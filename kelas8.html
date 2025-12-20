@@ -5,42 +5,226 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Menemukan Konsep Pythagoras | GeoSMART</title>
 <style>
-*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Verdana,sans-serif}
-body{margin:0;background:#0f172a;color:#e5e7eb;line-height:1.9}
-header{display:flex;justify-content:space-between;align-items:center;padding:16px;background:linear-gradient(135deg,#2563eb,#06b6d4)}
-header h1{margin:0;font-size:22px}
-.back-btn{background:#020617;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
-.container{max-width:1200px;margin:auto;padding:20px}
-.section{background:#1e293b;border-radius:16px;padding:28px;margin-bottom:40px}
-.section h2{color:#38bdf8;border-bottom:3px solid #38bdf8;padding-bottom:8px}
-.section h3{color:#facc15;margin-top:40px;border-left:6px solid #facc15;padding-left:12px}
-.section h4{margin-top:26px;color:#e5e7eb;margin-left:20px}
-p,li{text-align:justify;font-size:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:16px}
-.card{background:#0f172a;border-radius:14px;padding:14px;text-align:center}
-.card img{width:100%;max-height:220px;object-fit:contain;background:#fff;border-radius:10px;margin-bottom:10px}
-.formula{background:#020617;padding:12px;border-radius:8px;text-align:center;font-size:1.2em;color:#a5f3fc;font-weight:700;margin:14px 0}
-.makna-box{background:#172554;border-left:5px solid #84cc16;padding:16px;border-radius:8px;margin-top:24px}
-.makna-title{color:#84cc16;font-weight:700}
-ul{margin-left:20px}
-table{width:100%;border-collapse:collapse;margin-top:16px;margin-bottom:24px}
-th, td{border:1px solid #94a3b8;padding:10px;text-align:center}
-th{background:#1e293b;color:#38bdf8}
-.ai-btn{position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#022c22;padding:14px 22px;border-radius:50px;font-weight:700;text-decoration:none;box-shadow:0 10px 25px rgba(0,0,0,0.5);border:2px solid #86efac;z-index:999;transition:transform 0.25s, box-shadow 0.25s;}
-.ai-btn:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 18px 35px rgba(0,0,0,0.7);background:linear-gradient(135deg,#4ade80,#22c55e);}
+/* ================= RESET AMAN ================= */
+*{
+  box-sizing:border-box;
+  font-family:'Segoe UI',Tahoma,Verdana,sans-serif;
+  caret-color: transparent; /* HILANGKAN GARIS NGETIK */
+}
+
+html, body{
+  margin:0;
+  padding:0;
+}
+
+/* MATIKAN OUTLINE DEFAULT */
+a, button{
+  outline:none;
+}
+
+a:focus,
+a:active,
+button:focus,
+button:active{
+  outline:none;
+  box-shadow:none;
+}
+
+/* ================= BODY ================= */
+body{
+  background:#0f172a;
+  color:#e5e7eb;
+  line-height:1.9;
+}
+
+/* ================= HEADER ================= */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+}
+
+header h1{
+  margin:0;
+  font-size:22px;
+}
+
+/* ================= BACK BUTTON ================= */
+.back-btn{
+  background:#020617;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  user-select:none;
+}
+
+/* ================= CONTAINER ================= */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
+
+/* ================= SECTION ================= */
+.section{
+  background:#1e293b;
+  border-radius:16px;
+  padding:28px;
+  margin-bottom:40px;
+}
+
+.section h2{
+  color:#38bdf8;
+  border-bottom:3px solid #38bdf8;
+  padding-bottom:8px;
+}
+
+.section h3{
+  color:#facc15;
+  margin-top:40px;
+  border-left:6px solid #facc15;
+  padding-left:12px;
+}
+
+.section h4{
+  margin-top:26px;
+  color:#e5e7eb;
+  margin-left:20px;
+}
+
+/* ================= TEXT ================= */
+p, li{
+  text-align:justify;
+  font-size:16px;
+}
+
+/* ================= GRID ================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  margin-top:16px;
+}
+
+/* ================= CARD ================= */
+.card{
+  background:#0f172a;
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
+
+.card img{
+  width:100%;
+  max-height:220px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+/* ================= FORMULA ================= */
+.formula{
+  background:#020617;
+  padding:12px;
+  border-radius:8px;
+  text-align:center;
+  font-size:1.2em;
+  color:#a5f3fc;
+  font-weight:700;
+  margin:14px 0;
+}
+
+/* ================= MAKNA BOX ================= */
+.makna-box{
+  background:#172554;
+  border-left:5px solid #84cc16;
+  padding:16px;
+  border-radius:8px;
+  margin-top:24px;
+}
+
+.makna-title{
+  color:#84cc16;
+  font-weight:700;
+}
+
+/* ================= LIST & TABLE ================= */
+ul{
+  margin-left:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:16px;
+  margin-bottom:24px;
+}
+
+th, td{
+  border:1px solid #94a3b8;
+  padding:10px;
+  text-align:center;
+}
+
+th{
+  background:#1e293b;
+  color:#38bdf8;
+}
+
+/* ================= AI BUTTON (FIX UTAMA) ================= */
+.ai-btn{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#022c22;
+  padding:14px 22px;
+  border-radius:50px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+  border:2px solid #628eff;
+  z-index:999;
+  transition:transform 0.25s, box-shadow 0.25s;
+
+  /* FIX GARIS NGETIK */
+  caret-color: transparent;
+  outline:none;
+  user-select:none;
+}
+
+.ai-btn:hover{
+  transform:translateY(-6px) scale(1.05);
+  box-shadow:0 18px 35px rgba(0,0,0,0.7);
+  background:linear-gradient(135deg,#4ade80,#22c55e);
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  padding:20px;
+  color:#94a3b8;
+  font-size:14px;
+}
 </style>
+
 </head>
 <body>
 
 <header>
 <a href="smp.html" class="back-btn">⬅ Kembali</a>
-<h1>Teorema Pythagoras</h1>
+<h1>Kelas 8 Teorema Pythagoras</h1>
 </header>
 
 <div class="container">
 <div class="section">
 
-<h2>Teorema Pythagoras</h2>
+<h2>Kelas 8 Teorema Pythagoras</h2>
 
 <p>
 Teorema Pythagoras merupakan salah satu konsep penting dalam geometri, khususnya pada segitiga siku-siku. 

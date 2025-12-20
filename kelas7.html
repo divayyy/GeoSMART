@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>  
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -24,6 +24,7 @@ p,li{text-align:justify;font-size:16px}
 .makna-box{background:#172554;border-left:5px solid #84cc16;padding:16px;border-radius:8px;margin-top:24px}
 .makna-title{color:#84cc16;font-weight:700}
 footer{text-align:center;padding:14px;background:#020617;color:#94a3b8}
+
 /* ================= TOMBOL AI ================= */
 .ai-btn{
     position:fixed;
@@ -34,10 +35,10 @@ footer{text-align:center;padding:14px;background:#020617;color:#94a3b8}
     padding:14px 22px;
     border-radius:50px;
     font-weight:700;
-    text-decoration:none;
-    box-shadow:0 10px 25px rgba(0,0,0,0.5);
     border:2px solid #86b7ef;
     z-index:999;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
     transition:transform 0.25s, box-shadow 0.25s;
 }
 .ai-btn:hover{
@@ -354,11 +355,19 @@ apitnya sama besar.
 </div>
 </div>
 
-<a href="https://gemini.google.com/app" target="_blank" class="ai-btn">Tanya AI Gemini</a>
+<!-- ✅ TOMBOL GEMINI (FIX HP) -->
+<button class="ai-btn" onclick="openGemini()">Tanya AI Gemini</button>
 
 <footer>
 &copy; 2025 GeoSMART | Materi Kesebangunan SMP
 </footer>
+
+<script>
+function openGemini(){
+  // Redirect langsung (AMAN untuk HP)
+  window.location.href = "https://gemini.google.com/app";
+}
+</script>
 
 </body>
 </html>
