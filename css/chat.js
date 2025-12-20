@@ -1,79 +1,95 @@
 // public/scripts/chat.js
 
-const userInput = document.getElementById('userInput');
-const sendBtn = document.getElementById('sendBtn');
-const chatBox = document.getElementById('chat-box');
-
-// Fungsi utama yang dijalankan saat halaman dimuat
 document.addEventListener('DOMContentLoaded', () => {
+
+    const userInput = document.getElementById('userInput');
+    const sendBtn   = document.getElementById('sendBtn');
+    const chatBox   = document.getElementById('chat-box');
+
+    if (!userInput || !sendBtn || !chatBox) {
+        console.error('Elemen chat tidak ditemukan di DOM');
+        return;
+    }
+
+    // ================= INIT =================
     const soal = sessionStorage.getItem('soalUntukAI');
-    
-    if (soal) {
-        // 1. Tampilkan soal di textarea (Simulasi CTRL+V)
+
+    if (soal && soal.trim() !== '') {
         userInput.value = soal.trim();
-        // 2. Kunci input agar tidak bisa diubah/dihapus
-        userInput.setAttribute('readonly', 'true');
-        
-        // Pesan awal dari sistem
-        tampilkanPesan('ai', 'Selamat datang. Soal Anda sudah di sini. Klik "Dapatkan Petunjuk" untuk mendapatkan bantuan.');
-        
+
+        // Kunci input (AMAN di HP & desktop)
+        userInput.readOnly = true;
+        userInput.style.cursor = 'not-allowed';
+
+        tampilkanPesan(
+            'ai',
+            '👋 Selamat datang.<br>Soal Anda sudah dimuat.<br>Klik <b>"Dapatkan Petunjuk"</b> untuk melanjutkan.'
+        );
     } else {
-        userInput.value = "Tidak ada soal yang disalin. Silakan kembali ke halaman soal.";
+        userInput.value = 'Tidak ada soal yang dikirim. Silakan kembali ke halaman soal.';
+        userInput.readOnly = true;
         sendBtn.disabled = true;
     }
-});
 
-// Event Listener untuk tombol "Dapatkan Petunjuk"
-sendBtn.addEventListener('click', async () => {
-    const userSoal = userInput.value;
-    if (!userSoal || sendBtn.disabled) return;
-    
-    // Menonaktifkan tombol setelah klik pertama (Pembatasan Percakapan)
-    sendBtn.disabled = true; 
-    sendBtn.innerText = 'Memproses Petunjuk...';
-    userInput.style.backgroundColor = '#cccccc';
+    // ================= EVENT BUTTON =================
+    sendBtn.addEventListener('click', async () => {
+        if (sendBtn.disabled) return;
 
-    tampilkanPesan('ai', 'Mencari petunjuk...⏳');
+        const userSoal = userInput.value.trim();
+        if (!userSoal) return;
 
-    try {
-        // Mengirim soal ke server Node.js
-        const response = await fetch('/api/get-clue', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ soal: userSoal })
-        });
+        // Lock UI
+        sendBtn.disabled = true;
+        sendBtn.innerText = 'Memproses...';
+        userInput.style.backgroundColor = '#e5e5e5';
 
-        const data = await response.json();
+        const loadingId = tampilkanPesan('ai', '⏳ Mencari petunjuk...');
 
-        // Hapus pesan loading
-        hapusPesanLoading();
+        try {
+            const response = await fetch('/api/get-clue', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ soal: userSoal })
+            });
 
-        if (response.ok) {
-            tampilkanPesan('ai', data.clue);
-        } else {
-            tampilkanPesan('ai', 'Maaf, terjadi masalah pada server. ' + (data.error || 'Silakan coba lagi.'));
+            const data = await response.json();
+            hapusPesanById(loadingId);
+
+            if (response.ok && data.clue) {
+                tampilkanPesan('ai', data.clue);
+            } else {
+                tampilkanPesan(
+                    'ai',
+                    '⚠️ Terjadi masalah pada server.<br>' +
+                    (data.error || 'Silakan coba lagi nanti.')
+                );
+            }
+
+        } catch (err) {
+            console.error('Kesalahan jaringan:', err);
+            hapusPesanById(loadingId);
+            tampilkanPesan('ai', '❌ Gagal terhubung ke server.');
         }
+    });
 
-    } catch (error) {
-        console.error("Kesalahan jaringan:", error);
-        hapusPesanLoading();
-        tampilkanPesan('ai', 'Terjadi kesalahan koneksi.');
+    // ================= FUNCTIONS =================
+    function tampilkanPesan(sender, text) {
+        const messageDiv = document.createElement('div');
+        const messageId = 'msg-' + Date.now() + Math.random().toString(16).slice(2);
+
+        messageDiv.id = messageId;
+        messageDiv.className = `message ${sender}`;
+        messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        return messageId;
     }
+
+    function hapusPesanById(id) {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+    }
+
 });
-
-// Fungsi untuk menampilkan pesan di chat box
-function tampilkanPesan(sender, text) {
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message', sender);
-    messageDiv.innerHTML = text.replace(/\n/g, '<br>'); 
-    chatBox.appendChild(messageDiv);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-// Fungsi untuk menghapus pesan loading
-function hapusPesanLoading() {
-    const loadingMessage = chatBox.querySelector('.message.ai:last-child');
-    if (loadingMessage && loadingMessage.innerHTML.includes('Mencari petunjuk...')) {
-        chatBox.removeChild(loadingMessage);
-    }
-}
