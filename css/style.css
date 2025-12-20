@@ -1,4 +1,3 @@
-/* ================= RESET ================= */
 *{
   margin:0;
   padding:0;
@@ -7,12 +6,12 @@
 }
 
 body{
-  height:100vh;
-  overflow:hidden;
-  color:#ffffff;
+  min-height:100vh;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 .background{
   position:fixed;
   inset:0;
@@ -21,52 +20,42 @@ body{
   z-index:-1;
 }
 
-/* ================= HEADER (DESKTOP) ================= */
-.header{
-  position:relative;
-  height:280px;
+/* CONTAINER */
+.container{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 16px;
 }
 
-/* LOGO */
-.logo-box{
-  position:absolute;
-  top:35px;
-  left:23%;
-  transform:translateX(-50%);
+/* HEADER */
+.header{
+  text-align:center;
+  margin-bottom:40px;
 }
 
 .logo-box img{
-  width:280px;
-}
-
-/* TEXT */
-.text-box{
-  position:absolute;
-  top:170px;
-  left:55%;
-  transform:translateX(-50%);
+  width:260px;
 }
 
 .text-box h1{
-  font-size:55px;
-  font-weight:500;
+  font-size:48px;
 }
 
 .text-box h2{
-  font-size:55px;
+  font-size:36px;
   font-weight:700;
-  margin-top:6px;
 }
 
-/* ================= SECTION ================= */
-.horizontal-section{
-  position:absolute;
-  top:58%;
-  left:50%;
-  transform:translate(-50%, -50%);
+/* CONTENT */
+.content{
   display:flex;
-  align-items:center;
   gap:40px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
 }
 
 /* INPUT */
@@ -76,16 +65,14 @@ body{
 
 .input-box label{
   font-size:14px;
-  display:block;
-  margin-bottom:6px;
 }
 
 .input-box input{
   width:100%;
-  padding:12px 14px;
-  border-radius:6px;
+  padding:12px;
+  border-radius:8px;
   border:none;
-  margin-bottom:14px;
+  margin:10px 0;
 }
 
 #startBtn{
@@ -101,98 +88,42 @@ body{
 /* MENU */
 .menu{
   display:flex;
-  gap:30px;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
 }
 
 .card{
-  width:230px;
-  height:140px;
-  background:linear-gradient(
-    145deg,
-    rgba(0,200,255,0.18),
-    rgba(0,120,255,0.25)
-  );
+  width:220px;
+  height:130px;
+  background:rgba(0,160,255,0.25);
   border-radius:20px;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   cursor:pointer;
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,0.25);
+  backdrop-filter:blur(12px);
 }
 
-/* ================= AI BUTTON ================= */
+/* AI BUTTON */
 .ai-button{
   position:fixed;
-  right:32px;
-  bottom:32px;
-  padding:18px 28px;
+  right:20px;
+  bottom:20px;
+  z-index:9999;
+  padding:16px 26px;
   border-radius:50px;
   border:3px solid #00ffd5;
-  background:rgba(0,0,0,0.35);
+  background:rgba(0,0,0,0.4);
   color:#eafff5;
+  font-weight:600;
   cursor:pointer;
-  z-index:999;
 }
 
-/* ================= HP MODE ================= */
+/* MOBILE */
 @media (max-width:768px){
-
-  body{
-    overflow:auto;
-  }
-
-  .header{
-    height:auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    padding:30px 20px;
-  }
-
-  .logo-box,
-  .text-box{
-    position:static;
-    transform:none;
-  }
-
-  .logo-box img{
-    width:140px;
-    margin-bottom:20px;
-  }
-
-  .text-box h1{
-    font-size:26px;
-  }
-
-  .text-box h2{
-    font-size:20px;
-  }
-
-  .horizontal-section{
-    position:static;
-    transform:none;
-    flex-direction:column;
-    gap:30px;
-    padding-bottom:120px;
-  }
-
-  .menu{
-    flex-direction:column;
-    width:100%;
-    max-width:360px;
-  }
-
-  .card{
-    width:100%;
-  }
-
-  .ai-button{
-    right:16px;
-    bottom:16px;
-    padding:14px 18px;
-    font-size:14px;
-  }
+  .logo-box img{width:150px}
+  .text-box h1{font-size:26px}
+  .text-box h2{font-size:20px}
 }
