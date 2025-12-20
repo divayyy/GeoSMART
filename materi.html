@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GeoSMART - Materi Geometri SMP & SMA</title>
-
+    <title>GeoSMART - Materi Geometri SMP </title>
     <style>
         *{
             box-sizing:border-box;
             font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             transition: background-color 0.3s, color 0.3s;
         }
-
         body{
             margin:0;
             background:#0f172a;
@@ -35,7 +33,7 @@
         }
 
         .container{
-            max-width:900px;
+            max-width:800px;
             margin:auto;
             padding:30px 20px;
             text-align:center;
@@ -46,10 +44,11 @@
             font-size:24px;
             border-bottom:3px solid #38bdf8;
             padding-bottom:10px;
+            margin-top:0;
             margin-bottom:30px;
         }
 
-        /* TOMBOL BACK */
+        /* TOMBOL KEMBALI */
         .back-btn{
             display:inline-block;
             margin-bottom:30px;
@@ -68,26 +67,27 @@
             border-color:#facc15;
         }
 
-        .menu{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:25px;
+        .class-menu{
+            display:flex;
+            flex-direction:column;
+            gap:20px;
         }
 
-        .menu a{
+        .class-menu a{
             text-decoration:none;
-            padding:30px 20px;
-            border-radius:16px;
-            font-size:22px;
+            padding:20px;
+            border-radius:14px;
+            font-size:20px;
             background:#1e293b;
             color:#facc15;
+            cursor:pointer;
             font-weight:700;
+            box-shadow:0 6px 15px rgba(0,0,0,0.4);
             border:2px solid #38bdf8;
-            box-shadow:0 8px 18px rgba(0,0,0,0.45);
             display:block;
         }
 
-        .menu a:hover{
+        .class-menu a:hover{
             background:#334155;
             color:#a5f3fc;
             border-color:#facc15;
@@ -103,37 +103,31 @@
         }
     </style>
 </head>
-
 <body>
 
 <header>
-    <h1>GeoSMART: Materi Geometri</h1>
+    <h1>GeoSMART: Materi Geometri SMP</h1>
 </header>
 
 <div class="container">
 
-    <!-- TOMBOL BACK -->
-    <a href="index.html" class="back-btn">⬅ Kembali ke Beranda</a>
+    <!-- TOMBOL KEMBALI KE INDEX -->
+    <a href="index.html" class="back-btn">⬅ Kembali</a>
 
-    <h2>Pilih Jenjang Pendidikan</h2>
+    <h2>Pilih Tingkat Kelas untuk Melihat Materi</h2>
 
-    <div class="menu">
-        <a href="smp.html">
-            🏫 SMP <br>
-            <small>Kelas 7, 8, dan 9</small>
-        </a>
-
-        <a href="sma.html">
-            🎓 SMA <br>
-            <small>Kelas 10, 11, dan 12</small>
-        </a>
+    <div class="class-menu">
+        <a href="kelas7.html">📚 Kelas 7 – Garis, Sudut, dan Bangun Datar</a>
+        <a href="kelas8.html">📐 Kelas 8 – Teorema Pythagoras </a>
+        <a href="kelas9.html">🔄 Kelas 9 – Bangun Ruang Sisi Lengkung & Transformasi Geometri</a>
     </div>
 
 </div>
 
 <footer>
-    © 2025 GeoSMART | Media Pembelajaran Geometri Berbasis AI
+    © 2025 GeoSMART | Materi Geometri SMP
 </footer>
 
 </body>
 </html>
+>
