@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - GeoSMART</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body onload="displayWelcomeMessage()">
+    <div class="container dashboard">
+        <div style="text-align: center; margin-bottom: 40px;">
+             <img src="assets/images/logo-geo.png" alt="GeoSMART Logo" style="width: 120px; margin-bottom: 20px;"> 
+            <h2 id="welcomeMessage" style="font-weight: normal; font-size: 2em; color: var(--color-text);">Hello, [Student's Name!]</h2>
+            <h1 style="font-size: 3em; color: var(--color-secondary);">Lets Explore Geometry</h1>
+        </div>
+        
+        <div class="module-list">
+            <a href="soal-geometri.html" class="module-card">
+                <span><i class="fas fa-quidditch"></i></span> <h3>Practice Questions</h3>
+                <p>Mulai latihan numerasi geometri interaktif.</p>
+            </a>
+            
+            <div class="module-card disabled">
+                <span><i class="fas fa-trophy"></i></span>
+                <h3>Leaderboard</h3>
+                <p>Lihat skor dan peringkat terbaik Anda.</p>
+            </div>
+            
+            <div class="module-card disabled">
+                <span><i class="fas fa-robot"></i></span>
+                <h3>AI Helper</h3>
+                <p>Akses fitur AI tambahan dan tips belajar.</p>
+            </div>
+        </div>
+
+        <div class="ai-helper-area">
+            <button class="ai-clue-large-button disabled">
+                <img src="assets/images/google-g.png" alt="G-icon"> Ask AI for a Hint (Diaktifkan di Halaman Soal)
+            </button>
+        </div>
+
+    </div>
+    <script src="js/main.js"></script>
+    </body>
+</html>

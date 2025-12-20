@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>GeoSMART</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+  <!-- HEADER LOGO + TEKS SEJAJAR -->
+  <div class="header">
+    <div class="logo-box">
+      <img src="assets/images/geosmart.png" alt="GeoSMART Logo">
+    </div>
+    <div class="text-box">
+      <h1>Hello, <span id="studentName">[Nama Siswa]</span>!</h1>
+      <h2>Mari Jelajahi Geometri</h2>
+    </div>
+  </div>
+
+  <!-- INPUT + MENU HORIZONTAL -->
+  <div class="horizontal-section">
+    <!-- INPUT NAMA + START -->
+    <div class="input-box">
+      <label>Masukkan Nama:</label>
+      <input type="text" id="nameInput" placeholder="Masukkan Nama Anda">
+      <button id="startBtn">Mulai Belajar</button>
+    </div>
+
+<!-- MENU TOMBOL -->
+<div class="menu">
+  <div class="card" onclick="location.href='materi.html'">
+    Materi
+  </div>
+  <div class="card" onclick="location.href='videopembelajaran.html'">
+    Video Pembelajaran
+  </div>
+  <div class="card" onclick="location.href='latihansoal.html'">
+    Soal Latihan
+  </div>
+</div>
+
+  </div>
+
+  <!-- AI FLOAT BUTTON -->
+  <button class="ai-button" id="askAI">
+     Minta Petunjuk dari AI
+  </button>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Latihan Soal Numerasi Geometri | GeoSMART</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:'Segoe UI',Tahoma,Verdana,sans-serif;
+}
+
+body{
+  margin:0;
+  background:#0f172a;
+  color:#e5e7eb;
+  line-height:1.8;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  padding:18px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:26px;
+  font-weight:700;
+}
+
+/* CONTAINER */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 20px;
+  text-align:center;
+}
+
+/* TOMBOL BACK */
+.back-btn{
+  display:inline-block;
+  margin:20px 0;
+  padding:12px 22px;
+  border-radius:12px;
+  background:#020617;
+  color:#a5f3fc;
+  text-decoration:none;
+  font-weight:600;
+  border:2px solid #38bdf8;
+  cursor:pointer;
+}
+
+.back-btn:hover{
+  background:#1e293b;
+  color:#facc15;
+  border-color:#facc15;
+}
+
+/* SECTION */
+.section{
+  background:#1e293b;
+  border-radius:18px;
+  padding:30px;
+  margin-bottom:40px;
+}
+
+.section h2{
+  text-align:center;
+  color:#38bdf8;
+  margin-bottom:30px;
+  font-size:24px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+}
+
+/* CARD */
+.card{
+  background:#0f172a;
+  border-radius:16px;
+  padding:26px;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
+  border:2px solid #38bdf8;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+  border-color:#facc15;
+}
+
+.card h3{
+  color:#facc15;
+  margin-bottom:10px;
+  font-size:22px;
+}
+
+.card p{
+  font-size:15px;
+  color:#cbd5f5;
+}
+
+/* HIDDEN */
+.hidden{
+  display:none;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:16px;
+  color:#94a3b8;
+  font-size:14px;
+  background:#020617;
+}
+
+/* ========================= */
+/* HILANGKAN GARIS KAYAK NGETIK */
+/* ========================= */
+*{
+  user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+}
+
+*:focus{
+  outline:none;
+}
+</style>
+
+<script>
+function pilihJenjang(jenjang){
+  document.getElementById("menuAwal").classList.add("hidden");
+
+  if(jenjang === 'smp'){
+    document.getElementById("menuSMP").classList.remove("hidden");
+  } else {
+    document.getElementById("menuSMA").classList.remove("hidden");
+  }
+}
+
+function kembaliKeJenjang(){
+  document.getElementById("menuAwal").classList.remove("hidden");
+  document.getElementById("menuSMP").classList.add("hidden");
+  document.getElementById("menuSMA").classList.add("hidden");
+}
+</script>
+</head>
+
+<body>
+
+<header>
+<h1>Latihan Soal Numerasi Geometri</h1>
+<p>Pilih jenjang dan kelas untuk mulai berlatih</p>
+</header>
+
+<div class="container">
+
+<div class="section" id="menuAwal">
+<a href="index.html" class="back-btn">⬅ Kembali ke Beranda</a>
+
+<h2>Pilih Jenjang Pendidikan</h2>
+
+<div class="grid">
+  <div class="card" onclick="pilihJenjang('smp')">
+    <h3>SMP</h3>
+    <p>Kelas 7, 8, dan 9<br>Numerasi Geometri Dasar</p>
+  </div>
+
+  <div class="card" onclick="pilihJenjang('sma')">
+    <h3>SMA</h3>
+    <p>Kelas 10, 11, dan 12<br>Numerasi Geometri Lanjutan</p>
+  </div>
+</div>
+</div>
+
+<div class="section hidden" id="menuSMP">
+<h2>Pilih Kelas SMP</h2>
+
+<div class="grid">
+  <div class="card" onclick="location.href='soal7.html'">
+    <h3>Kelas 7</h3>
+    <p>Garis & Sudut<br>Bangun Datar<br>Kesebangunan</p>
+  </div>
+
+  <div class="card" onclick="location.href='soal8.html'">
+    <h3>Kelas 8</h3>
+    <p>Pythagoras<br>Lingkaran<br>Bangun Ruang</p>
+  </div>
+
+  <div class="card" onclick="location.href='soal9.html'">
+    <h3>Kelas 9</h3>
+    <p>Transformasi<br>Bangun Ruang<br>Numerasi Kontekstual</p>
+  </div>
+</div>
+
+<button class="back-btn" onclick="kembaliKeJenjang()">⬅ Kembali ke Jenjang</button>
+</div>
+
+<div class="section hidden" id="menuSMA">
+<h2>Pilih Kelas SMA</h2>
+
+<div class="grid">
+  <div class="card" onclick="location.href='sma-kelas10.html'">
+    <h3>Kelas 10</h3>
+    <p>Vektor<br>Trigonometri Dasar<br>Geometri Ruang</p>
+  </div>
+
+  <div class="card" onclick="location.href='sma-kelas11.html'">
+    <h3>Kelas 11</h3>
+    <p>Transformasi Geometri<br>Lingkaran<br>Trigonometri</p>
+  </div>
+
+  <div class="card" onclick="location.href='sma-kelas12.html'">
+    <h3>Kelas 12</h3>
+    <p>Dimensi Tiga<br>Jarak & Sudut Ruang<br>Numerasi Aplikasi</p>
+  </div>
+</div>
+
+<button class="back-btn" onclick="kembaliKeJenjang()">⬅ Kembali ke Jenjang</button>
+</div>
+
+</div>
+
+<footer>
+© 2025 GeoSMART | Numerasi Geometri SMP & SMA
+</footer>
+
+</body>
+</html>

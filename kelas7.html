@@ -1,0 +1,364 @@
+<!DOCTYPE html> 
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kesebangunan | GeoSMART</title>
+
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Verdana,sans-serif}
+body{margin:0;background:#0f172a;color:#e5e7eb;line-height:1.9}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px;background:linear-gradient(135deg,#2563eb,#06b6d4)}
+header h1{margin:0;font-size:22px}
+.back-btn{background:#020617;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+.container{max-width:1200px;margin:auto;padding:20px}
+.section{background:#1e293b;border-radius:16px;padding:28px;margin-bottom:40px}
+.section h2{color:#38bdf8;border-bottom:3px solid #38bdf8;padding-bottom:8px}
+.section h3{color:#facc15;margin-top:40px;border-left:6px solid #facc15;padding-left:12px}
+.section h4{margin-top:26px;color:#e5e7eb}
+p,li{text-align:justify;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:16px}
+.card{background:#0f172a;border-radius:14px;padding:14px;text-align:center}
+.card img{width:100%;max-height:200px;object-fit:contain;background:#fff;border-radius:10px;margin-bottom:10px}
+.formula{background:#020617;padding:12px;border-radius:8px;text-align:center;font-size:1.2em;color:#a5f3fc;font-weight:700;margin:14px 0}
+.makna-box{background:#172554;border-left:5px solid #84cc16;padding:16px;border-radius:8px;margin-top:24px}
+.makna-title{color:#84cc16;font-weight:700}
+footer{text-align:center;padding:14px;background:#020617;color:#94a3b8}
+/* ================= TOMBOL AI ================= */
+.ai-btn{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    background:linear-gradient(135deg,#426fd7,#426fd7);
+    color:#fcfffe;
+    padding:14px 22px;
+    border-radius:50px;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    border:2px solid #86b7ef;
+    z-index:999;
+    transition:transform 0.25s, box-shadow 0.25s;
+}
+.ai-btn:hover{
+    transform:translateY(-6px) scale(1.05);
+    box-shadow:0 18px 35px rgba(0,0,0,0.7);
+    background:linear-gradient(135deg,#4aaade,#4aaade);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="smp.html" class="back-btn">⬅ Kembali</a>
+<h1>Kesebangunan</h1>
+</header>
+
+<div class="container">
+<div class="section">
+
+<h2>Kelas 7 - Kesebangunan</h2>
+<p>
+Kesebangunan merupakan konsep dalam geometri yang membahas hubungan antara
+dua bangun datar yang memiliki bentuk sama tetapi ukuran yang berbeda.
+Konsep ini sangat sering digunakan dalam kehidupan sehari-hari, misalnya
+pada peta, denah bangunan, bayangan benda, serta perbandingan ukuran objek.
+</p>
+
+<!-- ================= A ================= -->
+<h3>A. Hubungan Antar Sudut</h3>
+<p>
+Hubungan antar sudut terjadi ketika dua garis sejajar dipotong oleh sebuah
+garis lain (garis transversal). Hubungan ini menghasilkan beberapa jenis
+sudut dengan sifat tertentu yang menjadi dasar dalam mempelajari
+kesebangunan.
+</p>
+
+<h4>1. Sudut Bertolak Belakang</h4>
+<p>
+Sudut bertolak belakang adalah pasangan sudut yang saling berhadapan pada
+dua garis yang berpotongan. Sudut ini selalu memiliki besar sudut yang sama.
+</p>
+<div class="formula">∠1 = ∠3</div>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sudutsehadap.jpg">
+<b>Sudut Bertolak Belakang</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> Dua garis berpotongan membentuk ∠1 = 70°. Tentukan ∠3.</p>
+<p><b>Penyelesaian:</b> Sudut bertolak belakang selalu sama besar, sehingga ∠3 = ∠1 = 70°.</p>
+<p><b>Kesimpulan:</b> Sudut bertolak belakang sama besar sehingga sudut yang berhadapan dapat langsung diketahui.</p>
+</div>
+
+<h4>2. Sudut Sehadap</h4>
+<p>
+Sudut sehadap adalah sudut yang menempati posisi yang sama pada dua garis
+sejajar yang dipotong oleh garis transversal. Besar sudut sehadap selalu sama.
+</p>
+<div class="formula">∠1 = ∠5</div>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sudutsehadap.jpg">
+<b>Sudut Sehadap</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> Jika ∠1 = 65°, tentukan ∠5.</p>
+<p><b>Penyelesaian:</b> Sudut sehadap sama besar, sehingga ∠5 = ∠1 = 65°.</p>
+<p><b>Kesimpulan:</b> Sudut sehadap sama besar pada garis sejajar, memudahkan perhitungan sudut.</p>
+</div>
+
+<h4>3. Sudut Dalam Berseberangan</h4>
+<p>
+Sudut dalam berseberangan terletak di antara dua garis sejajar dan berada
+pada sisi berlawanan dari garis transversal. Sudut ini memiliki besar sama.
+</p>
+<div class="formula">∠3 = ∠5</div>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sudutsehadap.jpg">
+<b>Sudut Dalam Berseberangan</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> Jika ∠3 = 120°, tentukan ∠5.</p>
+<p><b>Penyelesaian:</b> Sudut dalam berseberangan sama besar, ∠5 = ∠3 = 120°.</p>
+<p><b>Kesimpulan:</b> Sudut dalam berseberangan sama besar, berguna untuk menghitung sudut pada garis sejajar.</p>
+</div>
+
+<h4>4. Sudut Luar Berseberangan</h4>
+<p>
+Sudut luar berseberangan berada di luar dua garis sejajar dan terletak pada
+sisi berlawanan garis transversal. Sudut-sudut ini juga sama besar.
+</p>
+<div class="formula">∠1 = ∠7</div>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sudutsehadap.jpg">
+<b>Sudut Luar Berseberangan</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> Jika ∠1 = 50°, tentukan ∠7.</p>
+<p><b>Penyelesaian:</b> Sudut luar berseberangan sama besar, sehingga ∠7 = ∠1 = 50°.</p>
+<p><b>Kesimpulan:</b> Sudut luar berseberangan memudahkan penentuan sudut di luar garis sejajar.</p>
+</div>
+
+<h4>5. Sudut Dalam Sepihak</h4>
+<p>
+Sudut dalam sepihak terletak di antara dua garis sejajar dan berada pada sisi
+yang sama terhadap garis transversal. Jumlah sudut ini selalu 180°.
+</p>
+<div class="formula">∠3 + ∠4 = 180°</div>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sudutsehadap.jpg">
+<b>Sudut Dalam Sepihak</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> Jika ∠3 = 110°, tentukan ∠4.</p>
+<p><b>Penyelesaian:</b> Sudut dalam sepihak selalu berjumlah 180°, maka ∠4 = 180° - 110° = 70°.</p>
+<p><b>Kesimpulan:</b> Sudut dalam sepihak selalu berjumlah 180°, mempermudah perhitungan sudut.</p>
+</div>
+
+<h4>6. Sudut Luar Sepihak</h4>
+<p>
+Sudut luar sepihak terletak di luar dua garis sejajar dan berada pada sisi
+yang sama garis transversal. Jumlah sudutnya juga 180°.
+</p>
+<div class="formula">∠1 + ∠8 = 180°</div>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sudutsehadap.jpg">
+<b>Sudut Luar Sepihak</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> Jika ∠1 = 120°, tentukan ∠8.</p>
+<p><b>Penyelesaian:</b> Sudut luar sepihak berjumlah 180°, sehingga ∠8 = 180° - 120° = 60°.</p>
+<p><b>Kesimpulan:</b> Sudut luar sepihak sama dengan 180° minus sudut diketahui, berguna menghitung sudut eksternal.</p>
+</div>
+
+<!-- ================= B ================= -->
+<h3>B. Arti Kesebangunan</h3>
+<p>
+Kesebangunan adalah hubungan antara dua bangun datar yang memiliki bentuk
+sama tetapi ukurannya tidak harus sama. Dua bangun dikatakan sebangun jika
+sudut-sudut yang bersesuaian sama besar dan sisi-sisi yang bersesuaian
+memiliki perbandingan yang sama.
+</p>
+<p>
+Perbandingan sisi-sisi tersebut disebut sebagai perbandingan kesebangunan.
+Jika perbandingan bernilai 2, maka ukuran bangun pertama dua kali lebih besar
+daripada bangun kedua.
+</p>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sebangun.jpg">
+<b>Bangun Sebangun</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> Segitiga ABC sebangun dengan segitiga DEF. Jika AB : DE = 2 : 1 dan AB = 10 cm, tentukan DE.</p>
+<p><b>Penyelesaian:</b> Perbandingan sisi segitiga sebangun sama, DE = AB × 1/2 = 10 × 1/2 = 5 cm.</p>
+<p><b>Kesimpulan:</b> Kesebangunan memudahkan menentukan panjang sisi yang belum diketahui menggunakan perbandingan.</p>
+</div>
+
+<!-- ================= C ================= -->
+<h3>C. Kesebangunan pada Segitiga</h3>
+<p>
+Kesebangunan pada segitiga merupakan bagian terpenting dalam pembelajaran
+kesebangunan. Dua segitiga dikatakan sebangun apabila memenuhi salah satu
+dari syarat berikut.
+</p>
+
+<h4>1. Sudut–Sudut (AA)</h4>
+<p>
+Dua segitiga sebangun jika dua sudut pada segitiga pertama sama besar dengan
+dua sudut pada segitiga kedua.
+</p>
+<div class="grid">
+<div class="card">
+<img src="assets/images/asa.png">
+<b>Kesebangunan Segitiga (AA)</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> ∆ABC sebangun dengan ∆DEF. Jika ∠A = 50°, ∠B = 60°, tentukan ∠D dan ∠E.</p>
+<p><b>Penyelesaian:</b> AA → sudut bersesuaian sama besar, ∠D = 50°, ∠E = 60°.</p>
+<p><b>Kesimpulan:</b> AA membuktikan kesebangunan melalui dua sudut sama besar.</p>
+</div>
+
+<h4>2. Sisi–Sisi–Sisi (SSS)</h4>
+<p>
+Dua segitiga sebangun jika perbandingan panjang ketiga sisi yang
+bersesuaian sama.
+</p>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sss.jpg">
+<b>Kesebangunan Segitiga (SSS)</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> ∆ABC sisi = 6, 8, 10 cm. ∆DEF sebangun dengan DE = 3 cm. Tentukan EF dan DF.</p>
+<p><b>Penyelesaian:</b> Skala = DE/AB = 3/6 = 1/2. EF = 1/2 × 8 = 4 cm, DF = 1/2 × 10 = 5 cm.</p>
+<p><b>Kesimpulan:</b> SSS membuktikan kesebangunan melalui perbandingan sisi-sisi yang bersesuaian.</p>
+</div>
+
+<h4>3. Sisi–Sudut–Sisi (SAS)</h4>
+<p>
+Dua segitiga sebangun jika dua sisi yang bersesuaian sebanding dan sudut
+apitnya sama besar.
+</p>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sas.jpg">
+<b>Kesebangunan Segitiga (SAS)</b>
+</div>
+</div>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal & Penyelesaian</p>
+<p><b>Soal:</b> AB : DE = 3 : 2, AC : DF = 6 : 4, ∠A = ∠D. Jika AB = 9 cm, AC = 12 cm, tentukan DE dan DF.</p>
+<p><b>Penyelesaian:</b> DE = 9 × 2/3 = 6 cm, DF = 12 × 2/3 = 8 cm.</p>
+<p><b>Kesimpulan:</b> SAS membuktikan kesebangunan melalui dua sisi berskala sama dan sudut apit sama besar.</p>
+</div>
+
+<!-- ================= C ================= -->
+<h3>C. Contoh Soal Numerasi Geometri</h3>
+<p>Pada bagian ini, siswa akan belajar menghitung sisi dan sudut pada bangun datar yang sebangun, mengasah kemampuan numerasi geometri.</p>
+
+<h4>1. Kesebangunan Segitiga dengan Sudut–Sudut (AA)</h4>
+<p>Jika ∆ABC sebangun dengan ∆DEF dan diketahui ∠A = 40°, ∠B = 70°, tentukan ∠D dan ∠E.</p>
+<div class="grid">
+<div class="card">
+<img src="assets/images/soal1.jpg" alt="Segitiga AA">
+<b>Segitiga AA</b>
+</div>
+</div>
+<p><b>Penyelesaian:</b></p>
+<ul>
+<li>AA → sudut bersesuaian sama besar</li>
+<li>∠D = ∠A = 40°</li>
+<li>∠E = ∠B = 70°</li>
+<li>∠F = 180° - (40° + 70°) = 70°</li>
+</ul>
+<p><b>Kesimpulan:</b> Sudut yang bersesuaian dapat dihitung langsung, memperkuat numerasi geometri.</p>
+
+<h4>2. Kesebangunan Segitiga dengan Sisi–Sisi–Sisi (SSS)</h4>
+<p>∆ABC sisi = 6, 8, 10 cm. ∆DEF sebangun dengan skala 1:2. Tentukan sisi-sisi DEF.</p>
+<div class="grid">
+<div class="card">
+<img src="assets/images/soal2.jpg" alt="Segitiga SSS">
+<b>Segitiga SSS</b>
+</div>
+</div>
+<p><b>Penyelesaian:</b></p>
+<ul>
+<li>Skala = 2 → sisi DEF = sisi ABC × 2</li>
+<li>DE = 6 × 2 = 12 cm</li>
+<li>EF = 8 × 2 = 16 cm</li>
+<li>DF = 10 × 2 = 20 cm</li>
+</ul>
+<p><b>Kesimpulan:</b> Menghitung sisi segitiga sebangun melalui perbandingan numerik.</p>
+
+<h4>3. Kesebangunan Segitiga dengan Sisi–Sudut–Sisi (SAS)</h4>
+<p>Jika AB : DE = 3 : 4, AC : DF = 6 : 8, dan ∠A = ∠D = 50°. Tentukan panjang sisi DE dan DF.</p>
+<div class="grid">
+<div class="card">
+<img src="assets/images/sas_example.png" alt="Segitiga SAS">
+<b>Segitiga SAS</b>
+</div>
+</div>
+<p><b>Penyelesaian:</b></p>
+<ul>
+<li>DE = AB × skala = 3 × 4/3 = 4 cm</li>
+<li>DF = AC × skala = 6 × 8/6 = 8 cm</li>
+<li>∠D = ∠A = 50°</li>
+</ul>
+<p><b>Kesimpulan:</b> SAS membantu menghitung sisi menggunakan perbandingan dan sudut apit sama besar.</p>
+
+<h4>4. Contoh Numerasi Kesebangunan Lainnya</h4>
+<p>Sebuah bayangan tiang tinggi 5 m panjangnya 3 m di tanah. Bayangan seorang anak panjangnya 1,2 m. Tentukan tinggi anak jika bayangan anak sebanding dengan tiang.</p>
+<div class="grid">
+<div class="card">
+<img src="assets/images/shadow_example.png" alt="Bayangan Sebangun">
+<b>Bayangan Sebangun</b>
+</div>
+</div>
+<p><b>Penyelesaian:</b></p>
+<ul>
+<li>Skala = tinggi tiang / panjang bayangan = 5 / 3 = 1,6667</li>
+<li>Tinggi anak = panjang bayangan anak × skala = 1,2 × 1,6667 ≈ 2 m</li>
+</ul>
+<p><b>Kesimpulan:</b> Kesebangunan memudahkan perhitungan tinggi benda dengan bayangan, numerasi geometri diterapkan nyata.</p>
+
+<div class="makna-box">
+<p class="makna-title">Catatan Penting</p>
+<p>Numerasi geometri membantu siswa menghitung sisi dan sudut secara langsung. Menggunakan skala, perbandingan sisi, dan kesebangunan bayangan, siswa terbiasa menerapkan konsep matematika dalam bentuk angka dan konteks nyata.</p>
+</div>
+
+</div>
+</div>
+
+<a href="https://gemini.google.com/app" target="_blank" class="ai-btn">Tanya AI Gemini</a>
+
+<footer>
+&copy; 2025 GeoSMART | Materi Kesebangunan SMP
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bab 3 Transformasi Geometri | GeoSMART</title>
+
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Verdana,sans-serif}
+body{margin:0;background:#0f172a;color:#e5e7eb;line-height:1.9}
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4)
+}
+header h1{margin:0;font-size:22px}
+.back-btn{
+  background:#020617;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600
+}
+.container{max-width:1100px;margin:auto;padding:20px}
+.section{
+  background:#1e293b;
+  border-radius:16px;
+  padding:28px;
+  margin-bottom:40px
+}
+.section h2{
+  color:#38bdf8;
+  border-bottom:3px solid #38bdf8;
+  padding-bottom:8px
+}
+.section h3{
+  color:#facc15;
+  margin-top:40px;
+  border-left:6px solid #facc15;
+  padding-left:12px
+}
+.section h4{margin-top:26px;color:#e5e7eb}
+p,li{font-size:16px;text-align:justify}
+.makna-box{
+  background:#172554;
+  border-left:5px solid #84cc16;
+  padding:16px;
+  border-radius:10px;
+  margin-top:20px
+}
+.makna-title{color:#84cc16;font-weight:700}
+footer{
+  text-align:center;
+  padding:14px;
+  background:#020617;
+  color:#94a3b8
+}
+.ai-btn{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  background:linear-gradient(135deg,#426fd7,#4aaade);
+  color:#fff;
+  padding:14px 22px;
+  border-radius:50px;
+  font-weight:700;
+  text-decoration:none;
+  border:2px solid #86b7ef;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+.ai-btn:hover{
+  transform:translateY(-5px);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="smp.html" class="back-btn">⬅ Kembali</a>
+<h1>Bab 3 Transformasi Geometri</h1>
+</header>
+
+<div class="container">
+
+<!-- ================= BAB III ================= -->
+<div class="section">
+<h2>BAB III Transformasi Geometri</h2>
+
+<!-- ================= TRANSLASI ================= -->
+<h3>A. Translasi</h3>
+<p>
+<b>Translasi</b> adalah transformasi geometri yang memindahkan suatu titik atau bangun
+menurut arah dan jarak tertentu tanpa mengubah bentuk dan ukuran bangun tersebut.
+</p>
+
+<div class="makna-box">
+<p class="makna-title">Aturan Translasi:</p>
+<p>
+Jika titik A(x, y) ditranslasi oleh vektor (a, b), maka bayangannya adalah:
+</p>
+<p><b>A′(x + a, y + b)</b></p>
+</div>
+
+<div class="makna-box">
+<p class="makna-title">Contoh Soal:</p>
+<p>Titik A(2, 3) ditranslasi oleh vektor (4, −1).</p>
+<p><b>Penyelesaian:</b></p>
+<p>A′ = (2 + 4, 3 − 1) = (6, 2)</p>
+<p><b>Kesimpulan:</b> Bayangan titik A adalah A′(6, 2).</p>
+</div>
+
+<!-- ================= REFLEKSI ================= -->
+<h3>B. Refleksi</h3>
+<p>
+<b>Refleksi</b> adalah transformasi yang memetakan suatu titik atau bangun
+dengan cara mencerminkan terhadap garis atau titik tertentu.
+</p>
+
+<!-- 1 -->
+<h4>1. Refleksi terhadap Sumbu x, Sumbu y, dan Titik Asal (0,0)</h4>
+
+<div class="makna-box">
+<p class="makna-title">Aturan Refleksi:</p>
+<ul>
+<li>Sumbu x : (x, y) → (x, −y)</li>
+<li>Sumbu y : (x, y) → (−x, y)</li>
+<li>Titik asal (0,0) : (x, y) → (−x, −y)</li>
+</ul>
+</div>
+
+<div class="makna-box">
+<p class="makna-title">Contoh:</p>
+<p>Titik A(3, −4)</p>
+<ul>
+<li>Terhadap sumbu x → (3, 4)</li>
+<li>Terhadap sumbu y → (−3, −4)</li>
+<li>Terhadap titik asal → (−3, 4)</li>
+</ul>
+</div>
+
+<!-- 2 -->
+<h4>2. Refleksi terhadap Garis y = x dan y = −x</h4>
+
+<div class="makna-box">
+<p class="makna-title">Aturan Refleksi:</p>
+<ul>
+<li>Terhadap y = x → (x, y) → (y, x)</li>
+<li>Terhadap y = −x → (x, y) → (−y, −x)</li>
+</ul>
+</div>
+
+<div class="makna-box">
+<p class="makna-title">Contoh:</p>
+<p>Titik B(2, 5)</p>
+<ul>
+<li>Refleksi terhadap y = x → (5, 2)</li>
+<li>Refleksi terhadap y = −x → (−5, −2)</li>
+</ul>
+</div>
+
+<!-- 3 -->
+<h4>3. Refleksi terhadap Garis x = k dan Garis y = h</h4>
+
+<div class="makna-box">
+<p class="makna-title">Aturan Refleksi:</p>
+<ul>
+<li>Terhadap x = k → (x, y) → (2k − x, y)</li>
+<li>Terhadap y = h → (x, y) → (x, 2h − y)</li>
+</ul>
+</div>
+
+<div class="makna-box">
+<p class="makna-title">Contoh:</p>
+<p>Titik C(1, 4)</p>
+<ul>
+<li>Terhadap x = 3 → (5, 4)</li>
+<li>Terhadap y = 2 → (1, 0)</li>
+</ul>
+</div>
+
+<div class="makna-box">
+<p class="makna-title">Kesimpulan:</p>
+<ul>
+<li>Bentuk dan ukuran bangun tidak berubah</li>
+<li>Jarak ke cermin sama dengan jarak bayangannya</li>
+<li>Arah bangun terbalik</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<a href="https://gemini.google.com/app" target="_b_

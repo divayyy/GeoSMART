@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelas 9 Bangun Ruang | GeoSMART</title>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Verdana,sans-serif}
+body{margin:0;background:#0f172a;color:#e5e7eb;line-height:1.9}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px;background:linear-gradient(135deg,#2563eb,#06b6d4)}
+header h1{margin:0;font-size:22px}
+.back-btn{background:#020617;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+.container{max-width:1200px;margin:auto;padding:20px}
+.section{background:#1e293b;border-radius:16px;padding:28px;margin-bottom:40px}
+.section h2{color:#38bdf8;border-bottom:3px solid #38bdf8;padding-bottom:8px}
+.section h3{color:#facc15;margin-top:40px;border-left:6px solid #facc15;padding-left:12px}
+.section h4{margin-top:26px;color:#e5e7eb}
+p,li{text-align:justify;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:16px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+.card{background:#0f172a;border-radius:14px;padding:14px;text-align:center}
+.card img, model-viewer{width:100%;height:350px;object-fit:contain;background:#3680bc;border-radius:10px;margin-bottom:10px}
+.makna-box{background:#172554;border-left:5px solid #84cc16;padding:16px;border-radius:8px;margin-top:24px}
+.makna-title{color:#84cc16;font-weight:700}
+footer{text-align:center;padding:14px;background:#020617;color:#94a3b8}
+/* ================= TOMBOL AI ================= */
+.ai-btn{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    background:linear-gradient(135deg,#426fd7,#426fd7);
+    color:#fcfffe;
+    padding:14px 22px;
+    border-radius:50px;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    border:2px solid #86b7ef;
+    z-index:999;
+    transition:transform 0.25s, box-shadow 0.25s;
+}
+.ai-btn:hover{
+    transform:translateY(-6px) scale(1.05);
+    box-shadow:0 18px 35px rgba(0,0,0,0.7);
+    background:linear-gradient(135deg,#4aaade,#4aaade);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="smp.html" class="back-btn">⬅ Kembali</a>
+<h1>Bangun Ruang</h1>
+</header>
+
+<div class="container">
+
+<!-- ================= JENIS BANGUN RUANG ================= -->
+<div class="section">
+<h2>Klasifikasi Bangun Ruang</h2>
+
+<h3>A. Pengertian Bangun Ruang</h3>
+<p><b>Bangun ruang</b> adalah bangun tiga dimensi yang memiliki panjang, lebar, dan tinggi. Bangun ruang memiliki sisi, rusuk, dan titik sudut, atau permukaan lengkung tergantung jenisnya. Bangun ruang dibagi menjadi dua kategori utama: sisi datar dan sisi lengkung. Dengan memahami pengertian ini, siswa dapat lebih mudah mengenali jenis-jenis bangun ruang dan menghitung luas serta volumenya.</p>
+
+<h3>B. Jenis - Jenis Bangun Ruang</h3>
+
+<h4>1. Bangun Ruang Sisi Datar</h4>
+<p><b>Pengertian:</b> Bangun ruang sisi datar memiliki seluruh sisi berbentuk bidang datar.</p>
+<div class="grid">
+<!-- Kubus -->
+<div class="card">
+<model-viewer src="assets/images/bangunruang/kubus.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Kubus</b>
+<p>Kubus memiliki 6 sisi persegi, 12 rusuk, dan 8 titik sudut.</p>
+</div>
+
+<!-- Balok -->
+<div class="card">
+<model-viewer src="assets/images/bangunruang/balok.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Balok</b>
+<p>Balok memiliki 6 sisi persegi panjang, 3 pasang sisi saling berhadapan.</p>
+</div>
+
+<!-- Prisma Segitiga -->
+<div class="card">
+<model-viewer src="assets/models/prisma-segitiga.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Prisma Segitiga</b>
+<p>Memiliki 2 alas segitiga kongruen dan 3 sisi tegak persegi panjang.</p>
+</div>
+
+<!-- Prisma Segi Empat -->
+<div class="card">
+<model-viewer src="assets/models/prisma-segiempat.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Prisma Segi Empat</b>
+<p>Memiliki 2 alas segi empat dan 4 sisi tegak persegi panjang.</p>
+</div>
+
+<!-- Limas Segitiga -->
+<div class="card">
+<model-viewer src="assets/models/limas-segitiga.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Limas Segitiga</b>
+<p>Memiliki alas segitiga dan 3 sisi tegak berbentuk segitiga yang bertemu di puncak.</p>
+</div>
+
+<!-- Limas Segi Empat -->
+<div class="card">
+<model-viewer src="assets/models/limas-segiempat.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Limas Segi Empat</b>
+<p>Memiliki alas segi empat dan 4 sisi tegak berbentuk segitiga.</p>
+</div>
+</div>
+
+<h4>2. Bangun Ruang Sisi Lengkung</h4>
+<p><b>Pengertian:</b> Bangun ruang sisi lengkung memiliki setidaknya satu sisi lengkung.</p>
+<div class="grid">
+<!-- Tabung -->
+<div class="card">
+<model-viewer src="assets/models/tabung.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Tabung</b>
+<p>Memiliki 2 alas lingkaran dan 1 selimut lengkung.</p>
+</div>
+
+<!-- Bola -->
+<div class="card">
+<model-viewer src="assets/models/bola.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Bola</b>
+<p>Permukaannya seluruhnya lengkung dan semua titik pada permukaan sama jarak dari pusat.</p>
+</div>
+
+<!-- Kerucut -->
+<div class="card">
+<model-viewer src="assets/models/kerucut.glb" camera-controls auto-rotate interaction-prompt="none"></model-viewer>
+<b>Kerucut</b>
+<p>Memiliki alas lingkaran dan selimut berbentuk kerucut yang meruncing ke puncak.</p>
+</div>
+</div>
+</div>
+
+<!-- ================= KLASIFIKASI & JARING-JARING ================= -->
+<div class="section">
+<h2>Klasifikasi Jaring-Jaring</h2>
+
+<h3>A. Jaring-Jaring Kubus & Balok</h3>
+<div class="grid">
+<div class="card"><img src="assets/images/jaring-kubus.jpg"><b>Kubus</b></div>
+<div class="card"><img src="assets/images/jaring-balok.jpg"><b>Balok</b></div>
+</div>
+
+<h3>B. Jaring-Jaring Prisma & Limas</h3>
+<div class="grid">
+<div class="card"><img src="assets/images/jaring-prisma-segitiga.jpg"><b>Prisma Segitiga</b></div>
+<div class="card"><img src="assets/images/jaring-prisma-segiempat.jpg"><b>Prisma Segi Empat</b></div>
+<div class="card"><img src="assets/images/jaring-limas-segitiga.jpg"><b>Limas Segitiga</b></div>
+<div class="card"><img src="assets/images/jaring-limas-segiempat.jpg"><b>Limas Segi Empat</b></div>
+<div class="card"><img src="assets/images/jaring-kerucut.jpg"><b>Kerucut</b></div>
+</div>
+</div>
+
+<!-- ================= LUAS PERMUKAAN BANGUN RUANG ================= -->
+<div class="section">
+<h2>Luas Permukaan Bangun Ruang Sisi Datar</h2>
+
+<h3>A. Pengertian:</h3>
+<p>Luas permukaan bangun ruang sisi datar adalah jumlah luas seluruh sisi bangun tersebut. Dengan menghitung luas permukaan, siswa dapat mengetahui seberapa besar area yang menutupi bangun ruang.</p>
+
+<h3>B. Luas Permukaan Kubus, Balok, dan Prisma</h3>
+
+<p><b>a. Kubus</b></p>
+<p>Kubus memiliki 6 sisi yang sama besar berbentuk persegi. Rumus luas permukaan kubus:</p>
+<div class="formula">L = 6 × s²</div>
+<p>Langkah-langkah menghitung:</p>
+<ol>
+<li>Ukurlah panjang sisi kubus (s).</li>
+<li>Hitung luas satu sisi persegi (s × s).</li>
+<li>Kalikan dengan 6 karena kubus memiliki 6 sisi.</li>
+</ol>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal:</p>
+<p><b>Soal:</b> Sebuah kubus memiliki sisi 4 cm. Tentukan luas permukaannya.</p>
+<p><b>Penyelesaian:</b> L = 6 × 4² = 96 cm².</p>
+<p><b>Kesimpulan:</b> Kubus dengan sisi 4 cm memiliki luas permukaan 96 cm².</p>
+</div>
+
+<p><b>b. Balok</b></p>
+<p>Balok memiliki 3 pasang sisi persegi panjang yang saling berhadapan. Rumus luas permukaan balok:</p>
+<div class="formula">L = 2 × (p×l + p×t + l×t)</div>
+<p>Langkah-langkah menghitung:</p>
+<ol>
+<li>Ukur panjang (p), lebar (l), dan tinggi (t) balok.</li>
+<li>Hitung luas masing-masing pasang sisi: p×l, p×t, l×t.</li>
+<li>Jumlahkan ketiganya lalu kalikan dengan 2.</li>
+</ol>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal:</p>
+<p><b>Soal:</b> Balok memiliki panjang 5 cm, lebar 3 cm, tinggi 4 cm. Tentukan luas permukaannya.</p>
+<p><b>Penyelesaian:</b> L = 2 × (5×3 + 5×4 + 3×4) = 94 cm².</p>
+<p><b>Kesimpulan:</b> Luas permukaan balok = 94 cm².</p>
+</div>
+
+<p><b>c. Prisma</b></p>
+<p>Prisma memiliki dua alas yang sama dan sisi tegak berbentuk persegi panjang. Rumus luas permukaan prisma:</p>
+<div class="formula">L = 2 × Luas alas + Keliling alas × tinggi</div>
+<p>Langkah-langkah menghitung:</p>
+<ol>
+<li>Hitung luas alas prisma.</li>
+<li>Hitung keliling alas dan kalikan dengan tinggi prisma untuk mendapatkan luas selimut.</li>
+<li>Jumlahkan luas alas dan luas selimut.</li>
+</ol>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal:</p>
+<p><b>Soal:</b> Prisma segitiga dengan alas segitiga sama sisi sisi 4 cm, tinggi prisma 10 cm.</p>
+<p><b>Penyelesaian:</b> Luas alas = ½ × 4 × 3,464 ≈ 6,928 cm². Keliling alas = 4+4+4=12 cm. Luas selimut = 12×10=120 cm². Luas permukaan = 2×6,928 + 120 ≈ 133,856 cm².</p>
+<p><b>Kesimpulan:</b> Luas permukaan prisma ≈ 133,86 cm².</p>
+</div>
+
+<h3>C. Luas Permukaan Limas</h3>
+<p><b>a. Limas Segitiga</b></p>
+<p>Rumus luas permukaan limas segitiga:</p>
+<div class="formula">L = Luas alas + Luas sisi tegak</div>
+<p>Langkah-langkah:</p>
+<ol>
+<li>Hitung luas alas segitiga.</li>
+<li>Hitung luas masing-masing sisi tegak (½ × alas × tinggi sisi tegak).</li>
+<li>Jumlahkan luas alas dan luas sisi tegak.</li>
+</ol>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal:</p>
+<p><b>Soal:</b> Limas segitiga dengan alas 6 cm, tinggi alas 4 cm, tinggi sisi tegak 5 cm.</p>
+<p><b>Penyelesaian:</b> Luas alas = 12 cm². Luas sisi tegak = 3 × (½ × 6 ×5)=45 cm². Total = 12+45=57 cm².</p>
+<p><b>Kesimpulan:</b> Luas permukaan limas segitiga = 57 cm².</p>
+</div>
+
+<p><b>b. Limas Segi Empat</b></p>
+<p>Rumus luas permukaan limas segi empat:</p>
+<div class="formula">L = Luas alas + 4 × Luas sisi tegak</div>
+<p>Langkah-langkah:</p>
+<ol>
+<li>Hitung luas alas segi empat (s × s).</li>
+<li>Hitung luas salah satu sisi tegak (½ × alas sisi × tinggi sisi tegak).</li>
+<li>Kalikan dengan 4 dan jumlahkan dengan luas alas.</li>
+</ol>
+<div class="makna-box">
+<p class="makna-title">Contoh Soal:</p>
+<p><b>Soal:</b> Limas segi empat dengan sisi alas 5 cm dan tinggi sisi tegak 6 cm.</p>
+<p><b>Penyelesaian:</b> Luas alas = 25 cm². Sisi tegak = ½×5×6=15 cm². Total sisi tegak = 15×4=60 cm². Luas permukaan = 25+60=85 cm².</p>
+<p><b>Kesimpulan:</b> Luas permukaan limas segi empat = 85 cm².</p>
+</div>
+
+<h3>3. Pengaruh Perubahan Skala Bangun Ruang Sisi Datar terhadap Luas Permukaannya</h3>
+<p><b>Pengertian:</b> Skala adalah faktor pembesaran atau pengecilan suatu bangun. Perubahan skala akan mempengaruhi luas permukaan secara kuadratis.</p>
+<p>Jika sebuah bangun diperbesar atau diperkecil dengan faktor skala <b>k</b>, luas permukaannya berubah sebesar <b>k²</b> kali luas awal.</p>
+
+<div class="makna-box">
+<p class="makna-title">Langkah-langkah:</p>
+<ol>
+<li>Tentukan faktor skala <b>k</b>.</li>
+<li>Hitung kuadrat faktor skala <b>k²</b>.</li>
+<li>Kali luas permukaan awal dengan <b>k²</b> untuk mendapatkan luas permukaan baru.</li>
+</ol>
+</div>
+
+<p><b>Contoh:</b> Kubus sisi 4 cm, luas permukaan awal L₁ = 96 cm².</p>
+<ul>
+<li>Diperbesar 2 kali → L₂ = 2² × 96 = 384 cm²</li>
+<li>Diperkecil setengah → L₂ = (½)² × 96 = 24 cm²</li>
+</ul>
+
+<div class="makna-box">
+<p class="makna-title">Kesimpulan:</p>
+<ul>
+<li>Perubahan skala langsung mempengaruhi luas permukaan.</li>
+<li>Skala > 1 → luas permukaan bertambah.</li>
+<li>Skala < 1 → luas permukaan mengecil.</li>
+<li>Efeknya bersifat kuadratis: dua kali lipat sisi → luas 4 kali lipat, tiga kali lipat → luas 9 kali lipat.</li>
+</ul>
+</div>
+</div>
+
+<!-- ================= BAGIAN C ================= -->
+<div class="section">
+  <h2>Volume Bangun Ruang Sisi Datar</h2>
+
+  <!-- Pengertian -->
+  <h3>A. Pengertian Volume</h3>
+  <p>Volume adalah ukuran banyaknya ruang yang ditempati oleh sebuah bangun ruang. Satuan volume biasanya dalam cm³, m³, atau satuan kubik lainnya. Volume membantu kita mengetahui seberapa besar atau seberapa banyak isi dari suatu bangun ruang.</p>
+
+  <!-- 1. Volume Kubus, Balok, dan Prisma -->
+  <h3>B. Volume Kubus, Balok, dan Prisma</h3>
+  <p>Volume bangun ruang sisi datar dihitung dengan mengalikan luas alas dengan tinggi, atau panjang × lebar × tinggi untuk balok dan kubus.</p>
+
+  <h4>a. Kubus</h4>
+  <div class="makna-box">
+    <p class="makna-title">Rumus:</p>
+    <p>V = s³</p>
+    <p>s = panjang sisi kubus</p>
+    <p><b>Contoh:</b> Sisi kubus s = 4 cm → V = 4³ = 64 cm³</p>
+  </div>
+
+  <h4>b. Balok</h4>
+  <div class="makna-box">
+    <p class="makna-title">Rumus:</p>
+    <p>V = p × l × t</p>
+    <p>p = panjang, l = lebar, t = tinggi</p>
+    <p><b>Contoh:</b> Balok p=5 cm, l=3 cm, t=2 cm → V = 5×3×2 = 30 cm³</p>
+  </div>
+
+  <h4>c. Prisma</h4>
+  <div class="makna-box">
+    <p class="makna-title">Rumus:</p>
+    <p>V = Luas Alas × Tinggi</p>
+    <p><b>Contoh:</b> Prisma segitiga alas = 6 cm², tinggi prisma = 8 cm → V = 6 × 8 = 48 cm³</p>
+  </div>
+
+  <!-- 2. Volume Limas -->
+  <h3>C. Volume Limas</h3>
+  <p>Volume limas dihitung dengan 1/3 × luas alas × tinggi.</p>
+  <div class="makna-box">
+    <p class="makna-title">Rumus:</p>
+    <p>V = 1/3 × Luas Alas × Tinggi</p>
+    <p><b>Contoh:</b> Limas segi empat alas 4×4 cm, tinggi 6 cm →</p>
+    <ul>
+      <li>Luas alas = 4×4 = 16 cm²</li>
+      <li>V = 1/3 × 16 × 6 = 32 cm³</li>
+    </ul>
+  </div>
+
+  <!-- 3. Pengaruh Perubahan Skala -->
+  <h3>3. Pengaruh Perubahan Skala Bangun Ruang Sisi Datar terhadap Volumenya</h3>
+  <p>Jika sebuah bangun diperbesar atau diperkecil dengan faktor skala <b>k</b>, volumenya berubah sebesar <b>k³</b> kali volume awal.</p>
+
+  <div class="makna-box">
+    <p class="makna-title">Langkah-langkah:</p>
+    <ol>
+      <li>Tentukan faktor skala <b>k</b>.</li>
+      <li>Hitung kubik faktor skala <b>k³</b>.</li>
+      <li>Kali volume awal dengan <b>k³</b> untuk mendapatkan volume baru.</li>
+    </ol>
+  </div>
+
+  <p><b>Contoh 1:</b> Kubus sisi 4 cm, volume awal V₁ = 64 cm³. Diperbesar 2 kali → V₂ = 2³ × 64 = 512 cm³</p>
+  <p><b>Contoh 2:</b> Kubus sisi 4 cm, volume awal V₁ = 64 cm³. Diperkecil setengah → V₂ = (½)³ × 64 = 8 cm³</p>
+
+  <div class="makna-box">
+    <p class="makna-title">Kesimpulan:</p>
+    <ul>
+      <li>Perubahan skala langsung mempengaruhi volume.</li>
+      <li>Skala > 1 → volume meningkat drastis.</li>
+      <li>Skala < 1 → volume mengecil secara signifikan.</li>
+      <li>Efeknya bersifat kubik: dua kali lipat sisi → volume 8 kali lipat, tiga kali lipat → volume 27 kali lipat.</li>
+    </ul>
+  </div>
+<!-- ================= BAGIAN D ================= -->
+<div class="section">
+  <h2>Lingkaran</h2>
+
+  <!-- Pengertian -->
+  <div class="makna-box">
+    <p class="makna-title">A. Pengertian Lingkaran:</p>
+    <img src="assets/images/lingkaran/lingkaran.jpg" alt="Lingkaran" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Lingkaran adalah bangun datar yang terdiri dari semua titik pada bidang yang memiliki jarak sama dari satu titik pusat. Jarak dari titik pusat ke lingkaran disebut jari-jari (r), dan garis yang melewati pusat disebut diameter (d).</p>
+  </div>
+
+  <!-- 1. Keliling Lingkaran -->
+  <div class="makna-box">
+    <p class="makna-title">B. Keliling Lingkaran:</p>
+    <img src="assets/images/lingkaran/keliling.jpg" alt="Keliling Lingkaran" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: K = 2 × π × r atau K = π × d</p>
+    <p><b>Contoh:</b> Jika r = 7 cm → K = 2 × π × 7 ≈ 43,96 cm</p>
+    <p><b>Kesimpulan:</b> Keliling lingkaran bergantung pada jari-jari atau diameter.</p>
+  </div>
+
+  <!-- 2. Luas Lingkaran -->
+  <div class="makna-box">
+    <p class="makna-title">C. Luas Lingkaran:</p>
+    <img src="assets/images/lingkaran/luas.jpg" alt="Luas Lingkaran" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: L = π × r²</p>
+    <p><b>Contoh:</b> Jika r = 7 cm → L = π × 7² ≈ 153,94 cm²</p>
+    <p><b>Kesimpulan:</b> Luas lingkaran meningkat dengan kuadrat jari-jari.</p>
+  </div>
+
+  <!-- 3. Panjang Busur Lingkaran -->
+  <div class="makna-box">
+    <p class="makna-title">D. Panjang Busur Lingkaran:</p>
+    <img src="assets/images/lingkaran/busur.jpg" alt="Panjang Busur Lingkaran" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: Panjang busur = (θ / 360°) × 2 × π × r</p>
+    <p><b>Contoh:</b> r = 7 cm, sudut θ = 60° → Panjang busur ≈ 7,33 cm</p>
+    <p><b>Kesimpulan:</b> Panjang busur sebanding dengan sudut pusat.</p>
+  </div>
+
+  <!-- 4. Luas Juring Lingkaran -->
+  <div class="makna-box">
+    <p class="makna-title">Luas Juring Lingkaran:</p>
+    <img src="assets/images/lingkaran/juring.jpg" alt="Luas Juring Lingkaran" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: Luas juring = (θ / 360°) × π × r²</p>
+    <p><b>Contoh:</b> r = 7 cm, θ = 60° → Luas juring ≈ 25,66 cm²</p>
+    <p><b>Kesimpulan:</b> Luas juring sebanding dengan sudut pusat; semakin besar sudut, luas juring semakin besar.</p>
+  </div>
+</div>
+<!-- ================= BAGIAN E ================= -->
+<div class="section">
+  <h2>E. Luas Permukaan Bangun Ruang Sisi Lengkung</h2>
+
+  <!-- Pengertian -->
+  <div class="makna-box">
+    <p class="makna-title">Pengertian:</p>
+    <img src="assets/images/bangunruang/silengkung.jpg" alt="Bangun Ruang Sisi Lengkung" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Bangun ruang sisi lengkung adalah bangun ruang yang memiliki minimal satu sisi lengkung. Luas permukaannya dihitung dengan menjumlahkan luas sisi lengkung dan luas alas/permukaan lainnya.</p>
+  </div>
+
+  <!-- 1. Luas Permukaan Tabung -->
+  <div class="makna-box">
+    <p class="makna-title">1. Luas Permukaan Tabung:</p>
+    <img src="assets/images/bangunruang/tabung.jpg" alt="Luas Tabung" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: L = 2 × π × r² + 2 × π × r × t</p>
+    <p>r = jari-jari, t = tinggi tabung</p>
+    <p><b>Contoh:</b> Tabung r = 5 cm, t = 10 cm → L = 2×π×5² + 2×π×5×10 = 50π + 100π = 150π ≈ 471,24 cm²</p>
+    <p><b>Kesimpulan:</b> Luas permukaan tabung dihitung dari luas dua alas dan luas selimut tabung.</p>
+  </div>
+
+  <!-- 2. Luas Permukaan Kerucut -->
+  <div class="makna-box">
+    <p class="makna-title">2. Luas Permukaan Kerucut:</p>
+    <img src="assets/images/bangunruang/kerucut.jpg" alt="Luas Kerucut" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: L = π × r² + π × r × s</p>
+    <p>r = jari-jari alas, s = garis pelukis kerucut</p>
+    <p><b>Contoh:</b> Kerucut r = 4 cm, s = 5 cm → L = π×4² + π×4×5 = 16π + 20π = 36π ≈ 113,1 cm²</p>
+    <p><b>Kesimpulan:</b> Luas kerucut adalah jumlah luas alas dan luas selimut kerucut.</p>
+  </div>
+
+  <!-- 3. Luas Permukaan Bola -->
+  <div class="makna-box">
+    <p class="makna-title">3. Luas Permukaan Bola:</p>
+    <img src="assets/images/bangunruang/bola.jpg" alt="Luas Bola" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: L = 4 × π × r²</p>
+    <p>r = jari-jari bola</p>
+    <p><b>Contoh:</b> Bola r = 6 cm → L = 4 × π × 6² = 4 × 36π = 144π ≈ 452,16 cm²</p>
+    <p><b>Kesimpulan:</b> Luas permukaan bola bergantung pada kuadrat jari-jarinya.</p>
+  </div>
+
+  <!-- 4. Pengaruh Perubahan Skala -->
+  <div class="makna-box">
+    <p class="makna-title">4. Pengaruh Perubahan Skala Bangun Ruang Sisi Lengkung terhadap Luas Permukaannya:</p>
+    <p>Jika sebuah bangun sisi lengkung diperbesar atau diperkecil dengan faktor skala <b>k</b>, luas permukaannya berubah sebesar <b>k²</b> kali luas awal.</p>
+    <p><b>Langkah-langkah:</b></p>
+    <ol>
+      <li>Tentukan faktor skala <b>k</b></li>
+      <li>Hitung kuadrat faktor skala <b>k²</b></li>
+      <li>Kali luas permukaan awal dengan <b>k²</b> untuk mendapatkan luas baru</li>
+    </ol>
+    <p><b>Contoh:</b> Tabung L₁ = 471,24 cm², diperbesar 2 kali → L₂ = 2² × 471,24 = 4 × 471,24 ≈ 1884,96 cm²</p>
+    <p><b>Kesimpulan:</b> Perubahan skala mempengaruhi luas permukaan secara kuadratis, sama seperti pada bangun sisi datar.</p>
+  </div>
+<!-- ================= BAGIAN F ================= -->
+<div class="section">
+  <h2>F. Volume Bangun Ruang Sisi Lengkung</h2>
+
+  <!-- Pengertian -->
+  <div class="makna-box">
+    <p class="makna-title">Pengertian Volume:</p>
+    <img src="assets/images/bangunruang/silengkung.jpg" alt="Bangun Ruang Sisi Lengkung" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Volume adalah ukuran banyaknya ruang yang ditempati oleh sebuah bangun ruang. Untuk bangun sisi lengkung, volume dihitung berdasarkan rumus khusus setiap jenis bangun (tabung, kerucut, bola).</p>
+  </div>
+
+  <!-- 1. Volume Tabung -->
+  <div class="makna-box">
+    <p class="makna-title">1. Volume Tabung:</p>
+    <img src="assets/images/bangunruang/tabung.jpg" alt="Volume Tabung" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: V = π × r² × t</p>
+    <p>r = jari-jari alas, t = tinggi tabung</p>
+    <p><b>Contoh:</b> Tabung r = 5 cm, t = 10 cm → V = π × 5² × 10 = 250π ≈ 785,4 cm³</p>
+    <p><b>Kesimpulan:</b> Volume tabung tergantung luas alas dan tinggi tabung.</p>
+  </div>
+
+  <!-- 2. Volume Kerucut -->
+  <div class="makna-box">
+    <p class="makna-title">2. Volume Kerucut:</p>
+    <img src="assets/images/bangunruang/kerucut.jpg" alt="Volume Kerucut" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: V = 1/3 × π × r² × t</p>
+    <p>r = jari-jari alas, t = tinggi kerucut</p>
+    <p><b>Contoh:</b> Kerucut r = 4 cm, t = 9 cm → V = 1/3 × π × 4² × 9 = 48π ≈ 150,8 cm³</p>
+    <p><b>Kesimpulan:</b> Volume kerucut sama dengan sepertiga tabung yang memiliki alas dan tinggi sama.</p>
+  </div>
+
+  <!-- 3. Volume Bola -->
+  <div class="makna-box">
+    <p class="makna-title">3. Volume Bola:</p>
+    <img src="assets/images/bangunruang/bola.jpg" alt="Volume Bola" style="width:100%; max-width:300px; display:block; margin:auto;">
+    <p>Rumus: V = 4/3 × π × r³</p>
+    <p>r = jari-jari bola</p>
+    <p><b>Contoh:</b> Bola r = 6 cm → V = 4/3 × π × 6³ = 288π ≈ 904,78 cm³</p>
+    <p><b>Kesimpulan:</b> Volume bola bergantung pada kubik jari-jarinya.</p>
+  </div>
+
+  <!-- 4. Pengaruh Perubahan Skala -->
+  <div class="makna-box">
+    <p class="makna-title">4. Pengaruh Perubahan Skala Bangun Ruang Sisi Lengkung terhadap Volumenya:</p>
+    <p>Jika sebuah bangun sisi lengkung diperbesar atau diperkecil dengan faktor skala <b>k</b>, volumenya berubah sebesar <b>k³</b> kali volume awal.</p>
+    <p><b>Langkah-langkah:</b></p>
+    <ol>
+      <li>Tentukan faktor skala <b>k</b></li>
+      <li>Hitung kubik faktor skala <b>k³</b></li>
+      <li>Kali volume awal dengan <b>k³</b> untuk mendapatkan volume baru</li>
+    </ol>
+    <p><b>Contoh:</b> Tabung V₁ = 785,4 cm³, diperbesar 2 kali → V₂ = 2³ × 785,4 = 8 × 785,4 ≈ 6283,2 cm³</p>
+    <p><b>Kesimpulan:</b> Perubahan skala mempengaruhi volume secara kubik, sama seperti pada bangun sisi datar.</p>
+  </div>
+
+</div>
+
+<a href="https://gemini.google.com/app" target="_blank" class="ai-btn">Tanya AI Gemini</a>
+
+<footer>
+&copy; 2025 GeoSMART | Materi Bangun Ruang Kelas IX
+</footer>
+
+</body>
+</html>
