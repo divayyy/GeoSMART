@@ -211,6 +211,100 @@ footer{
   color:#94a3b8;
   font-size:14px;
 }
+.ai-mini-btn {
+    background: #38bdf8;
+    color: #010816;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+.ai-mini-btn:hover {
+    background: #facc15;
+    transform: scale(1.05);
+}
+
+/* Styling Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #1e293b;
+    width: 90%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #38bdf8;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    text-align: center;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header { margin-bottom: 15px; }
+.modal-icon { font-size: 40px; display: block; margin-bottom: 10px; }
+.modal-header h3 { margin: 0; color: #38bdf8; font-size: 22px; }
+
+.modal-body p { font-size: 14px; color: #cbd5e1; margin: 10px 0; }
+.copy-preview {
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #94a3b8;
+    border: 1px dashed #334155;
+    margin: 15px 0;
+    text-align: left;
+    max-height: 80px;
+    overflow: hidden;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #334155;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-go {
+    flex: 2;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -225,7 +319,28 @@ footer{
 <div class="section">
 
 <h2>Kelas 8 Teorema Pythagoras</h2>
+<h3>Tujuan Pembelajaran</h3>
+<p>
+Setelah mempelajari materi ini, peserta didik diharapkan mampu:
+</p>
 
+<ul>
+  <li>Memahami konsep Teorema Pythagoras melalui pembuktian visual (luas persegi).</li>
+  <li>Menghitung panjang salah satu sisi segitiga siku-siku jika dua sisi lainnya diketahui.</li>
+  <li>Mengidentifikasi kelompok bilangan yang termasuk Triple Pythagoras.</li>
+  <li>Menerapkan kebalikan Teorema Pythagoras untuk menentukan jenis segitiga (lincip, tumpul, atau siku-siku).</li>
+  <li>Menentukan perbandingan sisi-sisi pada segitiga istimewa (sudut 30°, 45°, dan 60°).</li>
+  <li>Menyelesaikan masalah nyata dalam kehidupan sehari-hari menggunakan konsep Pythagoras.</li>
+  <li>Menghitung jarak antara dua titik pada bidang koordinat Kartesius.</li>
+</ul>
+
+<div class="makna-box">
+  <p class="makna-title">Fokus Pembelajaran</p>
+  <p>
+  Pembelajaran ini menekankan pada kemampuan <b>numerasi</b> dan <b>logika spasial</b>. 
+  Siswa tidak hanya menghafal rumus $a^2 + b^2 = c^2$, tetapi mampu melihat polanya dalam bangun ruang dan koordinat.
+  </p>
+</div>
 <p>
 Teorema Pythagoras merupakan salah satu konsep penting dalam geometri, khususnya pada segitiga siku-siku. 
 Dengan mempelajarinya, kita dapat menentukan panjang sisi yang belum diketahui pada segitiga, menghitung jarak diagonal, hingga mengaplikasikannya dalam kehidupan sehari-hari seperti membuat tangga, memotong papan, atau menentukan panjang kabel.
@@ -252,7 +367,7 @@ Gambarlah kuadrat pada masing-masing sisi segitiga.
 <li>Sisi depan c adalah sisi terpanjang yang disebut sisi miring (hipotenusa).</li>
 <li>Sisi lain pembentuk sudut siku-siku (sisi BC dan sisi CA) disebut sisi siku-siku.</li>
 </ul>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Konsep Dasar Pythagoras', 'Mengenali hipotenusa dan sisi tegak pada segitiga siku-siku')"> ✨ Tanya Gemini </button>
 <h4>2. Menjumlahkan Luas Sisi-Sisi</h4>
 <p>Jumlah luas kuadrat pada kedua sisi tegak:</p>
 <div class="formula">3² + 4² = 9 + 16 = 25</div>
@@ -283,6 +398,7 @@ Visualisasi segitiga dan kuadrat pada sisi membantu pemahaman teorema Pythagoras
 Praktek langsung menggambar segitiga dan menghitung luas meningkatkan pemahaman.
 </p>
 </div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Pembuktian Pythagoras', 'Mengapa jumlah luas persegi pada sisi tegak sama dengan sisi miring')"> ✨ Minta Clue Konsep </button>
 <!-- Contoh 1 -->
 <h4>Contoh 1: Menentukan Hipotenusa</h4>
 <p>Segitiga siku-siku dengan sisi tegak 6 cm dan 8 cm. Tentukan hipotenusa!</p>
@@ -300,7 +416,37 @@ Praktek langsung menggambar segitiga dan menghitung luas meningkatkan pemahaman.
   <li>c = √100 = 10 cm</li>
 </ul>
 <p><b>Kesimpulan:</b> Hipotenusa = 10 cm</p>
-
+<div class="makna-box">
+  <p class="makna-title">Tips Hafalan: Keluarga Triple Pythagoras</p>
+  <p>Sering muncul di ujian! Kamu cukup menghafal induknya, kelipatannya pasti mengikuti:</p>
+  <table>
+    <tr>
+      <th>Kelompok</th>
+      <th>Induk Triple</th>
+      <th>Contoh Kelipatan (x2, x3, dst)</th>
+    </tr>
+    <tr>
+      <td><b>I</b></td>
+      <td>3, 4, 5</td>
+      <td>6, 8, 10 | 9, 12, 15</td>
+    </tr>
+    <tr>
+      <td><b>II</b></td>
+      <td>5, 12, 13</td>
+      <td>10, 24, 26 | 15, 36, 39</td>
+    </tr>
+    <tr>
+      <td><b>III</b></td>
+      <td>7, 24, 25</td>
+      <td>14, 48, 50</td>
+    </tr>
+    <tr>
+      <td><b>IV</b></td>
+      <td>8, 15, 17</td>
+      <td>16, 30, 34</td>
+    </tr>
+  </table>
+</div>
 <h3>B. Triple Pythagoras</h3>
 <p>
 Triple Pythagoras adalah kumpulan tiga bilangan bulat positif a, b, c yang memenuhi c² = a² + b². 
@@ -312,7 +458,7 @@ Contoh: (3, 4, 5), (5, 12, 13), (7, 24, 25).
 <b>Triple Pythagoras</b>
 </div>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Triple Pythagoras', 'Kelompok tiga angka yang membentuk segitiga siku-siku')"> ✨ Beri Tantangan Soal </button>
 <h4>1. Kebalikan Teorema Pythagoras</h4>
 <p>
 Digunakan untuk menentukan apakah sebuah segitiga siku-siku. Jika a² + b² = c² → siku-siku, jika tidak → bukan siku-siku.
@@ -440,7 +586,7 @@ sisinya, siswa dapat langsung menentukan panjang sisi tanpa perhitungan
 panjang.
 </p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Segitiga 45 Derajat', 'Perbandingan sisi a : a : a√2 pada segitiga siku-siku sama kaki')"> ✨ Tanya Cara Cepat </button>
 <!-- ================= 2 ================= -->
 <h4>2. Segitiga Siku-Siku dengan Sudut 30° dan 60°</h4>
 
@@ -488,7 +634,7 @@ jarak, serta perhitungan sudut elevasi dan depresi. Pemahaman perbandingan
 sisinya mempercepat proses numerasi geometri.
 </p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Segitiga 30-60 Derajat', 'Perbandingan sisi depan 30 derajat, 60 derajat, dan hipotenusa')"> ✨ Tanya Cara Cepat </button>
 <!-- ================= 3 ================= -->
 <h4>3. Contoh Soal Segitiga Istimewa</h4>
 <h4>Contoh 4: Segitiga 45° – 45° – 90°</h4>
@@ -669,7 +815,7 @@ yang tidak bisa diukur secara langsung, seperti menentukan panjang tangga,
 kabel, atau jarak terpendek.
 </p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Penerapan Pythagoras', 'Cara mengubah soal cerita menjadi model matematika segitiga siku-siku')"> ✨ Minta Langkah Pengerjaan </button>
 <!-- ================= E. RUMUS JARAK ================= -->
 <h3>E. Rumus Jarak</h3>
 
@@ -748,12 +894,74 @@ koordinat. Dengan memahami konsep ini, siswa dapat menentukan jarak antar
 titik secara sistematis dan logis.
 </p>
 </div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Rumus Jarak', 'Mencari jarak antara dua titik koordinat menggunakan prinsip Pythagoras')"> ✨ Tanya Gemini </button>
+<h3>F. Tips Numerasi: Menghitung Akar Kuadrat</h3>
+<p>
+Banyak siswa kesulitan saat harus menghitung akar seperti <b>√625</b> atau <b>√1.225</b>. 
+Berikut adalah cara cepat tanpa kalkulator:
+</p>
 
+<div class="makna-box">
+  <h4>Trik Akhiran 5:</h4>
+  <p>Jika angka berakhiran 25, maka akarnya pasti berakhiran 5.</p>
+  <ul>
+    <li><b>√625</b> → Belakangnya 25 (pasti 5). Angka depannya 6. Cari perkalian berurutan yang hasilnya mendekati 6 (2 x 3 = 6). Ambil angka terkecil yaitu <b>2</b>. Hasil: <b>25</b>.</li>
+    <li><b>√1.225</b> → Belakangnya 25 (pasti 5). Angka depannya 12. Cari perkalian berurutan (3 x 4 = 12). Ambil angka terkecil <b>3</b>. Hasil: <b>35</b>.</li>
+  </ul>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Trik Akar Kuadrat', 'Cara menghitung akar kuadrat besar dengan cepat tanpa kalkulator')"> ✨ Tanya Trik Lain </button>
+
+<button class="ai-mini-btn" onclick="tanyaGemini('Trik Cepat Akar', 'Cara menghitung akar kuadrat besar tanpa kalkulator untuk soal Pythagoras')"> 
+  ✨ Tanya Gemini Trik Lainnya 
+</button>
 </div>
 </div>
 
-<a href="https://gemini.google.com/app" target="_blank" class="ai-btn">Tanya AI Gemini</a>
-<footer>&copy; 2025 GeoSMART | Teorema Pythagoras </footer>
+<script>
+function openGemini(){
+  // Redirect langsung (AMAN untuk HP)
+  window.location.href = "https://gemini.google.com/app";
+}
+</script>
+<div id="aiModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="modal-icon">✨</span>
+            <h3 id="modalTitle">Tanya Gemini AI</h3>
+        </div>
+        <div class="modal-body">
+            <p>Pesan instruksi sudah otomatis <b>disalin</b> ke memori HP/Laptop kamu.</p>
+            <div class="copy-preview" id="textPreview"></div>
+            <p>Silakan klik tombol di bawah untuk membuka Gemini, lalu <b>Tempel/Paste</b> di kolom chat.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-cancel" onclick="closeModal()">Batal</button>
+            <button class="btn-go" id="goGemini">Buka Gemini & Tanya</button>
+        </div>
+    </div>
+    <script>
+function tanyaGemini(topik, detail) {
+    // Pesan otomatis agar Gemini hanya memberikan bimbingan (clue)
+    const prompt = `Saya sedang belajar "${topik}" (${detail}). Bantu saya memahami dengan memberikan 1 soal tantangan. PENTING: Jangan beri jawaban langsung, berikan CLUE atau langkah berpikirnya saja agar saya bisa menjawab sendiri.`;
 
+    // Salin otomatis ke memori HP/Laptop
+    navigator.clipboard.writeText(prompt).then(() => {
+        // Munculkan kotak pesan (Modal)
+        document.getElementById('modalTitle').innerText = topik;
+        document.getElementById('textPreview').innerText = prompt;
+        document.getElementById('aiModal').style.display = 'flex';
+        
+        // Tombol untuk buka Gemini
+        document.getElementById('goGemini').onclick = function() {
+            window.open("https://gemini.google.com/app", "_blank");
+            closeModal();
+        };
+    });
+}
+
+function closeModal() {
+    document.getElementById('aiModal').style.display = 'none';
+}
+</script>
 </body>
 </html>

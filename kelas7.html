@@ -24,28 +24,100 @@ p,li{text-align:justify;font-size:16px}
 .makna-box{background:#172554;border-left:5px solid #84cc16;padding:16px;border-radius:8px;margin-top:24px}
 .makna-title{color:#84cc16;font-weight:700}
 footer{text-align:center;padding:14px;background:#020617;color:#94a3b8}
+.ai-mini-btn {
+    background: #38bdf8;
+    color: #010816;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+.ai-mini-btn:hover {
+    background: #facc15;
+    transform: scale(1.05);
+}
 
-/* ================= TOMBOL AI ================= */
-.ai-btn{
-    position:fixed;
-    bottom:24px;
-    right:24px;
-    background:linear-gradient(135deg,#426fd7,#426fd7);
-    color:#fcfffe;
-    padding:14px 22px;
-    border-radius:50px;
-    font-weight:700;
-    border:2px solid #86b7ef;
-    z-index:999;
-    cursor:pointer;
-    box-shadow:0 10px 25px rgba(0,0,0,0.5);
-    transition:transform 0.25s, box-shadow 0.25s;
+/* Styling Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
 }
-.ai-btn:hover{
-    transform:translateY(-6px) scale(1.05);
-    box-shadow:0 18px 35px rgba(0,0,0,0.7);
-    background:linear-gradient(135deg,#4aaade,#4aaade);
+
+.modal-content {
+    background: #1e293b;
+    width: 90%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #38bdf8;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    text-align: center;
+    animation: slideUp 0.3s ease-out;
 }
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header { margin-bottom: 15px; }
+.modal-icon { font-size: 40px; display: block; margin-bottom: 10px; }
+.modal-header h3 { margin: 0; color: #38bdf8; font-size: 22px; }
+
+.modal-body p { font-size: 14px; color: #cbd5e1; margin: 10px 0; }
+.copy-preview {
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #94a3b8;
+    border: 1px dashed #334155;
+    margin: 15px 0;
+    text-align: left;
+    max-height: 80px;
+    overflow: hidden;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #334155;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-go {
+    flex: 2;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -60,15 +132,230 @@ footer{text-align:center;padding:14px;background:#020617;color:#94a3b8}
 <div class="section">
 
 <h2>Kelas 7 - Kesebangunan</h2>
+<!-- ================= TUJUAN PEMBELAJARAN ================= -->
+<h3>Tujuan Pembelajaran</h3>
 <p>
-Kesebangunan merupakan konsep dalam geometri yang membahas hubungan antara
-dua bangun datar yang memiliki bentuk sama tetapi ukuran yang berbeda.
-Konsep ini sangat sering digunakan dalam kehidupan sehari-hari, misalnya
-pada peta, denah bangunan, bayangan benda, serta perbandingan ukuran objek.
+Setelah mempelajari materi ini, peserta didik diharapkan mampu:
 </p>
 
+<ul>
+<li>Memahami pengertian sudut dan antar sudut dalam geometri.</li>
+<li>Mengidentifikasi berbagai jenis sudut berdasarkan besar sudutnya.</li>
+<li>Menjelaskan hubungan antar sudut pada dua garis sejajar yang dipotong oleh garis transversal.</li>
+<li>Menentukan besar sudut yang belum diketahui menggunakan sifat-sifat sudut.</li>
+<li>Memahami konsep kesebangunan pada bangun datar.</li>
+<li>Menyelesaikan masalah kontekstual yang berkaitan dengan kesebangunan.</li>
+<li>Menerapkan konsep kesebangunan dalam kehidupan sehari-hari.</li>
+</ul>
+
+<div class="makna-box">
+<p class="makna-title">Fokus Pembelajaran</p>
+<p>
+Pembelajaran difokuskan pada pemahaman konsep, keterampilan berhitung,
+dan kemampuan menerapkan konsep sudut serta kesebangunan dalam berbagai
+situasi nyata.
+</p>
+</div>
+<div class="section">
+
+<h3>A. Pengertian Titik, Garis, dan Bidang</h3>
+<p>
+Sebelum mempelajari kesebangunan lebih dalam, kita harus memahami tiga unsur dasar
+dalam geometri yang menjadi pondasi utama:
+</p>
+
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/titik.png" alt="Ilustrasi Titik">
+    <h4>1. Titik</h4>
+    <p>Titik adalah konsep abstrak yang tidak memiliki ukuran. Digunakan untuk menentukan posisi dan disimbolkan dengan noktah (.).</p>
+  </div>
+  <div class="card">
+    <img src="assets/images/garis.png" alt="Ilustrasi Garis">
+    <h4>2. Garis</h4>
+    <p>Kumpulan titik yang berderet ke dua arah berlawanan tak terhingga. Garis hanya memiliki dimensi panjang.</p>
+  </div>
+  <div class="card">
+    <img src="assets/images/bidang.png" alt="Ilustrasi Bidang">
+    <h4>3. Bidang</h4>
+    <p>Permukaan datar yang memiliki dua dimensi (panjang dan lebar) seperti permukaan meja atau layar HP.</p>
+  </div>
+</div>
+[Image of the geometric relationship between points, lines, and planes]
+<button class="ai-mini-btn" onclick="tanyaGemini('Titik, Garis, dan Bidang', 'Definisi dasar titik, garis, dan bidang sebagai pondasi geometri')"> ✨ Tanya Gemini </button>
+
+<h3>B. Hubungan Antar Garis</h3>
+<p>
+Dua garis atau lebih dalam satu bidang datar dapat memiliki posisi yang menentukan
+bentuk geometri yang akan dihasilkan.
+</p>
+
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/garis_sejajar.png" alt="Garis Sejajar">
+    <h4>1. Garis Sejajar (//)</h4>
+    <p>Dua garis yang jaraknya selalu tetap dan tidak akan pernah bertemu meskipun diperpanjang selamanya.</p>
+  </div>
+  <div class="card">
+    <img src="assets/images/garis_berpotongan.png" alt="Garis Berpotongan">
+    <h4>2. Garis Berpotongan</h4>
+    <p>Dua garis yang bertemu di satu titik. Jika perpotongannya membentuk siku-siku, disebut Berpotongan Tegak Lurus (⊥).</p>
+  </div>
+</div>
+[Image of parallel lines and intersecting lines in a plane]
+<div class="makna-box">
+<p class="makna-title">Fakta Geometri</p>
+<p>
+Sudut hanya bisa terbentuk jika ada dua garis yang <b>berpotongan</b>. Garis sejajar
+tidak akan pernah membentuk sudut satu sama lain kecuali dipotong oleh garis
+ketiga (transversal).
+</p>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Garis Sejajar dan Berpotongan', 'Perbedaan karakteristik garis sejajar dan garis berpotongan dalam satu bidang')"> ✨ Tanya Gemini </button>
+  
+<!-- ================= PENGERTIAN SUDUT ================= -->
+<h3>B.Pengertian Sudut</h3>
+<p>
+Sudut adalah daerah yang terbentuk oleh dua buah sinar garis yang bertemu pada
+satu titik pangkal yang sama. Titik pertemuan kedua garis tersebut disebut
+titik sudut, sedangkan kedua garisnya disebut kaki sudut.
+</p>
+<button class="ai-mini-btn" onclick="tanyaGemini('Pengertian Sudut', 'Daerah pertemuan dua sinar garis pada satu titik')">
+    ✨ Tanya Gemini
+</button>
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/bangundatar/a.png">
+    <b>Ilustrasi Sudut</b>
+  </div>
+</div>
+
+<div class="makna-box">
+<p class="makna-title">Kesimpulan</p>
+<p>Sudut terbentuk dari dua garis yang bertemu pada satu titik dan besar sudut
+menunjukkan tingkat kemiringan kedua garis tersebut.</p>
+</div>
+
+<!-- ================= PENGERTIAN ANTAR SUDUT ================= -->
+<h3>C. Pengertian Antar Sudut</h3>
+<p>
+Antar sudut adalah hubungan yang terjadi antara dua atau lebih sudut yang
+posisinya saling berkaitan. Hubungan ini biasanya muncul ketika dua garis
+sejajar dipotong oleh sebuah garis transversal.
+</p>
+<p>
+Hubungan antar sudut digunakan untuk menentukan besar sudut yang belum
+diketahui berdasarkan sifat-sifat sudut.
+</p>
+
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/bangundatar/asa.png">
+    <b>Hubungan Antar Sudut</b>
+  </div>
+</div>
+
+<div class="makna-box">
+<p class="makna-title">Kesimpulan</p>
+<p>Antar sudut membantu mempermudah perhitungan sudut pada garis sejajar
+dan bangun geometri.</p>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Pengertian Antar Sudut', 'Hubungan antara dua atau lebih sudut yang posisinya saling berkaitan pada garis sejajar')"> ✨ Tanya Gemini </button>
+<!-- ================= JENIS-JENIS SUDUT ================= -->
+<h3>D. Jenis-Jenis Sudut</h3>
+<p>
+Berdasarkan besar derajatnya, sudut dibedakan menjadi beberapa jenis berikut.
+Setiap jenis sudut memiliki ukuran dan karakteristik yang berbeda.
+</p>
+
+<!-- 1 -->
+<h4>1. Sudut Lancip</h4>
+<p>
+Sudut lancip adalah sudut yang besarnya kurang dari 90°.
+</p>
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/sas.jpg">
+    <b>Sudut Lancip (&lt; 90°)</b>
+  </div>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Lancip', 'Sudut yang besarnya kurang dari 90 derajat')">
+   ✨ Tanya Gemini
+</button>
+<!-- 2 -->
+<h4>2. Sudut Siku-siku</h4>
+<p>
+Sudut siku-siku adalah sudut yang besarnya tepat 90°.
+</p>
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/sudut_siku.png">
+    <b>Sudut Siku-siku (90°)</b>
+  </div>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Siku-siku', 'Sudut yang besarnya tepat 90 derajat')"> ✨ Tanya Gemini </button>
+<!-- 3 -->
+<h4>3. Sudut Tumpul</h4>
+<p>
+Sudut tumpul adalah sudut yang besarnya lebih dari 90° tetapi kurang dari 180°.
+</p>
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/sudut_tumpul.png">
+    <b>Sudut Tumpul (90° – 180°)</b>
+  </div>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Tumpul', 'Sudut yang besarnya antara 90 sampai 180 derajat')"> ✨ Tanya Gemini </button>
+<!-- 4 -->
+<h4>4. Sudut Lurus</h4>
+<p>
+Sudut lurus adalah sudut yang besarnya tepat 180°.
+</p>
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/sudut_lurus.png">
+    <b>Sudut Lurus (180°)</b>
+  </div>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Lurus', 'Sudut yang besarnya tepat 180 derajat')"> ✨ Tanya Gemini </button>
+<!-- 5 -->
+<h4>5. Sudut Refleks</h4>
+<p>
+Sudut refleks adalah sudut yang besarnya lebih dari 180° tetapi kurang dari 360°.
+</p>
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/sudut_refleks.png">
+    <b>Sudut Refleks (180° – 360°)</b>
+  </div>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Refleks', 'Sudut yang besarnya antara 180 sampai 360 derajat')"> ✨ Tanya Gemini </button>
+<!-- 6 -->
+<h4>6. Sudut Penuh</h4>
+<p>
+Sudut penuh adalah sudut yang besarnya tepat 360° atau satu putaran penuh.
+</p>
+<div class="grid">
+  <div class="card">
+    <img src="assets/images/sudut_penuh.png">
+    <b>Sudut Penuh (360°)</b>
+  </div>
+</div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Penuh', 'Sudut yang membentuk satu putaran lingkaran penuh atau tepat 360 derajat')"> ✨ Tanya Gemini </button>
+<div class="makna-box">
+<p class="makna-title">Ringkasan Jenis Sudut</p>
+<ul>
+<li>Sudut Lancip → &lt; 90°</li>
+<li>Sudut Siku-siku → 90°</li>
+<li>Sudut Tumpul → 90° – 180°</li>
+<li>Sudut Lurus → 180°</li>
+<li>Sudut Refleks → 180° – 360°</li>
+<li>Sudut Penuh → 360°</li>
+</ul>
+</div>
+
 <!-- ================= A ================= -->
-<h3>A. Hubungan Antar Sudut</h3>
+<h3>E. Hubungan Antar Sudut</h3>
 <p>
 Hubungan antar sudut terjadi ketika dua garis sejajar dipotong oleh sebuah
 garis lain (garis transversal). Hubungan ini menghasilkan beberapa jenis
@@ -94,7 +381,7 @@ dua garis yang berpotongan. Sudut ini selalu memiliki besar sudut yang sama.
 <p><b>Penyelesaian:</b> Sudut bertolak belakang selalu sama besar, sehingga ∠3 = ∠1 = 70°.</p>
 <p><b>Kesimpulan:</b> Sudut bertolak belakang sama besar sehingga sudut yang berhadapan dapat langsung diketahui.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Bertolak Belakang', 'Dua sudut yang berhadapan pada persilangan garis')"> ✨ Tanya Gemini </button>
 <h4>2. Sudut Sehadap</h4>
 <p>
 Sudut sehadap adalah sudut yang menempati posisi yang sama pada dua garis
@@ -113,7 +400,7 @@ sejajar yang dipotong oleh garis transversal. Besar sudut sehadap selalu sama.
 <p><b>Penyelesaian:</b> Sudut sehadap sama besar, sehingga ∠5 = ∠1 = 65°.</p>
 <p><b>Kesimpulan:</b> Sudut sehadap sama besar pada garis sejajar, memudahkan perhitungan sudut.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Sehadap', 'Sudut yang menghadap arah yang sama pada garis sejajar')"> ✨ Tanya Gemini </button>
 <h4>3. Sudut Dalam Berseberangan</h4>
 <p>
 Sudut dalam berseberangan terletak di antara dua garis sejajar dan berada
@@ -151,7 +438,7 @@ sisi berlawanan garis transversal. Sudut-sudut ini juga sama besar.
 <p><b>Penyelesaian:</b> Sudut luar berseberangan sama besar, sehingga ∠7 = ∠1 = 50°.</p>
 <p><b>Kesimpulan:</b> Sudut luar berseberangan memudahkan penentuan sudut di luar garis sejajar.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Berseberangan', 'Sudut dalam dan luar yang berada di sisi berlawanan dari garis transversal dan memiliki besar yang sama')"> ✨ Tanya Gemini </button>
 <h4>5. Sudut Dalam Sepihak</h4>
 <p>
 Sudut dalam sepihak terletak di antara dua garis sejajar dan berada pada sisi
@@ -170,7 +457,7 @@ yang sama terhadap garis transversal. Jumlah sudut ini selalu 180°.
 <p><b>Penyelesaian:</b> Sudut dalam sepihak selalu berjumlah 180°, maka ∠4 = 180° - 110° = 70°.</p>
 <p><b>Kesimpulan:</b> Sudut dalam sepihak selalu berjumlah 180°, mempermudah perhitungan sudut.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Dalam Sepihak', 'Dua sudut di dalam garis sejajar yang jika dijumlahkan hasilnya 180 derajat')"> ✨ Tanya Gemini </button>
 <h4>6. Sudut Luar Sepihak</h4>
 <p>
 Sudut luar sepihak terletak di luar dua garis sejajar dan berada pada sisi
@@ -189,9 +476,18 @@ yang sama garis transversal. Jumlah sudutnya juga 180°.
 <p><b>Penyelesaian:</b> Sudut luar sepihak berjumlah 180°, sehingga ∠8 = 180° - 120° = 60°.</p>
 <p><b>Kesimpulan:</b> Sudut luar sepihak sama dengan 180° minus sudut diketahui, berguna menghitung sudut eksternal.</p>
 </div>
+<button class="ai-mini-btn" onclick="tanyaGemini('Sudut Sepihak', 'Sudut dalam atau luar yang berada di sisi yang sama dan jika dijumlahkan hasilnya harus 180 derajat')"> ✨ Tanya Gemini </button>
 
+<h3>A.Pengertian Kesebangunan</h3>
+<p>
+Kesebangunan merupakan konsep dalam geometri yang membahas hubungan antara
+dua bangun datar yang memiliki bentuk sama tetapi ukuran yang berbeda.
+Konsep ini sangat sering digunakan dalam kehidupan sehari-hari, misalnya
+pada peta, denah bangunan, bayangan benda, serta perbandingan ukuran objek.
+</p>
+<button class="ai-mini-btn" onclick="tanyaGemini('Kesebangunan', 'Konsep dua bangun dengan bentuk sama tetapi ukuran berbeda')"> ✨ Tanya Gemini </button>
 <!-- ================= B ================= -->
-<h3>B. Arti Kesebangunan</h3>
+<h3>F. Arti Kesebangunan</h3>
 <p>
 Kesebangunan adalah hubungan antara dua bangun datar yang memiliki bentuk
 sama tetapi ukurannya tidak harus sama. Dua bangun dikatakan sebangun jika
@@ -203,6 +499,7 @@ Perbandingan sisi-sisi tersebut disebut sebagai perbandingan kesebangunan.
 Jika perbandingan bernilai 2, maka ukuran bangun pertama dua kali lebih besar
 daripada bangun kedua.
 </p>
+
 <div class="grid">
 <div class="card">
 <img src="assets/images/sebangun.jpg">
@@ -215,9 +512,9 @@ daripada bangun kedua.
 <p><b>Penyelesaian:</b> Perbandingan sisi segitiga sebangun sama, DE = AB × 1/2 = 10 × 1/2 = 5 cm.</p>
 <p><b>Kesimpulan:</b> Kesebangunan memudahkan menentukan panjang sisi yang belum diketahui menggunakan perbandingan.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Konsep Kesebangunan', 'Hubungan dua bangun datar yang memiliki sudut bersesuaian sama besar dan sisi-sisi yang sebanding')"> ✨ Tanya Gemini </button>
 <!-- ================= C ================= -->
-<h3>C. Kesebangunan pada Segitiga</h3>
+<h3>G. Kesebangunan pada Segitiga</h3>
 <p>
 Kesebangunan pada segitiga merupakan bagian terpenting dalam pembelajaran
 kesebangunan. Dua segitiga dikatakan sebangun apabila memenuhi salah satu
@@ -241,7 +538,7 @@ dua sudut pada segitiga kedua.
 <p><b>Penyelesaian:</b> AA → sudut bersesuaian sama besar, ∠D = 50°, ∠E = 60°.</p>
 <p><b>Kesimpulan:</b> AA membuktikan kesebangunan melalui dua sudut sama besar.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Syarat AA (Sudut-Sudut)', 'Dua segitiga sebangun jika memiliki dua sudut yang bersesuaian sama besar')"> ✨ Tanya Gemini </button>
 <h4>2. Sisi–Sisi–Sisi (SSS)</h4>
 <p>
 Dua segitiga sebangun jika perbandingan panjang ketiga sisi yang
@@ -259,7 +556,7 @@ bersesuaian sama.
 <p><b>Penyelesaian:</b> Skala = DE/AB = 3/6 = 1/2. EF = 1/2 × 8 = 4 cm, DF = 1/2 × 10 = 5 cm.</p>
 <p><b>Kesimpulan:</b> SSS membuktikan kesebangunan melalui perbandingan sisi-sisi yang bersesuaian.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Syarat SSS (Sisi-Sisi-Sisi)', 'Dua segitiga sebangun jika perbandingan panjang ketiga sisi yang bersesuaian nilainya sama')"> ✨ Tanya Gemini </button>
 <h4>3. Sisi–Sudut–Sisi (SAS)</h4>
 <p>
 Dua segitiga sebangun jika dua sisi yang bersesuaian sebanding dan sudut
@@ -277,16 +574,16 @@ apitnya sama besar.
 <p><b>Penyelesaian:</b> DE = 9 × 2/3 = 6 cm, DF = 12 × 2/3 = 8 cm.</p>
 <p><b>Kesimpulan:</b> SAS membuktikan kesebangunan melalui dua sisi berskala sama dan sudut apit sama besar.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Syarat SAS (Sisi-Sudut-Sisi)', 'Dua segitiga sebangun jika dua sisi bersesuaian sebanding dan sudut yang diapitnya sama besar')"> ✨ Tanya Gemini </button>
 <!-- ================= C ================= -->
-<h3>C. Contoh Soal Numerasi Geometri</h3>
+<h3>H. Contoh Soal Numerasi Geometri</h3>
 <p>Pada bagian ini, siswa akan belajar menghitung sisi dan sudut pada bangun datar yang sebangun, mengasah kemampuan numerasi geometri.</p>
 
 <h4>1. Kesebangunan Segitiga dengan Sudut–Sudut (AA)</h4>
 <p>Jika ∆ABC sebangun dengan ∆DEF dan diketahui ∠A = 40°, ∠B = 70°, tentukan ∠D dan ∠E.</p>
 <div class="grid">
 <div class="card">
-<img src="assets/images/soal1.jpg" alt="Segitiga AA">
+<img src="assets/images/bangundatar/asa.png" alt="Segitiga AA">
 <b>Segitiga AA</b>
 </div>
 </div>
@@ -298,7 +595,7 @@ apitnya sama besar.
 <li>∠F = 180° - (40° + 70°) = 70°</li>
 </ul>
 <p><b>Kesimpulan:</b> Sudut yang bersesuaian dapat dihitung langsung, memperkuat numerasi geometri.</p>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Soal Segitiga AA', 'Menentukan besar sudut yang belum diketahui pada dua segitiga yang sebangun berdasarkan syarat AA')"> ✨ Minta Clue Soal </button>
 <h4>2. Kesebangunan Segitiga dengan Sisi–Sisi–Sisi (SSS)</h4>
 <p>∆ABC sisi = 6, 8, 10 cm. ∆DEF sebangun dengan skala 1:2. Tentukan sisi-sisi DEF.</p>
 <div class="grid">
@@ -315,7 +612,7 @@ apitnya sama besar.
 <li>DF = 10 × 2 = 20 cm</li>
 </ul>
 <p><b>Kesimpulan:</b> Menghitung sisi segitiga sebangun melalui perbandingan numerik.</p>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Soal Segitiga SSS', 'Menghitung panjang sisi segitiga menggunakan perbandingan angka (skala) dari ketiga sisinya')"> ✨ Minta Clue Soal </button>
 <h4>3. Kesebangunan Segitiga dengan Sisi–Sudut–Sisi (SAS)</h4>
 <p>Jika AB : DE = 3 : 4, AC : DF = 6 : 8, dan ∠A = ∠D = 50°. Tentukan panjang sisi DE dan DF.</p>
 <div class="grid">
@@ -331,7 +628,7 @@ apitnya sama besar.
 <li>∠D = ∠A = 50°</li>
 </ul>
 <p><b>Kesimpulan:</b> SAS membantu menghitung sisi menggunakan perbandingan dan sudut apit sama besar.</p>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Latihan Segitiga Sebangun', 'Menentukan panjang sisi segitiga yang belum diketahui berdasarkan perbandingan sisi lainnya')"> ✨ Minta Clue Pengerjaan </button>
 <h4>4. Contoh Numerasi Kesebangunan Lainnya</h4>
 <p>Sebuah bayangan tiang tinggi 5 m panjangnya 3 m di tanah. Bayangan seorang anak panjangnya 1,2 m. Tentukan tinggi anak jika bayangan anak sebanding dengan tiang.</p>
 <div class="grid">
@@ -351,13 +648,43 @@ apitnya sama besar.
 <p class="makna-title">Catatan Penting</p>
 <p>Numerasi geometri membantu siswa menghitung sisi dan sudut secara langsung. Menggunakan skala, perbandingan sisi, dan kesebangunan bayangan, siswa terbiasa menerapkan konsep matematika dalam bentuk angka dan konteks nyata.</p>
 </div>
-
+<button class="ai-mini-btn" onclick="tanyaGemini('Soal Numerasi Kesebangunan', 'Menghitung tinggi benda asli menggunakan panjang bayangan dan skala perbandingan')"> ✨ Minta Soal Serupa </button>
 </div>
 </div>
 
-<!-- ✅ TOMBOL GEMINI (FIX HP) -->
-<button class="ai-btn" onclick="openGemini()">Tanya AI Gemini</button>
+<button class="ai-btn" onclick="tanyaGemini('Materi Kesebangunan secara umum')">Tanya AI Gemini</button>
 
+<script>
+function tanyaGemini(topik, detail) {
+    const pesan = `Halo Gemini, saya sedang belajar "${topik}". Penjelasannya: "${detail}". Saya belum paham, tolong jelaskan lebih sederhana dan berikan 1 contoh soal latihan beserta pembahasannya.`;
+
+    // Copy teks ke clipboard
+    navigator.clipboard.writeText(pesan).then(() => {
+        // Tampilkan Modal
+        document.getElementById('modalTitle').innerText = "Topik: " + topik;
+        document.getElementById('textPreview').innerText = pesan;
+        document.getElementById('aiModal').style.display = 'flex';
+        
+        // Setting aksi tombol buka Gemini
+        document.getElementById('goGemini').onclick = function() {
+            window.open("https://gemini.google.com/app", "_blank");
+            closeModal();
+        };
+    });
+}
+
+function closeModal() {
+    document.getElementById('aiModal').style.display = 'none';
+}
+
+// Menutup modal jika klik di luar area box
+window.onclick = function(event) {
+    const modal = document.getElementById('aiModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+</script>
 <footer>
 &copy; 2025 GeoSMART | Materi Kesebangunan SMP
 </footer>
@@ -368,6 +695,22 @@ function openGemini(){
   window.location.href = "https://gemini.google.com/app";
 }
 </script>
-
+<div id="aiModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="modal-icon">✨</span>
+            <h3 id="modalTitle">Tanya Gemini AI</h3>
+        </div>
+        <div class="modal-body">
+            <p>Pesan instruksi sudah otomatis <b>disalin</b> ke memori HP/Laptop kamu.</p>
+            <div class="copy-preview" id="textPreview"></div>
+            <p>Silakan klik tombol di bawah untuk membuka Gemini, lalu <b>Tempel/Paste</b> di kolom chat.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-cancel" onclick="closeModal()">Batal</button>
+            <button class="btn-go" id="goGemini">Buka Gemini & Tanya</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
