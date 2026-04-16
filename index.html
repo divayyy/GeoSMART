@@ -1,174 +1,76 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>GeoSMART</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    /* RESET */
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif;}
-    body{
-      min-height:100vh;
-      background:#0f172a url('assets/images/background1.png') center/cover no-repeat;
-      background-size:cover;
-      color:#fff;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-start;
-      padding:20px;
-      overflow-x:hidden;
-    }
-
-    header{text-align:center;margin-bottom:40px;}
-    .logo-box img{width:260px;max-width:80vw;}
-    .text-box h1{font-size:48px;font-weight:500;}
-    .text-box h2{font-size:36px;font-weight:700;margin-top:6px;}
-
-    .content{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      align-items:flex-start;
-      gap:40px;
-      width:100%;
-      max-width:1100px;
-    }
-
-    .input-box{width:280px;min-width:200px;}
-    .input-box label{font-size:14px;display:block;margin-bottom:6px;}
-    .input-box input{
-      width:100%;
-      padding:12px;
-      border-radius:8px;
-      border:none;
-      margin-bottom:14px;
-    }
-
-    /* TOMBOL GEO SMART (Mulai Belajar) 3D */
-    #startBtn{
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:2px solid #38bdf8;
-      background:#0f172a;
-      color:#38bdf8;
-      font-weight:700;
-      cursor:pointer;
-      transition:0.3s;
-      box-shadow: 0 6px 0 #2563eb, 0 6px 15px rgba(0,0,0,0.4);
-    }
-    #startBtn:hover{
-      transform:translateY(-6px);
-      background:#1e293b;
-      border-color:#facc15;
-      color:#facc15;
-      box-shadow: 0 12px 0 #2563eb, 0 12px 20px rgba(0,0,0,0.5);
-    }
-
-    /* MENU TOMBOL 3D */
-    .menu{
-      display:flex;
-      flex-wrap:wrap;
-      gap:20px;
-      justify-content:center;
-      align-items:center;
-    }
-    .menu .card{
-      width:220px;
-      height:130px;
-      background:#0f172a;
-      border:2px solid #38bdf8;
-      border-radius:12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      cursor:pointer;
-      transition:0.3s;
-      color:#38bdf8;
-      font-weight:700;
-      font-size:18px;
-      box-shadow: 0 6px 0 #2563eb, 0 6px 15px rgba(0,0,0,0.4);
-    }
-    .menu .card:hover{
-      transform:translateY(-6px);
-      background:#1e293b;
-      border-color:#facc15;
-      color:#facc15;
-      box-shadow: 0 12px 0 #2563eb, 0 12px 20px rgba(0,0,0,0.5);
-    }
-
-    /* Tombol AI */
-    .ai-button{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:9999;
-      padding:18px 28px;
-      border-radius:50px;
-      border:3px solid #00ffd5;
-      background:rgba(0,0,0,0.4);
-      color:#eafff5;
-      font-weight:600;
-      cursor:pointer;
-      transition:0.3s;
-      text-align:center;
-      display:inline-block;
-      box-sizing:border-box;
-    }
-    .ai-button:hover{
-      transform:translateY(-5px);
-    }
-
-    @media(max-width:768px){
-      .text-box h1{font-size:28px;}
-      .text-box h2{font-size:22px;}
-      .input-box, .menu .card{width:90%;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GeoSMART</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            height: 100vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                        url('assets/images/background1.png') center/cover no-repeat fixed;
+            display: flex; align-items: center; justify-content: center; color: #fff;
+            overflow: hidden;
+        }
+        .login-card {
+            background: rgba(37, 99, 235, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px; padding: 40px; width: 100%; max-width: 400px;
+            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: slideUp 0.6s ease-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .login-card input { 
+            background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); 
+        }
+        .login-card input:focus { 
+            background: rgba(255,255,255,0.2); color: white; border-color: #38bdf8; box-shadow: none; 
+        }
+        .btn-login {
+            background: #2563eb; border: none; transition: 0.3s;
+        }
+        .btn-login:hover { background: #1d4ed8; transform: scale(1.02); }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="logo-box">
-    <img src="assets/images/geosmart.png" alt="GeoSMART Logo">
-  </div>
-  <div class="text-box">
-    <h1>Hello, <span id="studentName">[Nama Siswa]</span>!</h1>
-    <h2>Mari Jelajahi GeoSMART</h2>
-  </div>
-</header>
+    <div class="login-card">
+        <img src="assets/images/geosmart.png" alt="Logo" width="120" class="mb-3">
+        <h4 class="fw-bold">GeoSMART</h4>
+        <p class="small text-white-50 mb-4">Masukkan nama untuk mulai belajar</p>
+        
+        <form id="loginForm">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-3" id="username" placeholder="Nama" required autocomplete="off">
+                <label class="text-dark">Nama Pengguna</label>
+            </div>
+            <button type="submit" class="btn btn-login w-100 rounded-pill py-2 fw-bold text-white shadow">
+                Masuk Sekarang
+            </button>
+        </form>
+    </div>
 
-<section class="content">
-  <div class="input-box">
-    <label>Masukkan Nama:</label>
-    <input type="text" id="nameInput" placeholder="Masukkan Nama Anda">
-    <button id="startBtn">Mulai Belajar di GeoSMART</button>
-  </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            localStorage.setItem('geo_user', user);
+            window.location.href = 'dashboard.html';
+        });
 
-  <div class="menu">
-    <div class="card" onclick="location.href='materi.html'">Materi</div>
-    <div class="card" onclick="location.href='videopembelajaran.html'">Video Pembelajaran</div>
-    <div class="card" onclick="location.href='latihansoal.html'">Soal Latihan</div>
-  </div>
-</section>
-
-<!-- Tombol AI sebagai link langsung agar HP buka pasti -->
-<a href="https://gemini.google.com/app" target="_blank" class="ai-button">Minta Petunjuk dari AI</a>
-
-<script>
-  // Tombol mulai belajar
-  const startBtn = document.getElementById('startBtn');
-  const nameInput = document.getElementById('nameInput');
-  const studentName = document.getElementById('studentName');
-  startBtn.addEventListener('click', ()=>{
-    if(nameInput.value.trim()!==""){
-      studentName.textContent = nameInput.value.trim();
-      nameInput.value="";
-    }
-  });
-</script>
-
+        // Redirect otomatis jika sudah ada sesi login
+        window.onload = function() {
+            if(localStorage.getItem('geo_user')) {
+                window.location.href = 'dashboard.html';
+            }
+        };
+    </script>
 </body>
 </html>
