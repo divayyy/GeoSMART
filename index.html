@@ -1,274 +1,173 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>GeoSMART</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* RESET */
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif;}
+    body{
+      min-height:100vh;
+      background:#0f172a url('assets/images/background1.png') center/cover no-repeat;
+      background-size:cover;
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:20px;
+      overflow-x:hidden;
+    }
 
-<title>GeoSMART</title>
+    header{text-align:center;margin-bottom:40px;}
+    .logo-box img{width:260px;max-width:80vw;}
+    .text-box h1{font-size:48px;font-weight:500;}
+    .text-box h2{font-size:36px;font-weight:700;margin-top:6px;}
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+    .content{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:flex-start;
+      gap:40px;
+      width:100%;
+      max-width:1100px;
+    }
 
-<style>
+    .input-box{width:280px;min-width:200px;}
+    .input-box label{font-size:14px;display:block;margin-bottom:6px;}
+    .input-box input{
+      width:100%;
+      padding:12px;
+      border-radius:8px;
+      border:none;
+      margin-bottom:14px;
+    }
 
-body{
-font-family:'Poppins',sans-serif;
-background:
-linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)),
-url('assets/images/background1.png') center/cover no-repeat fixed;
-color:white;
-overflow-x:hidden;
-}
+    /* TOMBOL GEO SMART (Mulai Belajar) 3D */
+    #startBtn{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:2px solid #38bdf8;
+      background:#0f172a;
+      color:#38bdf8;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow: 0 6px 0 #2563eb, 0 6px 15px rgba(0,0,0,0.4);
+    }
+    #startBtn:hover{
+      transform:translateY(-6px);
+      background:#1e293b;
+      border-color:#facc15;
+      color:#facc15;
+      box-shadow: 0 12px 0 #2563eb, 0 12px 20px rgba(0,0,0,0.5);
+    }
 
-/* ANIMASI */
-.fade-in{animation:fadeIn .6s;}
-.slide-up{animation:slideUp .5s;}
+    /* MENU TOMBOL 3D */
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+      align-items:center;
+    }
+    .menu .card{
+      width:220px;
+      height:130px;
+      background:#0f172a;
+      border:2px solid #38bdf8;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      cursor:pointer;
+      transition:0.3s;
+      color:#38bdf8;
+      font-weight:700;
+      font-size:18px;
+      box-shadow: 0 6px 0 #2563eb, 0 6px 15px rgba(0,0,0,0.4);
+    }
+    .menu .card:hover{
+      transform:translateY(-6px);
+      background:#1e293b;
+      border-color:#facc15;
+      color:#facc15;
+      box-shadow: 0 12px 0 #2563eb, 0 12px 20px rgba(0,0,0,0.5);
+    }
 
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
-}
+    /* Tombol AI */
+    .ai-button{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      z-index:9999;
+      padding:18px 28px;
+      border-radius:50px;
+      border:3px solid #00ffd5;
+      background:rgba(0,0,0,0.4);
+      color:#eafff5;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+      text-align:center;
+      display:inline-block;
+      box-sizing:border-box;
+    }
+    .ai-button:hover{
+      transform:translateY(-5px);
+    }
 
-@keyframes slideUp{
-from{transform:translateY(20px);opacity:0}
-to{transform:translateY(0);opacity:1}
-}
-
-/* LOGIN */
-.login-bg{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.login-card{
-background:rgba(37,99,235,0.35);
-backdrop-filter:blur(15px);
-border-radius:25px;
-box-shadow:0 25px 50px rgba(0,0,0,.3);
-padding:40px;
-width:420px;
-text-align:center;
-color:white;
-}
-
-.login-card input{
-background:rgba(255,255,255,0.2);
-color:white;
-border:none;
-}
-
-.login-card label{
-color:white;
-}
-
-/* NAVBAR */
-.navbar{
-background:rgba(0,0,0,0.3);
-backdrop-filter:blur(8px);
-position:relative;
-z-index:1050;
-}
-
-/* DROPDOWN FIX */
-.dropdown-menu{
-z-index:2000;
-}
-
-/* HERO */
-.hero-card{
-background:rgba(255,255,255,0.15);
-backdrop-filter:blur(12px);
-border-radius:30px;
-padding:50px;
-margin-top:30px;
-position:relative;
-z-index:1;
-}
-
-/* MENU CARD */
-.subject-card{
-border-radius:20px;
-padding:25px;
-cursor:pointer;
-transition:.3s;
-background:rgba(255,255,255,0.15);
-backdrop-filter:blur(12px);
-display:flex;
-gap:20px;
-align-items:center;
-color:white;
-box-shadow:0 10px 30px rgba(0,0,0,.2);
-}
-
-.subject-card:hover{
-transform:translateY(-8px);
-background:rgba(255,255,255,0.25);
-}
-
-.page-section{display:none}
-.page-section.active{display:block}
-
-</style>
+    @media(max-width:768px){
+      .text-box h1{font-size:28px;}
+      .text-box h2{font-size:22px;}
+      .input-box, .menu .card{width:90%;}
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- LOGIN -->
-<div id="page-login" class="page-section active fade-in">
+<header>
+  <div class="logo-box">
+    <img src="assets/images/geosmart.png" alt="GeoSMART Logo">
+  </div>
+  <div class="text-box">
+    <h1>Hello, <span id="studentName">[Nama Siswa]</span>!</h1>
+    <h2>Mari Jelajahi GeoSMART</h2>
+  </div>
+</header>
 
-<div class="login-bg">
-<div class="login-card slide-up">
+<section class="content">
+  <div class="input-box">
+    <label>Masukkan Nama:</label>
+    <input type="text" id="nameInput" placeholder="Masukkan Nama Anda">
+    <button id="startBtn">Mulai Belajar di GeoSMART</button>
+  </div>
 
-<img src="assets/images/geosmart.png" width="140">
+  <div class="menu">
+    <div class="card" onclick="location.href='materi.html'">Materi</div>
+    <div class="card" onclick="location.href='videopembelajaran.html'">Video Pembelajaran</div>
+    <div class="card" onclick="location.href='latihansoal.html'">Soal Latihan</div>
+  </div>
+</section>
 
-<h4 class="fw-bold mt-3">Selamat Datang di GeoSMART</h4>
-<p>Silakan masuk untuk mulai belajar</p>
-
-<form onsubmit="event.preventDefault();loginUser();">
-
-<div class="form-floating mb-3">
-<input type="text" class="form-control rounded-4" id="username" required>
-<label>Nama Pengguna</label>
-</div>
-
-<div class="form-floating mb-4">
-<input type="password" class="form-control rounded-4" id="password" required>
-<label>Password</label>
-</div>
-
-<button class="btn btn-dark w-100 rounded-pill py-3 fw-bold">
-Masuk
-</button>
-
-</form>
-
-</div>
-</div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="page-dashboard" class="page-section fade-in">
-
-<nav class="navbar shadow-sm">
-<div class="container">
-
-<img src="assets/images/geosmart.png" height="40">
-
-<div class="dropdown">
-<button class="btn btn-light rounded-circle" data-bs-toggle="dropdown">
-<i class="fas fa-user"></i>
-</button>
-
-<ul class="dropdown-menu dropdown-menu-end">
-<li class="dropdown-header">
-Halo, <span id="namaUser">User</span>
-</li>
-<li><hr></li>
-<li>
-<a class="dropdown-item text-danger" onclick="logout()">Logout</a>
-</li>
-</ul>
-
-</div>
-</div>
-</nav>
-
-<div class="container pb-5">
-
-<div class="hero-card slide-up">
-<h1 class="fw-bold">Belajar Geometri Lebih Mudah</h1>
-<p>Akses materi, video, dan latihan soal interaktif.</p>
-</div>
-
-<div class="mt-5">
-<h4 class="fw-bold mb-4">Pilih Menu Belajar</h4>
-
-<div class="row g-4">
-
-<!-- MATERI -->
-<div class="col-md-4">
-<div onclick="location.href='materi.html'" class="subject-card">
-<i class="fas fa-book fa-2x text-info"></i>
-<div>
-<h5>Materi</h5>
-<small>Pelajari konsep geometri</small>
-</div>
-</div>
-</div>
-
-<!-- VIDEO -->
-<div class="col-md-4">
-<div onclick="location.href='videopembelajaran.html'" class="subject-card">
-<i class="fas fa-play fa-2x text-success"></i>
-<div>
-<h5>Video</h5>
-<small>Video pembelajaran</small>
-</div>
-</div>
-</div>
-
-<!-- KUIS -->
-<div class="col-md-4">
-<div onclick="location.href='latihansoal.html'" class="subject-card">
-<i class="fas fa-pen fa-2x text-warning"></i>
-<div>
-<h5>Kuis</h5>
-<small>Latihan soal</small>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Tombol AI sebagai link langsung agar HP buka pasti -->
+<a href="https://gemini.google.com/app" target="_blank" class="ai-button">Minta Petunjuk dari AI</a>
 
 <script>
-
-/* LOGIN */
-function loginUser(){
-let user=document.getElementById("username").value;
-if(user=="") user="Siswa";
-
-localStorage.setItem("user", user);
-document.getElementById("namaUser").innerText=user;
-
-pindahHalaman("dashboard");
-}
-
-/* PINDAH HALAMAN */
-function pindahHalaman(page){
-document.querySelectorAll(".page-section").forEach(el=>{
-el.classList.remove("active");
-});
-document.getElementById("page-"+page).classList.add("active");
-}
-
-/* LOGOUT */
-function logout(){
-if(confirm("Yakin keluar?")){
-localStorage.removeItem("user");
-document.getElementById("username").value="";
-document.getElementById("password").value="";
-pindahHalaman("login");
-}
-}
-
-/* AUTO LOGIN */
-window.onload = function(){
-let user = localStorage.getItem("user");
-if(user){
-document.getElementById("namaUser").innerText=user;
-pindahHalaman("dashboard");
-}
-}
-
+  // Tombol mulai belajar
+  const startBtn = document.getElementById('startBtn');
+  const nameInput = document.getElementById('nameInput');
+  const studentName = document.getElementById('studentName');
+  startBtn.addEventListener('click', ()=>{
+    if(nameInput.value.trim()!==""){
+      studentName.textContent = nameInput.value.trim();
+      nameInput.value="";
+    }
+  });
 </script>
 
 </body>
