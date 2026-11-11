@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logging Out... | GeoSMART</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #1e2937;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .loader {
+            text-align: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 30px 40px;
+        }
+        .loader h2 {
+            color: #b91c1c;
+            margin-top: 0;
+        }
+        .loader p {
+            color: #475569;
+        }
+    </style>
+    <script>
+        setTimeout(function(){
+            window.location.href = 'index.html';
+        }, 1000);
+    </script>
+</head>
+<body>
+    <div class="loader">
+        <h2>Mohon tunggu...</h2>
+        <p>Sedang keluar dari sistem GeoSMART</p>
+    </div>
+</body>
+</html>

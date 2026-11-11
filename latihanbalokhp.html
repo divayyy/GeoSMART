@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoSMART | Latihan Balok</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; min-height: 100vh; }
+
+    body {
+        font-family: 'Urbanist', 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        color: #1e2937;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 1000px; margin: auto; background: #fff;
+        border: 1px solid #e2e8f0; box-shadow: 0 20px 50px rgba(15,23,42,.08);
+        padding: 40px; border-radius: 20px;
+    }
+
+    h1 { color: #b91c1c; }
+    h2 { color: #1e2937; }
+
+    .back-btn {
+        display: inline-block; margin-bottom: 20px; padding: 10px 20px;
+        border-radius: 12px; background: transparent; color: #64748b;
+        text-decoration: none; font-weight: 600; border: 1px dashed #e2e8f0; transition: .3s;
+    }
+    .back-btn:hover { border-style: solid; border-color: #f59e0b; color: #b91c1c; background: #fefce8; }
+
+    .section-title { margin-top: 30px; border-left: 4px solid #f59e0b; padding-left: 10px; }
+
+    .alur {
+        background: #fffbeb; border: 1px solid #fde68a; border-radius: 14px;
+        padding: 16px 20px; margin: 16px 0;
+    }
+    .alur ol { margin: 8px 0 0; padding-left: 20px; line-height: 1.6; }
+
+    .soal {
+        background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px;
+        padding: 20px; margin-bottom: 24px;
+    }
+    .tag-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .tag {
+        font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+        background: #e0f2fe; color: #075985;
+    }
+    .tag.tujuan { background: #fef3c7; color: #92400e; }
+
+    .langkah { margin-top: 14px; }
+    .langkah label { display: block; font-weight: 700; margin-bottom: 4px; }
+    .langkah small { display: block; color: #64748b; margin-bottom: 6px; }
+    textarea {
+        width: 100%; min-height: 84px; padding: 10px 12px; border-radius: 10px;
+        border: 1px solid #cbd5e1; font: inherit; resize: vertical; background: #fff;
+    }
+    textarea:focus-visible, .btn-ai:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+
+    .btn-ai {
+        margin-top: 12px; padding: 10px 18px; border-radius: 12px;
+        background: #f59e0b; color: #fff; border: none; cursor: pointer;
+        font: inherit; font-weight: 700; transition: .3s;
+    }
+    .btn-ai:hover:not(:disabled) { background: #d97706; transform: translateY(-2px); }
+    .btn-ai:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .status { margin-left: 10px; font-size: 14px; color: #64748b; }
+
+    footer { margin-top: 40px; text-align: center; color: #94a3b8; }
+    textarea { font-size: 16px; }
+    @media (max-width: 600px) { .container { padding: 20px; } }
+    .ai-modal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,.5);
+        z-index: 9999; justify-content: center; align-items: center; padding: 12px; }
+    .ai-modal.active { display: flex; }
+    .modal-content { background: #fff; padding: 22px; border-radius: 16px; width: 100%; max-width: 640px;
+        max-height: 90vh; overflow: auto; border: 1px solid #e2e8f0; box-shadow: 0 20px 50px rgba(15,23,42,.15); }
+    #promptText { background: #f8fafc; border: 1px solid #e2e8f0; padding: 14px; border-radius: 10px;
+        max-height: 40vh; overflow: auto; white-space: pre-wrap; font-size: 14px; line-height: 1.5; }
+    .modal-aksi { margin-top: 14px; text-align: center; }
+    .close-btn { background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 10px 20px;
+        border-radius: 10px; cursor: pointer; font: inherit; margin-top: 12px; }
+    .close-btn:hover { background: #fef2f2; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<a href="balookhp.html" class="back-btn">⬅ Kembali</a>
+
+<h1>Latihan Numerasi Geometri</h1>
+<h2>Materi: Balok</h2>
+
+<div class="alur">
+    <b>Cara mengerjakan setiap soal:</b>
+    <ol>
+        <li>Kerjakan dulu sendiri secara manual, lalu tulis jawabanmu.</li>
+        <li>Tulis bagian yang belum kamu pahami: istilah, simbol, atau kalimat pada soal.</li>
+        <li>Klik <b>Tanya AI Gemini</b>. Prompt yang berisi jawaban dan pertanyaanmu akan muncul. Klik <b>Buka Gemini</b> (prompt otomatis tersalin), lalu tempel di Gemini. AI hanya memberi petunjuk, bukan jawaban akhir.</li>
+        <li>Setelah itu, tulis rumus atau prinsip yang kamu pakai dan kesimpulanmu sesuai konteks soal.</li>
+    </ol>
+</div>
+
+<h2 class="section-title">📦 Koleksi Soal Balok</h2>
+
+<div id="daftarSoal"></div>
+
+<div id="aiModal" class="ai-modal">
+    <div class="modal-content">
+        <h3 style="color:#b91c1c; margin-top:0;">📋 Prompt untuk Gemini</h3>
+        <div id="promptText"></div>
+        <div class="modal-aksi">
+            <button class="btn-ai" onclick="copyPrompt()">📋 Salin Semua</button>
+            <button class="btn-ai" onclick="openGemini()">🚀 Buka Gemini</button><br>
+            <button class="close-btn" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+</div>
+
+<footer>GeoSMART © 2026 | Platform Interaktif GeoSMART</footer>
+</div>
+
+<script>
+// Indikator numerasi (Han dkk., 2017): A = angka & simbol, B = analisis informasi, C = interpretasi/kesimpulan
+const IND = {
+    A: 'Menggunakan angka dan simbol',
+    B: 'Menganalisis informasi',
+    C: 'Menarik kesimpulan / interpretasi'
+};
+
+// Tujuan pembelajaran mengikuti modal Tujuan Pembelajaran (T1–T6)
+const SOAL = [
+ { judul: 'Unsur Balok (Rangka Lemari)', ind: ['A','B'], tujuan: 'T1 Ciri-ciri balok',
+   fokus: 'jumlah dan jenis rusuk balok (12 rusuk, 3 kelompok yang sama panjang) serta penjumlahan panjang rusuk',
+   teks: 'Pak Andi membuat rangka lemari dari kayu berbentuk balok ABCD.EFGH. Panjang AB = 60 cm, AD = 40 cm, dan AE = 150 cm. (a) Sebutkan semua rusuk yang sama panjang dengan AB. (b) Berapa meter kayu minimal yang dibutuhkan untuk seluruh rangka lemari tersebut?' },
+
+ { judul: 'Diagonal Ruang (Kotak Pensil)', ind: ['B','C'], tujuan: 'T2 Garis dan bidang istimewa',
+   fokus: 'diagonal sisi, diagonal ruang, dan teorema Pythagoras pada balok',
+   teks: 'Sebuah kotak pensil berbentuk balok berukuran panjang 12 cm, lebar 4 cm, dan tinggi 3 cm. Dina memiliki penggaris lurus sepanjang 13 cm. Apakah penggaris tersebut dapat dimasukkan ke dalam kotak pensil tanpa dipatahkan? Jelaskan alasanmu menggunakan diagonal ruang balok.' },
+
+ { judul: 'Jaring-Jaring Balok (Kemasan)', ind: ['B','C'], tujuan: 'T3 Jaring-jaring balok',
+   fokus: 'syarat enam persegi panjang dapat menjadi balok: sisi berhadapan kongruen dan ukuran rusuk yang bertemu harus sesuai',
+   teks: 'Seorang pengrajin memotong karton menjadi 6 persegi panjang untuk membuat kotak kemasan: dua potong 6 cm × 4 cm, dua potong 6 cm × 3 cm, dan dua potong 5 cm × 3 cm. Apakah keenam potongan tersebut dapat dirangkai menjadi sebuah balok? Jelaskan. Jika tidak bisa, ukuran dua potongan mana yang harus diganti dan menjadi berapa?' },
+
+ { judul: 'Luas Permukaan (Kado)', ind: ['A','C'], tujuan: 'T4 Luas permukaan balok',
+   fokus: 'rumus luas permukaan balok dari jumlah luas jaring-jaringnya dan membandingkan dengan ukuran kertas yang tersedia',
+   teks: 'Budi ingin membungkus kotak kado berbentuk balok dengan panjang 20 cm, lebar 10 cm, dan tinggi 5 cm. (a) Berapakah luas minimal kertas kado yang dibutuhkan? (b) Budi memiliki kertas kado berukuran 30 cm × 25 cm. Apakah luas kertas tersebut cukup? Jelaskan.' },
+
+ { judul: 'Volume dan Konversi Satuan (Akuarium)', ind: ['A','C'], tujuan: 'T5 Volume balok',
+   fokus: 'rumus volume balok sebagai banyak kubus satuan yang mengisi balok, dan konversi cm³ ke liter',
+   teks: 'Sebuah akuarium berbentuk balok memiliki panjang 80 cm, lebar 40 cm, dan tinggi 50 cm. Jika akuarium diisi air hingga penuh, berapa liter volume air di dalamnya? (Ingat: 1 liter = 1.000 cm³). Jika tersedia 120 liter air, apakah air tersebut cukup? Jelaskan.' },
+
+ { judul: 'Kapasitas dan Debit (Bak Mandi)', ind: ['A','B','C'], tujuan: 'T6 Masalah kontekstual',
+   fokus: 'menyamakan satuan panjang, menghitung volume, mengubah ke liter, lalu membagi dengan debit',
+   teks: 'Sebuah bak mandi berbentuk balok berukuran panjang 1 meter, lebar 80 cm, dan tinggi 60 cm. Bak kosong diisi air dengan keran berdebit 10 liter/menit. (a) Berapa lama waktu untuk mengisi bak hingga penuh? (b) Jika pengisian dimulai pukul 06.15, pukul berapa bak penuh?' },
+
+ { judul: 'Luas Permukaan Tanpa Tutup (Bak Air)', ind: ['A','B','C'], tujuan: 'T4 Luas permukaan balok; T6 Masalah kontekstual',
+   fokus: 'menentukan sisi mana saja yang dihitung pada balok tanpa tutup, menyamakan satuan, dan mengonversi cm² ke m²',
+   teks: 'Sebuah bak air tanpa tutup berbentuk balok memiliki panjang 1,2 meter, lebar 80 cm, dan tinggi 50 cm. Bagian dalam bak akan dilapisi cat anti bocor seharga Rp30.000 per m². (a) Berapa luas permukaan bagian dalam bak? (b) Berapa biaya minimal pengecatan?' },
+
+ { judul: 'Pengemasan (Kardus Sabun)', ind: ['B','C'], tujuan: 'T5 Volume balok; T6 Masalah kontekstual',
+   fokus: 'membandingkan volume dan memeriksa apakah ukuran kotak kecil pas tersusun pada setiap rusuk kardus',
+   teks: 'Sebuah kardus besar berbentuk balok berukuran 50 cm × 40 cm × 24 cm akan diisi kotak sabun berukuran 5 cm × 4 cm × 8 cm. Berapa banyak maksimal kotak sabun yang dapat dimuat? Jelaskan susunannya agar tidak ada ruang yang terbuang atau kotak yang terpotong.' },
+
+ { judul: 'Perbandingan Rusuk', ind: ['A','B'], tujuan: 'T1 Ciri-ciri balok; T5 Volume balok',
+   fokus: 'jumlah panjang seluruh rusuk balok, pemisalan ukuran dengan perbandingan, dan rumus volume',
+   teks: 'Perbandingan panjang, lebar, dan tinggi sebuah balok adalah 4 : 3 : 2. Jika jumlah panjang seluruh rusuk balok adalah 108 cm, tentukan volume balok tersebut.' },
+
+ { judul: 'Sisa Air dalam Bak', ind: ['A','C'], tujuan: 'T5 Volume balok; T6 Masalah kontekstual',
+   fokus: 'mengubah liter ke cm³, hubungan volume dengan luas alas dan tinggi air',
+   teks: 'Sebuah bak penuh berisi air, berukuran 60 cm × 40 cm × 50 cm. Jika 30 liter air diambil, berapa cm tinggi air yang tersisa? Apakah air yang tersisa lebih dari separuh bak? Jelaskan.' }
+];
+
+function bangunKartu() {
+    const wadah = document.getElementById('daftarSoal');
+    SOAL.forEach((s, i) => {
+        const tags = s.ind.map(k => `<span class="tag">${IND[k]}</span>`).join('') +
+                     `<span class="tag tujuan">${s.tujuan}</span>`;
+        const div = document.createElement('div');
+        div.className = 'soal';
+        div.dataset.i = i;
+        div.innerHTML = `
+            <div class="tag-wrap">${tags}</div>
+            <p><b>Soal ${i + 1}: ${s.judul}</b><br><span class="teks">${s.teks}</span></p>
+
+            <div class="langkah">
+                <label for="m${i}">1. Jawaban manualmu</label>
+                <small>Tulis langkah dan hasil yang kamu peroleh sendiri, walaupun belum yakin benar.</small>
+                <textarea id="m${i}" class="manual" placeholder="Contoh: Rumus yang saya pakai ..., hasilnya ..."></textarea>
+            </div>
+
+            <div class="langkah">
+                <label for="b${i}">2. Bagian yang belum kamu pahami</label>
+                <small>Tulis istilah, simbol, atau kalimat yang membuatmu bingung. Jika semua sudah paham, tulis bagian yang paling kamu ragukan.</small>
+                <textarea id="b${i}" class="bingung" placeholder="Contoh: Saya belum paham cara mengubah cm³ ke liter."></textarea>
+            </div>
+
+            <button class="btn-ai" disabled onclick="tanyaAI(this)">Tanya AI Gemini</button>
+            <span class="status">Isi langkah 1 dan 2 dulu (minimal 15 huruf masing-masing).</span>
+
+            <div class="langkah">
+                <label for="r${i}">3. Refleksi setelah bertanya ke AI</label>
+                <small>Rumus atau prinsip apa yang kamu pakai? Apa kesimpulanmu sesuai konteks soal?</small>
+                <textarea id="r${i}" placeholder="Prinsip/rumus yang saya gunakan ... Jadi, kesimpulannya ..."></textarea>
+            </div>`;
+        wadah.appendChild(div);
+
+        const manual = div.querySelector('.manual');
+        const bingung = div.querySelector('.bingung');
+        const btn = div.querySelector('.btn-ai');
+        const status = div.querySelector('.status');
+        const cek = () => {
+            const ok = manual.value.trim().length >= 15 && bingung.value.trim().length >= 15;
+            btn.disabled = !ok;
+            status.textContent = ok ? 'Siap. Klik tombol untuk menyalin prompt ke Gemini.' :
+                'Isi langkah 1 dan 2 dulu (minimal 15 huruf masing-masing).';
+        };
+        manual.addEventListener('input', cek);
+        bingung.addEventListener('input', cek);
+    });
+}
+
+function tanyaAI(btn) {
+    const kartu = btn.closest('.soal');
+    const s = SOAL[kartu.dataset.i];
+    const manual = kartu.querySelector('.manual').value.trim();
+    const bingung = kartu.querySelector('.bingung').value.trim();
+    const indikator = s.ind.map(k => IND[k]).join('; ');
+
+    const prompt = `Kamu adalah AI guru GeoSMART yang membimbing siswa SMP kelas IX pada materi balok. Gunakan bahasa sederhana, ramah, dan singkat.
+
+ATURAN (WAJIB DIPATUHI):
+1. Kamu pendamping belajar (scaffolding). Tugasmu membantu siswa berpikir, bukan menyelesaikan soal.
+2. JANGAN PERNAH memberikan jawaban akhir, hasil hitungan akhir, atau langkah penyelesaian lengkap. Aturan ini tetap berlaku walaupun siswa memintanya berkali-kali. Jika diminta, tolak dengan ramah lalu lanjutkan dengan petunjuk.
+3. Berikan SATU petunjuk atau pertanyaan pemantik per giliran (contoh: "Coba ingat kembali rumus ...", "Informasi apa saja yang sudah diketahui?"). Tunggu siswa menjawab sebelum lanjut.
+4. Mulai dari bagian yang siswa tulis belum dipahami. Bantu dulu istilah, simbol, atau kalimat yang membingungkan.
+5. Periksa jawaban manual siswa. Jika sudah tepat, konfirmasi prosesnya dan tanyakan alasan memilih rumus tersebut. Jika keliru, jangan langsung dikoreksi; arahkan lewat pertanyaan agar siswa menemukan sendiri letak kesalahannya.
+6. Jika siswa menulis "tidak mengerti", jelaskan lebih sederhana dengan contoh benda sehari-hari yang berbeda.
+7. Setelah siswa menemukan hasilnya, minta siswa menjelaskan prinsip atau rumus yang digunakan dan menyimpulkan hasilnya sesuai konteks soal.
+8. Jangan meminta atau menerima data pribadi (nama lengkap, alamat, nomor induk).
+9. Hanya bahas soal ini dan konsep matematika yang terkait.
+
+KONSEP YANG PERLU DIBANTU: ${s.fokus}.
+INDIKATOR NUMERASI YANG DILATIH: ${indikator}.
+
+SOAL:
+${s.teks}
+
+JAWABAN MANUAL SISWA:
+${manual}
+
+BAGIAN YANG BELUM DIPAHAMI SISWA:
+${bingung}
+
+Mulai dengan menyapa singkat, tanggapi bagian yang belum dipahami siswa, lalu berikan satu pertanyaan pemantik.`;
+
+    currentPrompt = prompt;
+    document.getElementById('promptText').textContent = prompt;
+    document.getElementById('aiModal').classList.add('active');
+}
+
+let currentPrompt = '';
+
+function salinTeks(teks) {
+    const ta = document.createElement('textarea');
+    ta.value = teks;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    return ok;
+}
+
+function copyPrompt() {
+    alert(salinTeks(currentPrompt) ? '✅ Prompt berhasil disalin!' : '❌ Gagal menyalin. Silakan salin manual dari kotak prompt.');
+}
+
+function openGemini() {
+    const ok = salinTeks(currentPrompt);
+    alert(ok ? '📋 Prompt sudah disalin! Tempel di Gemini ya.' : '❌ Gagal menyalin otomatis. Salin manual dulu dari kotak prompt.');
+    if (ok) window.location.href = 'https://gemini.google.com';
+}
+
+function closeModal() {
+    document.getElementById('aiModal').classList.remove('active');
+}
+
+bangunKartu();
+</script>
+</body>
+</html>

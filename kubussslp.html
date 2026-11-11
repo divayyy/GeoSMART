@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧊 KUBUS - GeoSMART</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<style>
+*{box-sizing:border-box;font-family:'Urbanist','Segoe UI',Tahoma,sans-serif}
+body{margin:0;background:linear-gradient(rgba(255,255,255,.93),rgba(240,249,255,.93)),url('assets/images/bgkubika4.png') center/cover fixed;background-color:#f0f9ff;color:#1e2937;overflow-x:hidden;line-height:1.7}
+header{background:rgba(255,255,255,.88);backdrop-filter:blur(8px);box-shadow:0 4px 15px rgba(15,23,42,.06);border-bottom:1px solid #fde68a;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;z-index:1000}
+header h1{margin:0;font-size:20px;font-weight:800;color:#b91c1c}
+.back-btn{color:#b45309;text-decoration:none;font-weight:600;padding:8px 16px;border-radius:10px;background:#fefce8;border:1px solid #fde047}
+.tujuan-btn{background:#fff;color:#b45309;border:1px solid #fcd34d;padding:8px 14px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
+.tujuan-btn:hover{background:#f59e0b;color:#fff;border-color:#f59e0b}
+.wrap{max-width:1150px;margin:auto;padding:28px 15px 50px}
+.section{background:#fff;border-radius:20px;padding:25px;margin-bottom:26px;border:1px solid #e2e8f0;box-shadow:0 12px 25px rgba(15,23,42,.06)}
+h2{font-size:1.6rem;font-weight:800;color:#b91c1c;margin:0 0 14px}
+h3{color:#b45309;margin:22px 0 8px;font-size:1.2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:#fefce8;border:1px solid #fde68a;border-radius:16px;padding:16px}
+.card h4{margin:0 0 6px;color:#b45309}
+.formula{display:inline-block;background:#fff;border:1px solid #fcd34d;border-radius:10px;padding:6px 12px;font-family:'JetBrains Mono',monospace;font-weight:700}
+.contoh{background:#fff7ed;border-left:4px solid #f59e0b;padding:10px 14px;border-radius:8px;margin-top:10px;font-size:.95rem}
+.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;border-radius:14px;padding:14px 18px}
+.info ol{margin:6px 0 0;padding-left:20px}
+model-viewer{width:100%;height:420px;background:radial-gradient(circle,#fff,#f1f5f9);border-radius:12px}
+.tab-menu{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tab-menu button{background:#f8fafc;color:#475569;border:1px solid #e2e8f0;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600}
+.tab-menu button.active{background:#f59e0b;color:#fff;border-color:#f59e0b}
+.tab-content{display:none}.tab-content.active{display:block;animation:fi .4s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.iframe-wrapper{position:relative;width:100%;padding-bottom:65%;height:0;overflow:hidden;border-radius:12px;border:1px solid #e2e8f0;margin-bottom:14px}
+.iframe-wrapper iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+textarea{width:100%;min-height:80px;padding:10px 12px;border:1px solid #93c5fd;border-radius:10px;font-size:15px;resize:vertical;margin:6px 0 10px}
+label{font-weight:600;color:#475569}
+.btn{background:linear-gradient(45deg,#f59e0b,#ea580c);color:#fff;border:0;padding:9px 16px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
+.btn.alt{background:#fff;color:#b45309;border:2px solid #fcd34d}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opt{display:inline-block;margin:4px 6px 4px 0;min-width:110px;padding:8px 14px;border-radius:10px;border:2px solid #93c5fd;background:#fff;color:#2563eb;font-weight:600;cursor:pointer}
+.opt.ok{background:#10b981;border-color:#10b981;color:#fff}.opt.no{background:#ef4444;border-color:#ef4444;color:#fff}
+.res{font-weight:700;min-height:24px}.res.ok{color:#059669}.res.no{color:#dc2626}
+.soal{border:2px solid #bfdbfe;border-radius:16px;padding:20px;margin-bottom:18px;background:#fff}
+.soal h4{margin:0 0 6px;color:#b45309;font-size:1.1rem}
+.tag{display:inline-block;background:#eff6ff;color:#1d4ed8;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.tag.hots{background:#7c3aed;color:#fff}
+.pemb{background:rgba(16,185,129,.08);border:2px solid #10b981;border-radius:12px;padding:12px 16px;margin-top:12px}
+.pemb[hidden]{display:none}
+.msg{color:#dc2626;font-size:.9rem;font-weight:600;min-height:20px}
+dialog{border:3px solid #f59e0b;border-radius:20px;padding:0;width:min(560px,calc(100% - 28px));max-height:calc(100dvh - 30px);overflow:auto}
+dialog::backdrop{background:rgba(15,23,42,.55)}
+.d-head{background:#fefce8;padding:16px 22px;border-bottom:1px solid #fde68a}
+.d-head h3{margin:0}.d-body{padding:16px 22px 20px}
+.d-foot{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+/* modal tujuan pembelajaran */
+.modal-tujuan{width:min(720px,calc(100% - 28px))}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;background:#fefce8;padding:16px 22px;border-bottom:1px solid #fde68a;position:sticky;top:0}
+.modal-head h2{margin:0;font-size:1.35rem}
+.modal-head p{margin:2px 0 0;color:#64748b;font-size:.9rem}
+.modal-close{background:#fff;border:2px solid #fcd34d;color:#b45309;border-radius:10px;width:38px;height:38px;cursor:pointer}
+.modal-body{padding:16px 22px 22px}
+.cp-box{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;border-radius:14px;padding:12px 16px}
+.cp-box ul{margin:6px 0;padding-left:20px}
+.intro{font-weight:700;color:#b45309;margin:16px 0 8px}
+.tujuan-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.tujuan-list li{display:flex;gap:12px;background:#fefce8;border:1px solid #fde68a;border-radius:14px;padding:12px 14px}
+.tujuan-list .ikon{flex:0 0 38px;height:38px;border-radius:50%;background:#f59e0b;color:#fff;display:flex;align-items:center;justify-content:center}
+.tujuan-list strong{display:block;color:#b45309}
+
+/* tabel */
+.tb{width:100%;max-width:420px;border-collapse:collapse;margin:10px 0;font-size:.95rem}
+.tb th,.tb td{border:1px solid #fde68a;padding:6px 12px;text-align:left}
+.tb th{background:#fefce8;color:#b45309}
+
+/* tab Titik Sudut */
+.svgbox{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;text-align:center;margin-bottom:14px}
+.svgbox svg{max-width:420px;width:100%;height:auto}
+.vtx{cursor:pointer;outline:none}
+.vtx circle{fill:#fff;stroke:#2563eb;stroke-width:2.5;transition:fill .2s}
+.vtx.on circle{fill:#f59e0b;stroke:#b45309}
+.vtx:focus-visible circle{stroke:#b91c1c;stroke-width:4}
+.vtx text{font-weight:800;font-size:15px;fill:#1e2937;pointer-events:none}
+
+@media(max-width:768px){model-viewer{height:300px}h2{font-size:1.35rem}.iframe-wrapper{padding-bottom:75%}header h1{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="kubuslp.html" class="back-btn">⬅ Kembali</a>
+  <h1>🧊 Kubus - GeoSMART</h1>
+  <button type="button" class="tujuan-btn" id="btnBukaTujuan"><i class="fa-solid fa-bullseye"></i> Tujuan</button>
+</header>
+
+<!-- Modal Tujuan Pembelajaran -->
+<dialog class="modal-tujuan" id="modalTujuan" aria-labelledby="judulTujuan">
+    <div class="modal-head">
+        <div>
+            <h2 id="judulTujuan">Tujuan Pembelajaran</h2>
+            <p>Bangun Ruang Kubus &middot; Fase D, Kelas IX</p>
+        </div>
+        <button type="button" class="modal-close" id="btnTutupTujuan" aria-label="Tutup">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="cp-box">
+            <strong>Capaian Pembelajaran (Fase D)</strong>
+            <ul>
+                <li>Geometri: membuat jaring-jaring bangun ruang dan membuat bangun ruang dari jaring-jaringnya.</li>
+                <li>Pengukuran: menjelaskan cara menentukan luas permukaan dan volume bangun ruang serta menyelesaikan masalah yang terkait.</li>
+            </ul>
+            <small>Tujuan di bawah mengacu pada buku Matematika untuk SMP/MTs Kelas IX (Budhi dkk., 2025), Bab 3 Bangun Ruang.</small>
+        </div>
+        <p class="intro">Setelah belajar dengan GeoSMART, kamu diharapkan mampu:</p>
+        <ul class="tujuan-list">
+            <li>
+                <span class="ikon"><i class="fa-solid fa-cube"></i></span>
+                <div>
+                    <strong>Menjelaskan ciri-ciri kubus</strong>
+                    Menyebutkan dan menunjuk sisi (6), rusuk (12), dan titik sudut (8) pada kubus, serta menjelaskan bahwa semua sisinya berbentuk persegi dengan ukuran sama dan kubus merupakan balok khusus.
+                </div>
+            </li>
+            <li>
+                <span class="ikon"><i class="fa-solid fa-draw-polygon"></i></span>
+                <div>
+                    <strong>Menjelaskan garis dan bidang istimewa</strong>
+                    Mengenali diagonal sisi, diagonal ruang, dan bidang diagonal pada kubus.
+                </div>
+            </li>
+            <li>
+                <span class="ikon"><i class="fa-solid fa-shapes"></i></span>
+                <div>
+                    <strong>Menjelaskan bentuk jaring-jaring kubus dan membuat kubus dari jaring-jaringnya</strong>
+                    Menentukan apakah suatu rangkaian persegi dapat dilipat menjadi kubus, lalu menamai titik sudutnya.
+                </div>
+            </li>
+            <li>
+                <span class="ikon"><i class="fa-solid fa-vector-square"></i></span>
+                <div>
+                    <strong>Menentukan rumus luas permukaan kubus</strong>
+                    Menurunkan L = 6 × s × s dari jumlah luas enam persegi pada jaring-jaring kubus.
+                </div>
+            </li>
+            <li>
+                <span class="ikon"><i class="fa-solid fa-calculator"></i></span>
+                <div>
+                    <strong>Menentukan rumus volume kubus</strong>
+                    Menunjukkan bahwa V = s × s × s melalui susunan kubus satuan.
+                </div>
+            </li>
+            <li>
+                <span class="ikon"><i class="fa-solid fa-lightbulb"></i></span>
+                <div>
+                    <strong>Menyelesaikan masalah kontekstual luas permukaan dan volume kubus</strong>
+                    Menggunakan angka dan simbol, menganalisis informasi, dan menarik kesimpulan pada masalah luas permukaan dan volume kubus dalam kehidupan sehari-hari, termasuk konversi satuan.
+                </div>
+            </li>
+        </ul>
+    </div>
+</dialog>
+
+<div class="wrap">
+
+<div class="section">
+  <h2>Visualisasi 3D</h2>
+  <model-viewer src="assets/images/bangunruang/kubus.glb" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-robot"></i> Cara Belajar bersama AI</h2>
+  <div class="info">
+    AI di GeoSMART adalah <b>pendamping</b>, bukan mesin penjawab. Ikuti urutan ini:
+    <ol>
+      <li><b>Baca</b> materi atau soal lebih dulu.</li>
+      <li><b>Tulis</b> bagian yang belum kamu pahami (istilah, kalimat, atau simbol), atau tulis penyelesaianmu sendiri.</li>
+      <li><b>Tanya Gemini</b>, lalu jawab pertanyaan pemantik dari AI. Kamu akan diberi petunjuk, bukan jawaban akhir.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-chart-simple"></i> Tiga Kemampuan Numerasi pada Kubus</h2>
+  <p>Di GeoSMART kamu berlatih menggunakan <b>volume</b> dan <b>luas permukaan</b> kubus untuk menyelesaikan masalah sehari-hari. Ada tiga kemampuan numerasi yang dilatih:</p>
+  <div class="grid">
+    <div class="card"><h4>🔢 Menggunakan angka dan simbol</h4>Memilih rumus (V = s × s × s atau L = 6 × s × s), memasukkan angka, dan menghitung dengan satuan yang benar.</div>
+    <div class="card"><h4>🔍 Menganalisis informasi</h4>Memilah informasi pada teks atau gambar: mana yang diketahui, mana yang ditanyakan, mana yang perlu disamakan satuannya atau tidak dipakai.</div>
+    <div class="card"><h4>💡 Menarik kesimpulan</h4>Menafsirkan hasil sesuai konteks: satuan, pembulatan, perbandingan, atau keputusan yang diambil.</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🧊 Kubus</h2>
+
+  <h3><i class="fa-solid fa-circle-info"></i> Pengertian</h3>
+  <p>Balok adalah benda yang dibatasi oleh enam persegi panjang. Jika semua persegi panjang yang membentuk balok berbentuk <b>persegi dengan ukuran sama</b>, balok tersebut disebut <b>kubus</b>. Jadi kubus adalah balok khusus (p = l = t). Contohnya dadu, kardus kotak sempurna, dan es batu.</p>
+  <p>Kubus diberi nama sesuai titik sudutnya, misalnya <b>ABCD.EFGH</b> dengan ABCD sebagai alas dan EFGH sebagai bagian atas. Enam persegi pada kubus ABCD.EFGH adalah:</p>
+  <table class="tb">
+    <tr><th>Bagian</th><th>Persegi</th></tr>
+    <tr><td>Depan</td><td>ABFE</td></tr>
+    <tr><td>Belakang</td><td>DCGH</td></tr>
+    <tr><td>Kiri</td><td>DAEH</td></tr>
+    <tr><td>Kanan</td><td>CBFG</td></tr>
+    <tr><td>Atas</td><td>HEFG</td></tr>
+    <tr><td>Bawah (alas)</td><td>ABCD</td></tr>
+  </table>
+  <p style="font-size:.9rem;color:#64748b;margin-top:0">Huruf pada nama sisi mengikuti keliling sisi tersebut dan boleh dimulai dari titik sudut mana saja.</p>
+  <button class="btn" onclick="bukaAI('materi','pengertian')">✨ Tanya Gemini</button>
+
+  <h3><i class="fa-solid fa-cube"></i> Nama Bagian-bagian Kubus</h3>
+  <div class="grid">
+    <div class="card"><h4>Sisi (bidang)</h4>Persegi yang membatasi kubus. Ada <b>6 sisi</b> yang sama besar.</div>
+    <div class="card"><h4>Rusuk</h4>Garis pembentuk sisi. Ada <b>12 rusuk</b> yang semuanya sama panjang:
+      <br>• rusuk alas: AB, BC, CD, DA
+      <br>• rusuk atas: EF, FG, GH, HE
+      <br>• rusuk tegak: AE, BF, CG, DH</div>
+    <div class="card"><h4>Titik sudut</h4>Titik temu antarrusuk (tiga rusuk bertemu di setiap titik sudut). Ada <b>8 titik sudut</b>: A, B, C, D, E, F, G, H.</div>
+  </div>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','unsur')">✨ Tanya Gemini</button></p>
+
+  <h3><i class="fa-solid fa-slash"></i> Garis dan Bidang Istimewa</h3>
+  <div class="grid">
+    <div class="card"><h4>Diagonal sisi</h4>Garis (bukan rusuk) yang menghubungkan dua titik sudut dalam satu bidang (sisi), contoh BG. Setiap sisi memiliki 2, sehingga seluruhnya ada <b>12</b>.</div>
+    <div class="card"><h4>Diagonal ruang</h4>Garis (bukan rusuk) yang menghubungkan dua titik sudut yang terletak pada persegi yang berbeda, contoh EC. Ada <b>4</b>: AG, BH, CE, DF.</div>
+    <div class="card"><h4>Bidang diagonal</h4>Segi empat (persegi panjang) yang dibuat oleh dua diagonal sisi dan dua diagonal ruang, contoh DBFH. Pada bidang ini terdapat dua diagonal sisi (DB dan FH) dan dua diagonal ruang (DF dan BH). Ada <b>6</b>.</div>
+  </div>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','istimewa')">✨ Tanya Gemini</button></p>
+
+  <h3><i class="fa-solid fa-shapes"></i> Jaring-jaring Kubus</h3>
+  <p>Jaring-jaring adalah rangkaian persegi yang diperoleh ketika kubus dibuka, dan dapat dilipat kembali menjadi kubus. Jaring-jaring kubus terdiri dari <b>enam persegi</b> yang sama ukuran. Jika yang dibuat adalah kotak tanpa tutup, jaring-jaringnya terdiri dari <b>lima persegi</b>.</p>
+  <p>Perlu diingat: <b>tidak semua</b> rangkaian enam persegi dapat dilipat menjadi kubus. Untuk memeriksanya, kamu bisa memberi nama titik sudut pada rangkaian tersebut:</p>
+  <div class="info">
+    <b>Cara memeriksa jaring-jaring kubus</b>
+    <ol>
+      <li>Mulai dengan satu persegi sebagai alas, beri nama ABCD.</li>
+      <li>Beri nama persegi yang menempel pada tiap sisinya, misalnya ADHE di kiri dan DCGH di atasnya. Titik yang akan bertemu saat dilipat diberi huruf yang sama.</li>
+      <li>Lanjutkan sampai semua persegi bernama. Jika ada persegi yang hanya dapat diberi nama yang sama dengan persegi yang sudah ada, rangkaian itu <b>bukan</b> jaring-jaring kubus.</li>
+    </ol>
+  </div>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','jaring')">✨ Tanya Gemini</button></p>
+</div>
+
+<div class="section">
+  <h2>Eksplorasi Unsur &amp; Jaring-jaring</h2>
+  <div class="tab-menu" id="tabMenu"></div>
+  <div id="tabBody"></div>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-square-root-variable"></i> Luas Permukaan dan Volume</h2>
+  <h3>Luas Permukaan</h3>
+  <p>Luas permukaan adalah jumlah luas seluruh sisi. Kubus memiliki 6 sisi berbentuk persegi yang sama besar. Jika kubus dibuka menjadi jaring-jaring, luas permukaannya sama dengan jumlah luas keenam persegi tersebut.</p>
+  <div class="grid">
+    <div class="card"><h4>Kubus</h4><span class="formula">L = 6 × s × s</span>
+      <div class="contoh">Kubus s = 5 cm:<br>luas satu sisi = 5 × 5 = 25 cm²<br>L = 6 × 25 = <b>150 cm²</b></div></div>
+    <div class="card"><h4>Kubus sebagai balok khusus</h4><span class="formula">2(s×s + s×s + s×s) = 6 × s × s</span>
+      <div class="contoh">Dari rumus balok L = 2(p×l + p×t + l×t) dengan p = l = t = s.</div></div>
+  </div>
+  <p class="contoh" style="margin-top:12px"><b>Eksplorasi:</b> buka tab <b>Jaring-jaring</b> pada bagian Eksplorasi di atas, lalu buka dan tutup jaring-jaringnya. Perhatikan enam persegi yang luasnya dijumlahkan.</p>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','luas')">✨ Tanya Gemini</button></p>
+
+  <h3>Volume</h3>
+  <p>Volume menyatakan besar ruang yang ditempati suatu benda. Kubus dengan rusuk 1 cm memiliki volume 1 cm³ (kubus satuan). Volume kubus adalah banyaknya kubus satuan yang dapat mengisi kubus tersebut. Jangan lupa memberi satuan volume (pangkat tiga).</p>
+  <div class="grid">
+    <div class="card"><h4>Kubus</h4><span class="formula">V = s × s × s</span>
+      <div class="contoh">Kubus s = 3 cm: satu lapis berisi 3 × 3 = 9 kubus satuan, sebanyak 3 lapis.<br>V = 3 × 3 × 3 = <b>27 cm³</b></div></div>
+  </div>
+  <p class="contoh" style="margin-top:12px"><b>Ingat konversi:</b> 1 liter = 1.000 cm³ = 1 dm³, dan 1 m³ = 1.000 dm³ = 1.000 liter.</p>
+
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','volume')">✨ Tanya Gemini</button></p>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-clipboard-question"></i> Latihan Mandiri Numerasi Geometri</h2>
+  <div class="info" style="margin-bottom:16px">Setiap soal dikerjakan dalam <b>tiga langkah numerasi</b>: angka dan simbol, analisis informasi, lalu kesimpulan. Isi semua dengan caramu sendiri, tanyakan ke Gemini untuk dicek lewat petunjuk, lalu buka pembahasan.</div>
+  <div id="daftarSoal"></div>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-box-open"></i> Kubus di Sekitar Kita</h2>
+  <p>Dadu, kardus, kubus rubik, dan es batu adalah contoh benda berbentuk kubus. Luas permukaan berguna untuk memperkirakan bahan (cat atau kertas pembungkus), sedangkan volume menunjukkan kapasitas isi.</p>
+  <div class="grid">
+    <div class="card"><h4>📦 Kardus</h4>s = 40 cm<br>V = 64.000 cm³ = 64 liter</div>
+    <div class="card"><h4>🎲 Dadu</h4>s = 1,6 cm<br>V ≈ 4,1 cm³</div>
+    <div class="card"><h4>🧊 Es batu</h4>s = 2 cm<br>V = 8 cm³</div>
+    <div class="card"><h4>🧩 Kubus rubik</h4>s = 5,7 cm<br>V ≈ 185,2 cm³</div>
+  </div>
+  <div class="info" style="margin-top:14px"><b>Yuk berpikir!</b> Jika kamu punya kotak berbentuk kubus, bagaimana cara menghitung banyak kubus satuan yang muat di dalamnya?</div>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','dunia')">✨ Tanya Gemini</button></p>
+</div>
+
+</div>
+
+<dialog id="aiDlg">
+  <div class="d-head"><h3 id="aiJudul">Tanya Gemini</h3></div>
+  <div class="d-body">
+    <p id="aiKonteks" style="margin-top:0"></p>
+    <label for="aiInput" id="aiLabel"></label>
+    <textarea id="aiInput" oninput="cekInput()"></textarea>
+    <div class="msg" id="aiInfo"></div>
+    <div class="d-foot">
+      <button class="btn alt" onclick="document.getElementById('aiDlg').close()">Batal</button>
+      <button class="btn" id="aiKirim" onclick="kirimAI()" disabled>Salin prompt &amp; buka Gemini</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ===== MODAL TUJUAN ===== */
+document.getElementById('btnBukaTujuan').addEventListener('click',()=>document.getElementById('modalTujuan').showModal());
+document.getElementById('btnTutupTujuan').addEventListener('click',()=>document.getElementById('modalTujuan').close());
+
+/* ===== TAB TITIK SUDUT (gambar interaktif) ===== */
+const P={A:[50,190],B:[170,190],C:[230,150],D:[110,150],E:[50,70],F:[170,70],G:[230,30],H:[110,30]};
+const LB={A:[32,206],B:[188,206],C:[250,156],D:[92,164],E:[32,68],F:[188,74],G:[250,26],H:[98,12]};
+const EDG=['AB','BC','CD','DA','EF','FG','GH','HE','AE','BF','CG','DH'];
+const HID=['DA','CD','DH'];
+function pt(k){return k.split('').map(c=>P[c].join(',')).join(' ')}
+const TITIK_HTML=`<div class="svgbox">
+<svg viewBox="0 0 290 222" role="img" aria-label="Kubus ABCD.EFGH dengan delapan titik sudut yang dapat ditandai">
+<polygon points="${pt('ABFE')}" fill="#eff6ff"/>
+<polygon points="${pt('EFGH')}" fill="#dbeafe"/>
+<polygon points="${pt('CBFG')}" fill="#bfdbfe"/>
+${EDG.map(e=>`<line x1="${P[e[0]][0]}" y1="${P[e[0]][1]}" x2="${P[e[1]][0]}" y2="${P[e[1]][1]}" stroke="#1e3a8a" stroke-width="${HID.includes(e)?1.6:2}" ${HID.includes(e)?'stroke-dasharray="5 4"':''} stroke-linecap="round"/>`).join('')}
+${'ABCDEFGH'.split('').map(v=>`<g class="vtx" tabindex="0" role="button" aria-label="Titik sudut ${v}" onclick="togTitik(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togTitik(this)}"><circle cx="${P[v][0]}" cy="${P[v][1]}" r="11"/><text x="${LB[v][0]}" y="${LB[v][1]}" text-anchor="middle" dominant-baseline="central">${v}</text></g>`).join('')}
+</svg>
+<div class="res" id="titikInfo">Titik sudut yang sudah ditandai: 0 dari 8</div>
+<button class="btn alt" onclick="resetTitik()">Ulangi</button>
+</div>`;
+function updTitik(){
+  const n=document.querySelectorAll('#titik .vtx.on').length;
+  const r=document.getElementById('titikInfo');
+  r.className='res'+(n===8?' ok':'');
+  r.textContent=n===8?'✅ Semua 8 titik sudut sudah ditandai. Di setiap titik sudut, tiga rusuk bertemu.':'Titik sudut yang sudah ditandai: '+n+' dari 8';
+}
+function togTitik(g){g.classList.toggle('on');updTitik()}
+function resetTitik(){document.querySelectorAll('#titik .vtx.on').forEach(g=>g.classList.remove('on'));updTitik()}
+
+/* ===== EKSPLORASI ===== */
+const TABS=[
+ {id:'sisi',nama:'Sisi',geo:'xyuhycc6',q1:'Setelah mengamati gambar, apa yang dimaksud dengan sisi kubus menurutmu? Bagaimana bentuk dan ukurannya?',mc:[{q:'Berapa jumlah sisi yang membatasi sebuah kubus?',o:['4 sisi','6 sisi','8 sisi'],a:1},{q:'Bentuk setiap sisi kubus adalah ....',o:['Persegi','Persegi panjang','Segitiga'],a:0}]},
+ {id:'rusuk',nama:'Rusuk',geo:'ptqeubwx',q1:'Apa perbedaan rusuk dan sisi menurut pengamatanmu? Bagaimana panjang semua rusuk kubus?',mc:[{q:'Berapa jumlah seluruh rusuk kubus?',o:['8 rusuk','10 rusuk','12 rusuk'],a:2},{q:'Bagaimana panjang semua rusuk kubus?',o:['Berbeda-beda','Semuanya sama panjang','Ada tiga ukuran'],a:1}]},
+ {id:'titik',nama:'Titik Sudut',html:TITIK_HTML,info:'<b>Instruksi:</b> ketuk setiap titik sudut pada gambar kubus ABCD.EFGH untuk menandainya, lalu hitung banyaknya.',q1:'Apa yang dimaksud dengan titik sudut menurutmu? Sebutkan nama-nama titik sudut pada kubus ABCD.EFGH!',mc:[{q:'Berapa jumlah seluruh titik sudut kubus?',o:['6','8','12'],a:1},{q:'Berapa rusuk yang bertemu pada setiap titik sudut kubus?',o:['2 rusuk','3 rusuk','4 rusuk'],a:1}]},
+ {id:'dsisi',nama:'Diagonal Sisi',geo:'djpawdzz',q1:'Jelaskan di mana letak diagonal sisi pada sebuah sisi kubus! Mengapa garis itu bukan rusuk?',mc:[{q:'Setiap sisi memiliki 2 diagonal sisi. Berapa jumlah seluruhnya pada kubus?',o:['6','12','24'],a:1}]},
+ {id:'druang',nama:'Diagonal Ruang',geo:'gamdvdtx',q1:'Apa yang dimaksud dengan diagonal ruang? Apa bedanya dengan diagonal sisi?',mc:[{q:'Berapa jumlah diagonal ruang pada kubus?',o:['2','4','8'],a:1},{q:'Garis AG termasuk ....',o:['Rusuk','Diagonal sisi','Diagonal ruang'],a:2}]},
+ {id:'bdiag',nama:'Bidang Diagonal',geo:'zwr9wfd4',q1:'Menurutmu, mengapa bidang ini disebut bidang diagonal? Garis apa saja yang ada pada bidang ini?',mc:[{q:'Berapa jumlah bidang diagonal pada kubus?',o:['4','6','12'],a:1},{q:'Bidang diagonal pada kubus berbentuk ....',o:['Persegi','Persegi panjang','Segitiga'],a:1}]},
+ {id:'jaring',nama:'Jaring-jaring',geo:'wkkkdktm',q1:'Jelaskan dengan kata-katamu: bagaimana enam persegi pada jaring-jaring terlipat menjadi kubus?',
+  info:'<b>Instruksi:</b> gunakan applet untuk membuka dan menutup jaring-jaring kubus, lalu amati keenam persegi yang terbentuk.',
+  mc:[{q:'Jaring-jaring kubus terdiri dari ... persegi yang sama ukuran.',o:['4','6','8'],a:1},
+      {q:'Jika ABCD adalah alas dan ABFE adalah sisi depan, sisi mana yang menjadi belakang?',o:['DCGH','DAEH','CBFG'],a:0},
+      {q:'Jaring-jaring kotak berbentuk kubus tanpa tutup terdiri dari ... persegi.',o:['4','5','6'],a:1}]}
+];
+const IFR='/width/1000/height/650/allowUpscale=true/rc=false/ai=false/sdz=false/smb=false/stb=false/stbh=false/ld=false/sri=false';
+document.getElementById('tabMenu').innerHTML=TABS.map((t,i)=>`<button class="${i?'':'active'}" onclick="openTab(this,'${t.id}')">${t.nama}</button>`).join('');
+document.getElementById('tabBody').innerHTML=TABS.map((t,i)=>`
+ <div id="${t.id}" class="tab-content ${i?'':'active'}">
+  ${t.html?t.html:`<div class="iframe-wrapper"><iframe src="https://www.geogebra.org/material/iframe/id/${t.geo}${IFR}"></iframe></div>`}
+  ${t.info?`<div class="info" style="margin-bottom:12px">${t.info}</div>`:''}
+  <h4 style="color:#b45309;margin:8px 0 0">🧠 Aktivitas 1: Analisis</h4>
+  <p style="margin:4px 0">${t.q1}</p>
+  <textarea placeholder="Ketik jawabanmu di sini..."></textarea>
+  ${t.mc.map((m,j)=>`<h4 style="color:#b45309;margin:8px 0 0">✍️ Aktivitas ${j+2}: Pilihan Ganda</h4><p style="margin:4px 0">${m.q}</p><div>${m.o.map((o,k)=>`<button class="opt" onclick="pilih(this,${m.a===k})">${o}</button>`).join('')}</div><div class="res"></div>`).join('')}
+ </div>`).join('');
+function openTab(btn,id){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('#tabMenu button').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+function pilih(btn,benar){
+  const box=btn.parentElement;
+  box.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  btn.classList.add(benar?'ok':'no');
+  const r=box.nextElementSibling;
+  r.className='res '+(benar?'ok':'no');
+  r.textContent=benar?'✅ Benar!':'❌ Belum tepat. Amati kembali visualisasi di atas, lalu coba jelaskan alasannya.';
+}
+
+/* ===== LATIHAN ===== */
+const SOAL=[
+ {j:'Akuarium Kubus',f:'Volume',t:'Sebuah akuarium berbentuk kubus memiliki panjang rusuk 50 cm. Jika diisi air hingga penuh, berapa liter volume air di dalamnya? (1 liter = 1.000 cm³)',
+  a:'V = s × s × s = 50 × 50 × 50 = 125.000 cm³; 125.000 ÷ 1.000 = 125 liter.',n:'Informasi yang dipakai: rusuk 50 cm dan 1 liter = 1.000 cm³. Yang ditanyakan dalam liter, sehingga cm³ harus dikonversi.',k:'Akuarium dapat menampung 125 liter air saat penuh.'},
+ {j:'Bak Penampung Air',f:'Volume',t:'Bak penampung air berbentuk kubus dengan panjang rusuk bagian dalam 1,2 m. Berapa liter air paling banyak yang dapat ditampung bak tersebut? (1 m³ = 1.000 liter)',
+  a:'V = 1,2 × 1,2 × 1,2 = 1,728 m³ = 1.728 dm³ = 1.728 liter.',n:'Ukuran sudah dalam satuan yang sama (m). Kapasitas paling banyak sama dengan volume bak, dan 1 m³ = 1.000 liter.',k:'Bak menampung paling banyak 1.728 liter air.'},
+ {j:'Kotak Penyimpan',f:'Volume dan luas permukaan',t:'Kotak penyimpan berbentuk kubus berkapasitas 125 cm³. Seluruh permukaan luar kotak akan dilapisi kertas. Berapa cm² luas kertas yang dibutuhkan (anggap tanpa sisa)?',
+  a:'s × s × s = 125, sehingga s = 5 cm (karena 5 × 5 × 5 = 125). L = 6 × s × s = 6 × 5 × 5 = 150 cm².',n:'Yang diketahui adalah volume, sedangkan rumus luas permukaan memerlukan panjang rusuk, sehingga rusuk harus dicari lebih dulu.',k:'Luas kertas yang dibutuhkan adalah 150 cm².'},
+ {j:'Keramik Bak Mandi',f:'Luas permukaan',t:'Bagian dalam bak mandi berbentuk kubus tanpa tutup dengan rusuk 1 m (alas dan empat dinding) akan ditutup keramik 20 cm × 20 cm. Satu dus berisi 12 keramik. Berapa dus yang perlu dibeli?',
+  a:'Luas = 5 × 1 × 1 = 5 m² = 50.000 cm². Keramik = 50.000 ÷ (20 × 20) = 125 buah. Dus = 125 ÷ 12 ≈ 10,42.',n:'Yang ditutup hanya alas dan empat dinding (5 sisi, bukan 6). Satuan bak (m) dan keramik (cm) harus disamakan, dan keramik dijual per dus.',k:'Dibeli 11 dus (dibulatkan ke atas agar seluruh permukaan tertutup).'},
+ {j:'Cat Dadu Hiasan',f:'Luas permukaan',t:'Dadu hiasan berbentuk kubus dengan rusuk 40 cm akan dicat seluruh permukaannya. Satu kaleng cat cukup untuk 2,4 m². Berapa dadu paling banyak yang dapat dicat dengan satu kaleng? (1 m² = 10.000 cm²)',
+  a:'L = 6 × 40 × 40 = 9.600 cm² = 0,96 m². Banyak dadu = 2,4 ÷ 0,96 = 2,5.',n:'Seluruh permukaan dicat, sehingga yang dihitung enam sisi. Ukuran dadu dalam cm sedangkan kemampuan cat dalam m², jadi satuannya disamakan.',k:'Banyak dadu harus bilangan bulat dan dibulatkan ke bawah: paling banyak 2 dadu (2,5 dadu berarti dadu ketiga tidak tercat penuh).'},
+ {j:'Dua Kotak Mainan',f:'Volume dan luas permukaan',hots:1,t:'Kotak A berbentuk kubus dengan rusuk 4 cm, kotak B berbentuk kubus dengan rusuk 8 cm. Adi berkata: “Rusuk kotak B dua kali rusuk kotak A, jadi karton yang dipakai dan isinya juga dua kali lipat.” Benarkah pernyataan Adi? Buktikan dengan perhitungan!',
+  a:'Kotak A: L = 6 × 4 × 4 = 96 cm², V = 4 × 4 × 4 = 64 cm³. Kotak B: L = 6 × 8 × 8 = 384 cm², V = 8 × 8 × 8 = 512 cm³. Perbandingan luas = 384 ÷ 96 = 4; perbandingan volume = 512 ÷ 64 = 8.',n:'Yang dibandingkan adalah luas permukaan (karton) dan volume (isi) dari dua kubus, bukan hanya panjang rusuknya.',k:'Pernyataan Adi salah: rusuk 2 kali, tetapi luas permukaan menjadi 4 kali (2²) dan volume menjadi 8 kali (2³).'}
+];
+const LANG=[['🔢 Angka dan simbol','Tulis yang diketahui, rumus yang kamu pakai, dan perhitunganmu...'],['🔍 Analisis informasi','Informasi apa yang kamu pakai dan mengapa? Adakah satuan yang perlu disamakan?'],['💡 Kesimpulan','Tulis kesimpulan sesuai konteks soal, lengkap dengan satuan...']];
+document.getElementById('daftarSoal').innerHTML=SOAL.map((s,i)=>`
+ <div class="soal">
+  <h4>${i+1}. ${s.j}<span class="tag${s.hots?' hots':''}">${s.hots?'HOTS · ':''}${s.f}</span></h4>
+  <p style="margin:4px 0 8px">${s.t}</p>
+  ${LANG.map((l,j)=>`<label for="a${i}_${j}">${j+1}. ${l[0]}</label><textarea id="a${i}_${j}" style="min-height:60px" placeholder="${l[1]}"></textarea>`).join('')}
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn" onclick="bukaAI('latihan',${i})">✨ Tanya Gemini</button>
+    <button class="btn alt" onclick="lihatPemb(${i})">Lihat pembahasan</button>
+  </div>
+  <div class="msg" id="m${i}"></div>
+  <div class="pemb" id="p${i}" hidden><b>Pembahasan:</b>
+   <p style="margin:6px 0"><b>🔢 Angka dan simbol:</b> ${s.a}</p>
+   <p style="margin:6px 0"><b>🔍 Analisis informasi:</b> ${s.n}</p>
+   <p style="margin:6px 0"><b>💡 Kesimpulan:</b> ${s.k}</p>
+   <small>Bandingkan dengan jawabanmu. Jika berbeda, tanyakan ke Gemini bagian mana yang perlu kamu tinjau kembali.</small></div>
+ </div>`).join('');
+function bagian(i,j){return document.getElementById('a'+i+'_'+j).value.trim()}
+function lengkap(i){return [0,1,2].every(j=>bagian(i,j).length>=5)}
+function lihatPemb(i){
+  const m=document.getElementById('m'+i);
+  if(!lengkap(i)){m.textContent='Isi dulu ketiga langkah (angka dan simbol, analisis informasi, kesimpulan) dengan caramu sendiri.';return}
+  m.textContent='';document.getElementById('p'+i).hidden=false;
+}
+
+/* ===== PROMPT AI (SCAFFOLDING) ===== */
+const TOPIK={
+ pengertian:{n:'Pengertian kubus',f:'Balok adalah benda yang dibatasi enam persegi panjang. Jika semua persegi panjang pembentuk balok berbentuk persegi dengan ukuran sama, balok tersebut disebut kubus (balok khusus, p = l = t). Enam persegi pada kubus ABCD.EFGH: depan ABFE, belakang DCGH, kiri DAEH, kanan CBFG, atas HEFG, bawah/alas ABCD. Kubus diberi nama menurut titik sudutnya, dengan ABCD sebagai alas dan EFGH sebagai bagian atas.'},
+ unsur:{n:'Sisi, rusuk, dan titik sudut kubus',f:'Persegi yang membatasi kubus disebut bidang atau sisi (6 buah, sama besar). Garis yang membentuk sisi disebut rusuk (12 buah, semuanya sama panjang: 4 rusuk alas AB, BC, CD, DA; 4 rusuk atas EF, FG, GH, HE; 4 rusuk tegak AE, BF, CG, DH). Titik temu antarrusuk disebut titik sudut (8 buah; tiga rusuk bertemu di setiap titik sudut).'},
+ istimewa:{n:'Diagonal sisi, diagonal ruang, dan bidang diagonal kubus',f:'Diagonal sisi: garis (bukan rusuk) yang menghubungkan dua titik sudut dalam satu bidang, contoh BG (12 buah, tiap sisi punya 2). Diagonal ruang: garis (bukan rusuk) yang menghubungkan dua titik sudut yang terletak pada persegi yang berbeda, contoh EC (4 buah: AG, BH, CE, DF). Bidang diagonal: segi empat (persegi panjang, bukan persegi) yang dibuat oleh dua diagonal sisi dan dua diagonal ruang, contoh DBFH (6 buah).'},
+ jaring:{n:'Jaring-jaring kubus',f:'Jaring-jaring kubus adalah rangkaian enam persegi sama ukuran hasil membuka kubus yang dapat dilipat kembali menjadi kubus (kotak tanpa tutup memakai lima persegi). Tidak semua rangkaian enam persegi adalah jaring-jaring kubus. Cara memeriksa: mulai dengan satu persegi bernama ABCD, beri nama persegi yang menempel dengan huruf titik sudut (titik yang bertemu saat dilipat diberi huruf sama); jika ada persegi yang hanya bisa diberi nama yang sudah dipakai persegi lain, rangkaian itu bukan jaring-jaring kubus.'},
+ luas:{n:'Luas permukaan kubus',f:'Luas permukaan kubus = jumlah luas enam persegi pada jaring-jaringnya = 6 × sisi × sisi. Contoh kubus rusuk 5 cm: L = 6 × 25 = 150 cm². Kubus adalah balok dengan p = l = t, sehingga 2(s×s + s×s + s×s) = 6 × s × s.'},
+ volume:{n:'Volume kubus',f:'Volume kubus = sisi × sisi × sisi (banyak kubus satuan pengisi kubus: satu lapis berisi s × s kubus satuan, sebanyak s lapis). Kubus satuan rusuk 1 cm bervolume 1 cm³. 1 liter = 1.000 cm³. Contoh kubus rusuk 3 cm: V = 27 cm³.'},
+ dunia:{n:'Penerapan kubus dalam kehidupan sehari-hari',f:'Luas permukaan dipakai untuk memperkirakan bahan (cat, kertas), volume untuk kapasitas isi, dengan rumus kubus dan konversi satuan.'}
+};
+let ctx=null;
+function bukaAI(mode,k){
+  if(mode==='latihan'&&!lengkap(k)){
+    document.getElementById('m'+k).textContent='Isi dulu ketiga langkah dengan caramu sendiri, baru tanyakan ke Gemini.';return;
+  }
+  ctx={mode,k};
+  document.getElementById('aiInput').value='';
+  document.getElementById('aiKirim').disabled=true;
+  document.getElementById('aiInfo').textContent='';
+  if(mode==='materi'){
+    document.getElementById('aiJudul').textContent='Tanya Gemini: '+TOPIK[k].n;
+    document.getElementById('aiKonteks').textContent='Baca dulu bagian materi ini. Lalu sebutkan bagian yang belum kamu pahami agar AI bisa membantu tepat sasaran.';
+    document.getElementById('aiLabel').textContent='Bagian mana yang belum kamu pahami? (istilah, kalimat, atau simbol)';
+  }else{
+    document.getElementById('aiJudul').textContent='Tanya Gemini: soal '+SOAL[k].j;
+    document.getElementById('aiKonteks').textContent='Penyelesaianmu sudah disertakan di prompt. AI akan memberi petunjuk, bukan jawaban akhir.';
+    document.getElementById('aiLabel').textContent='Bagian mana yang membuatmu ragu atau ingin kamu cek?';
+  }
+  document.getElementById('aiDlg').showModal();
+}
+function cekInput(){document.getElementById('aiKirim').disabled=document.getElementById('aiInput').value.trim().length<8}
+function susunPrompt(tanya){
+  const umum='Gunakan bahasa Indonesia yang ramah dan sederhana untuk siswa kelas IX SMP. Jangan meminta atau menuliskan data pribadi. Jika aku menulis “tidak mengerti”, jelaskan ulang dengan cara atau contoh yang berbeda.';
+  if(ctx.mode==='materi'){
+    const t=TOPIK[ctx.k];
+    return `Kamu adalah AI guru GeoSMART untuk siswa kelas IX SMP. Topik: ${t.n}.
+Fakta acuan dari buku (jangan menyimpang): ${t.f}
+
+Aturan:
+1. Jangan langsung menjelaskan seluruh materi. Mulai dengan satu pertanyaan pemantik untuk memeriksa pemahamanku.
+2. Jelaskan hanya bagian yang aku sebut belum paham, dengan contoh benda sehari-hari.
+3. Setelah menjelaskan, akhiri dengan satu pertanyaan untuk kujawab sendiri, dan jangan memberikan jawabannya.
+4. ${umum}
+
+Bagian yang belum kupahami setelah membaca materi: ${tanya}`;
+  }
+  const s=SOAL[ctx.k];
+  return `Kamu adalah AI guru GeoSMART untuk siswa kelas IX SMP. Tugasmu hanya memberi petunjuk (clue) bertahap pada soal numerasi tentang ${s.f.toLowerCase()} kubus.
+
+Soal: ${s.t}
+
+Pekerjaan yang sudah kukerjakan sendiri:
+1) Angka dan simbol: ${bagian(ctx.k,0)}
+2) Analisis informasi: ${bagian(ctx.k,1)}
+3) Kesimpulan: ${bagian(ctx.k,2)}
+
+Yang ingin kucek atau kutanyakan: ${tanya}
+
+Aturan:
+1. Jangan memberikan jawaban akhir secara langsung. Jika aku memintanya, termasuk beserta langkah penyelesaian, tetap arahkan dengan petunjuk.
+2. Periksa ketiga bagian pekerjaanku satu per satu. Sebutkan bagian yang sudah tepat, dan arahkan bagian yang perlu kutinjau tanpa menyebutkan hasil akhirnya.
+3. Angka dan simbol: tanyakan rumus apa yang kupakai dan mengapa, lalu minta aku menjelaskannya.
+4. Analisis informasi: tanyakan informasi mana yang perlu dipakai, mana yang tidak, dan apakah ada satuan yang harus disamakan.
+5. Kesimpulan: tanyakan apakah hasilku masuk akal dalam konteks soal (satuan, pembulatan, atau perbandingan).
+6. Beri satu petunjuk per balasan, lalu tunggu jawabanku.
+7. ${umum}`;
+}
+function kirimAI(){
+  const p=susunPrompt(document.getElementById('aiInput').value.trim());
+  navigator.clipboard.writeText(p).catch(()=>{});
+  window.open('https://gemini.google.com/app?q='+encodeURIComponent(p),'_blank');
+  const i=document.getElementById('aiInfo');
+  i.style.color='#059669';
+  i.textContent='Prompt tersalin. Jika kolom Gemini masih kosong, tempel dengan Ctrl+V (atau tekan lama lalu Tempel).';
+}
+</script>
+</body>
+</html>

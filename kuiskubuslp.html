@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoSMART | Kuis Evaluasi Kubus</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Urbanist','Segoe UI',sans-serif;}
+body{
+    height:100vh; overflow:hidden; color:#1e2937;
+    background:linear-gradient(rgba(255,255,255,.93),rgba(240,249,255,.93)),url('assets/images/bgkubika4.png');
+    background-size:cover; background-position:center; background-repeat:no-repeat; background-color:#f0f9ff;
+}
+.container{width:95%;max-width:1200px;height:95vh;margin:auto;padding:15px 0;display:flex;gap:15px;}
+
+.sidebar{width:250px;background:#fff;border-radius:18px;border:1px solid #e2e8f0;box-shadow:0 6px 20px rgba(15,23,42,.06);padding:15px;overflow:auto;}
+.sidebar-header{background:#7dd3fc;color:#0c4a6e;text-align:center;padding:12px;border-radius:12px;font-weight:700;margin-bottom:15px;}
+.stats{display:flex;justify-content:space-between;margin-bottom:15px;}
+.stat{text-align:center;}
+.stat-number{font-size:22px;font-weight:700;color:#0369a1;}
+.stat-label{font-size:12px;color:#64748b;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.num{height:50px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;font-weight:600;transition:.3s;}
+.num:hover{background:#f0f9ff;border-color:#38bdf8;}
+.num.active{background:#7dd3fc;color:#0c4a6e;border-color:#38bdf8;}
+.num.done{background:#14b8a6;color:#fff;border-color:#14b8a6;}
+
+.main{flex:1;background:#fff;border-radius:18px;border:1px solid #e2e8f0;box-shadow:0 6px 20px rgba(15,23,42,.06);padding:20px;display:flex;flex-direction:column;overflow:auto;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;gap:10px;flex-wrap:wrap;}
+.timer{background:#ef4444;color:#fff;padding:8px 15px;border-radius:25px;font-size:14px;font-weight:700;}
+.badge{background:#f8fafc;border:1px solid #e2e8f0;padding:8px 15px;border-radius:25px;font-size:14px;}
+.dashboard-btn{text-decoration:none;background:#7dd3fc;color:#0c4a6e;padding:8px 15px;border-radius:25px;font-size:14px;font-weight:600;transition:.3s;}
+.dashboard-btn:hover{background:#38bdf8;transform:translateY(-2px);}
+
+.progress{height:8px;background:#f1f5f9;border-radius:50px;overflow:hidden;margin-bottom:16px;}
+.progress-bar{width:10%;height:100%;background:#7dd3fc;transition:.4s;}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:#e0f2fe;color:#075985;}
+.tag.tujuan{background:#dbeafe;color:#1e40af;}
+
+.question{font-size:20px;font-weight:600;margin-bottom:16px;line-height:1.55;}
+.btn{width:100%;padding:12px 15px;margin-bottom:8px;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#1e2937;text-align:left;font-size:15px;cursor:pointer;transition:.3s;}
+.btn:hover{background:#f0f9ff;border-color:#38bdf8;}
+.btn.selected{background:#7dd3fc;border-color:#38bdf8;color:#0c4a6e;font-weight:700;}
+.btn:focus-visible,.back:focus-visible,.next:focus-visible{outline:3px solid #0369a1;outline-offset:2px;}
+
+.footer{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;}
+.back{padding:10px 20px;border:1px solid #e2e8f0;border-radius:25px;background:#fff;color:#64748b;cursor:pointer;font:inherit;}
+.back:hover{border-color:#38bdf8;color:#0369a1;}
+.next{padding:10px 20px;border:none;border-radius:25px;background:#7dd3fc;color:#0c4a6e;cursor:pointer;font:inherit;font-weight:600;}
+.next:hover{background:#38bdf8;}
+
+/* Hasil */
+.skor-besar{font-size:44px;font-weight:800;color:#0369a1;}
+.rekap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0;}
+.rekap div{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;}
+.rekap b{display:block;font-size:20px;color:#0369a1;}
+.review{border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:10px;background:#f8fafc;}
+.review.benar{border-left:5px solid #14b8a6;}
+.review.salah{border-left:5px solid #ef4444;}
+.review p{line-height:1.55;margin-top:6px;}
+
+@media(max-width:900px){
+    body{overflow:auto;height:auto;}
+    .container{flex-direction:column;height:auto;}
+    .sidebar{width:100%;}
+    .main{overflow:visible;}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="sidebar-header">📋 Daftar Soal</div>
+        <div class="stats">
+            <div class="stat"><div class="stat-number" id="selesai">0</div><div class="stat-label">Terjawab</div></div>
+            <div class="stat"><div class="stat-number" id="pengerjaan">1</div><div class="stat-label">Pengerjaan</div></div>
+            <div class="stat"><div class="stat-number">10</div><div class="stat-label">Total</div></div>
+        </div>
+        <div class="grid" id="grid"></div>
+    </div>
+
+    <div class="main" id="main">
+        <div class="topbar">
+            <div style="display:flex;gap:10px;align-items:center;">
+                <a href="kubuslp.html" class="dashboard-btn">Kembali</a>
+                <div class="timer" id="timer">⏰ 20:00</div>
+            </div>
+            <div class="badge" id="badge">Soal 1/10</div>
+        </div>
+
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="tags" id="tags"></div>
+        <div class="question" id="q">Memuat...</div>
+        <div id="opsi"></div>
+
+        <div class="footer">
+            <button class="back" onclick="prev()">← Sebelumnya</button>
+            <button class="next" id="btnNext" onclick="next()">Lanjut →</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Indikator numerasi (Han dkk., 2017)
+const IND = {
+    A: 'Menggunakan angka dan simbol',
+    B: 'Menganalisis informasi',
+    C: 'Menarik kesimpulan / interpretasi'
+};
+
+// Bank soal tetap. Tujuan T1-T6 mengikuti modal Tujuan Pembelajaran.
+// Opsi pertama pada tiap soal adalah jawaban benar; urutan diacak saat kuis dimulai.
+const BANK = [
+ { ind:'A', tujuan:'T1 Ciri-ciri kubus',
+   q:'Pak Budi membuat kerangka kubus dari bambu dengan panjang rusuk 40 cm. Panjang bambu minimal yang dibutuhkan untuk seluruh rusuk kerangka adalah ...',
+   o:['4,8 m','1,6 m','2,4 m','9,6 m'],
+   p:'Kubus memiliki 12 rusuk yang sama panjang. Panjang bambu = 12 × 40 cm = 480 cm = 4,8 m. Angka 1,6 m hanya menghitung 4 rusuk, dan 2,4 m menghitung 6 rusuk (seperti jumlah sisi).' },
+
+ { ind:'B', tujuan:'T2 Garis dan bidang istimewa',
+   q:'Sebuah kotak berbentuk kubus memiliki panjang rusuk dalam 10 cm. Dina memiliki dua sedotan lurus, masing-masing 16 cm dan 18 cm. Gunakan √3 ≈ 1,73. Pernyataan yang benar adalah ...',
+   o:['Hanya sedotan 16 cm yang dapat masuk seluruhnya, karena diagonal ruang kubus ≈ 17,3 cm','Kedua sedotan dapat masuk, karena rusuk kubus 10 cm','Hanya sedotan 18 cm yang dapat masuk, karena lebih panjang dari rusuk','Tidak ada yang dapat masuk, karena keduanya lebih panjang dari 10 cm'],
+   p:'Benda lurus terpanjang di dalam kubus berimpit dengan diagonal ruang: 10√3 ≈ 17,3 cm. Sedotan 16 cm < 17,3 cm sehingga muat (dimiringkan), sedangkan 18 cm > 17,3 cm sehingga tidak muat.' },
+
+ { ind:'B', tujuan:'T3 Jaring-jaring; T4 Luas permukaan; T5 Volume',
+   q:'Luas seluruh jaring-jaring sebuah kubus adalah 294 cm². Volume kubus yang terbentuk dari jaring-jaring tersebut adalah ...',
+   o:['343 cm³','49 cm³','294 cm³','2.058 cm³'],
+   p:'Jaring-jaring kubus terdiri dari 6 persegi sama, sehingga luasnya sama dengan luas permukaan: 6s² = 294, maka s² = 49 dan s = 7 cm. Volume = 7³ = 343 cm³. Angka 49 adalah luas satu sisi.' },
+
+ { ind:'C', tujuan:'T4 Luas permukaan; T6 Masalah kontekstual',
+   q:'Sebuah kubus hias berusuk 30 cm akan dicat seluruh permukaannya sebanyak dua lapis. Satu kaleng cat cukup untuk mengecat 1 m² satu lapis. Banyak kaleng cat minimal yang harus dibeli adalah ...',
+   o:['2 kaleng','1 kaleng','3 kaleng','6 kaleng'],
+   p:'Luas permukaan = 6 × 30² = 5.400 cm² = 0,54 m². Dua lapis = 1,08 m², lebih dari 1 m², sehingga dibutuhkan 2 kaleng. Jawaban 1 kaleng terjadi jika lupa mengalikan dua lapis.' },
+
+ { ind:'A', tujuan:'T5 Volume kubus',
+   q:'Sebuah tandon air berbentuk kubus memiliki panjang rusuk dalam 1,5 m. Jika diisi penuh, banyak air yang tertampung adalah ... liter.',
+   o:['3.375','337,5','33.750','3,375'],
+   p:'Volume = 1,5 × 1,5 × 1,5 = 3,375 m³. Karena 1 m³ = 1.000 liter, kapasitasnya 3.375 liter. (Cara lain: 150³ = 3.375.000 cm³ ÷ 1.000 = 3.375 liter.)' },
+
+ { ind:'C', tujuan:'T5 Volume kubus; T6 Masalah kontekstual',
+   q:'Sebuah bak berbentuk kubus dengan rusuk dalam 50 cm berisi air penuh. Air dikuras dengan pompa berdebit 5 liter/menit mulai pukul 09.20. Bak akan kosong pada pukul ...',
+   o:['09.45','09.35','10.20','09.40'],
+   p:'Volume = 50³ = 125.000 cm³ = 125 liter. Waktu = 125 ÷ 5 = 25 menit, sehingga bak kosong pukul 09.45.' },
+
+ { ind:'A', tujuan:'T4 Luas permukaan; T6 Masalah kontekstual',
+   q:'Sebuah lorong mainan berbentuk kubus berusuk 25 cm tanpa alas dan tanpa tutup. Luas kain minimal untuk melapisi seluruh sisi lorong tersebut adalah ...',
+   o:['2.500 cm²','3.750 cm²','3.125 cm²','625 cm²'],
+   p:'Tanpa alas dan tutup tersisa 4 sisi: 4 × 25² = 4 × 625 = 2.500 cm². Nilai 3.750 cm² adalah luas permukaan kubus tertutup.' },
+
+ { ind:'B', tujuan:'T5 Volume kubus; T6 Masalah kontekstual',
+   q:'Sebuah kardus berbentuk kubus dengan rusuk dalam 24 cm akan diisi penuh dengan kubus mainan berusuk 4 cm tanpa ada ruang kosong. Banyak kubus mainan yang dapat dimuat adalah ...',
+   o:['216 buah','6 buah','36 buah','864 buah'],
+   p:'Pada setiap rusuk dapat disusun 24 ÷ 4 = 6 kubus. Banyak kubus = 6 × 6 × 6 = 216. Cek volume: 13.824 ÷ 64 = 216. Angka 36 adalah banyak kubus pada satu lapis.' },
+
+ { ind:'C', tujuan:'T5 Volume kubus',
+   q:'Sebuah kubus mainan bervolume 729 cm³ akan dimasukkan ke dalam kotak berbentuk kubus dengan rusuk dalam 10 cm. Kesimpulan yang tepat adalah ...',
+   o:['Muat, karena rusuk mainan 9 cm lebih kecil dari 10 cm','Tidak muat, karena rusuk mainan 27 cm','Tidak muat, karena volume 729 cm³ lebih besar dari 10 cm','Tidak muat, karena rusuk mainan 243 cm'],
+   p:'Rusuk mainan = ∛729 = 9 cm karena 9³ = 729. Karena 9 cm < 10 cm, mainan muat. Membandingkan volume (cm³) dengan rusuk (cm) adalah kesalahan karena satuannya berbeda.' },
+
+ { ind:'C', tujuan:'T5 Volume kubus; T6 Masalah kontekstual',
+   q:'Sebuah keluarga membutuhkan 1.500 liter air. Tersedia dua tandon berbentuk kubus: tandon A berusuk dalam 1 m dan tandon B berusuk dalam 1,2 m. Kesimpulan yang tepat adalah ...',
+   o:['Hanya tandon B yang cukup, karena kapasitasnya 1.728 liter','Kedua tandon cukup, karena rusuknya lebih dari 1 m','Hanya tandon A yang cukup, karena kapasitasnya 1.000 liter','Tidak ada yang cukup, karena kapasitas B hanya 172,8 liter'],
+   p:'Tandon A: 1³ = 1 m³ = 1.000 liter (kurang dari 1.500). Tandon B: 1,2³ = 1,728 m³ = 1.728 liter (lebih dari 1.500). Jadi hanya tandon B yang cukup.' }
+];
+
+let soal = [];          // soal terpilih dengan urutan opsi sudah diacak
+let idx = 0;
+let jawaban = {};
+let waktu = 1200;
+let timerId = null;
+let selesaiSudah = false;
+
+function acak(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function init(){
+    soal = BANK.map(b => {
+        const opsi = acak(b.o);
+        return { ind:b.ind, tujuan:b.tujuan, q:b.q, p:b.p, opsi:opsi, benar:opsi.indexOf(b.o[0]) };
+    });
+    renderGrid();
+    render();
+    timerId = setInterval(tick, 1000);
+}
+
+function renderGrid(){
+    document.getElementById('grid').innerHTML = soal.map((_, i) => {
+        let cls = 'num';
+        if (i === idx) cls += ' active';
+        else if (jawaban[i] !== undefined) cls += ' done';
+        return `<div class="${cls}" onclick="go(${i})">${i + 1}</div>`;
+    }).join('');
+    document.getElementById('selesai').textContent = Object.keys(jawaban).length;
+    document.getElementById('pengerjaan').textContent = idx + 1;
+}
+
+function render(){
+    const d = soal[idx];
+    document.getElementById('tags').innerHTML =
+        `<span class="tag">${IND[d.ind]}</span><span class="tag tujuan">${d.tujuan}</span>`;
+    document.getElementById('q').textContent = `${idx + 1}. ${d.q}`;
+    const huruf = ['A','B','C','D'];
+    document.getElementById('opsi').innerHTML = d.opsi.map((o, i) => `
+        <button class="btn ${jawaban[idx] === i ? 'selected' : ''}" onclick="pilih(${i})">${huruf[i]}. ${o}</button>
+    `).join('');
+    document.getElementById('btnNext').textContent = idx === soal.length - 1 ? 'Selesai ✓' : 'Lanjut →';
+    document.getElementById('progressBar').style.width = ((idx + 1) / soal.length * 100) + '%';
+    document.getElementById('badge').textContent = `Soal ${idx + 1}/${soal.length}`;
+    renderGrid();
+}
+
+function pilih(i){ jawaban[idx] = i; render(); }
+function go(i){ idx = i; render(); }
+function prev(){ if (idx > 0) { idx--; render(); } }
+function next(){
+    if (idx < soal.length - 1) { idx++; render(); return; }
+    const kosong = soal.length - Object.keys(jawaban).length;
+    if (kosong > 0 && !confirm(`Masih ada ${kosong} soal belum dijawab. Selesaikan kuis sekarang?`)) return;
+    finish();
+}
+
+function tick(){
+    waktu--;
+    if (waktu < 0) { finish(); return; }
+    const m = Math.floor(waktu / 60), s = waktu % 60;
+    const t = document.getElementById('timer');
+    if (t) t.textContent = `⏰ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function finish(){
+    if (selesaiSudah) return;
+    selesaiSudah = true;
+    clearInterval(timerId);
+
+    const rekap = { A:[0,0], B:[0,0], C:[0,0] };   // [benar, total]
+    let skor = 0;
+    soal.forEach((d, i) => {
+        rekap[d.ind][1]++;
+        if (jawaban[i] === d.benar) { skor++; rekap[d.ind][0]++; }
+    });
+    const nilai = skor * 10;
+    const huruf = ['A','B','C','D'];
+
+    const kartuInd = Object.keys(rekap).map(k =>
+        `<div><b>${rekap[k][0]} / ${rekap[k][1]}</b>${IND[k]}</div>`).join('');
+
+    const review = soal.map((d, i) => {
+        const ok = jawaban[i] === d.benar;
+        const jwbSiswa = jawaban[i] === undefined ? 'Tidak dijawab' : `${huruf[jawaban[i]]}. ${d.opsi[jawaban[i]]}`;
+        return `<div class="review ${ok ? 'benar' : 'salah'}">
+            <div class="tags"><span class="tag">${IND[d.ind]}</span><span class="tag tujuan">${d.tujuan}</span></div>
+            <b>${i + 1}. ${ok ? 'Benar' : 'Belum tepat'}</b>
+            <p>${d.q}</p>
+            <p><b>Jawabanmu:</b> ${jwbSiswa}<br><b>Jawaban benar:</b> ${huruf[d.benar]}. ${d.opsi[d.benar]}</p>
+            <p><b>Pembahasan:</b> ${d.p}</p>
+        </div>`;
+    }).join('');
+
+    document.getElementById('main').innerHTML = `
+        <div class="topbar">
+            <a href="kubuslp.html" class="dashboard-btn">Kembali</a>
+            <div class="badge">Kuis selesai</div>
+        </div>
+        <h2 style="color:#0369a1;">Hasil Kuis Evaluasi Kubus</h2>
+        <div class="skor-besar">${nilai}</div>
+        <p>Kamu menjawab benar ${skor} dari ${soal.length} soal.</p>
+        <div class="rekap">${kartuInd}</div>
+        <p style="margin-bottom:12px;color:#64748b;">Pelajari pembahasan di bawah, terutama soal yang belum tepat. Rekap per indikator menunjukkan kemampuan numerasi mana yang perlu kamu latih lagi.</p>
+        ${review}
+        <div class="footer"><span></span><button class="next" onclick="location.reload()">Ulangi Kuis</button></div>`;
+    document.getElementById('main').scrollTop = 0;
+}
+
+init();
+</script>
+</body>
+</html>

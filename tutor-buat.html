@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoSMART | Master Guide Pengembangan</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --success: #16a34a;
+            --dark-bg: #f0f9ff;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #1e2937;
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+        }
+
+        .hero-section {
+            padding: 120px 0 60px;
+            background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.12), transparent);
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(15,23,42,0.08);
+        }
+
+        .badge-step {
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 800;
+            padding: 5px 18px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        h1, h2 { color: #b91c1c; font-weight: 700; margin-bottom: 20px; }
+
+        pre {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            color: #b45309;
+            font-size: 0.85rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        code { color: #dc2626; background: #fef2f2; padding: 2px 5px; border-radius: 4px; }
+
+        .folder-structure {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Fira Code', monospace;
+            border: 1px dashed #fbbf24;
+            color: #334155;
+        }
+
+        .git-cmd { color: var(--success); font-weight: bold; }
+
+        .tips-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            color: #78350f;
+        }
+
+        .btn-back {
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover { background: var(--primary); color: #ffffff; }
+
+        .text-secondary { color: #64748b !important; }
+        .text-primary { color: #f59e0b !important; }
+        .border-primary { border-color: #f59e0b !important; }
+        .border-secondary { border-color: #e2e8f0 !important; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar fixed-top">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+            <span class="navbar-brand fw-bold" style="color: var(--primary);">
+                <i class="fas fa-microchip"></i> GeoSMART
+            </span>
+            <a href="dashboard.html" class="btn-back"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        </div>
+    </nav>
+
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Tutorial Pembuatan Media GeoSMART</h1>
+            <p class="lead text-secondary mx-auto" style="max-width: 700px;">
+                Perhatikan tutorial ini masih sangat tidak lengkap, jadi ada baiknya agar meminta tutor pada AI! hehe.</p>
+        </div>
+    </header>
+
+    <main class="container pb-5">
+        
+        <section class="step-card">
+            <span class="badge-step">Fase 1: Environment</span>
+            <h2><i class="fas fa-laptop-code text-primary"></i> Persiapan Alat & Struktur</h2>
+            <div class="row g-4">
+                <div class="col-md-7">
+                    <p>Pastikan "Big Three" terinstall untuk kelancaran coding:</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"><i class="fas fa-check text-primary"></i></span><b>VS Code:</b> Aktifkan extension <i>Live Server</i> & <i>Prettier</i>.</li>
+                        <li><span class="fa-li"><i class="fas fa-check text-primary"></i></span><b>Git Bash:</b> Wajib untuk mengelola repository lokal ke GitHub.</li>
+                        <li><span class="fa-li"><i class="fas fa-check text-primary"></i></span><b>Google Chrome:</b> Gunakan tab <i>Console</i> (F12) untuk cek error script.</li>
+                    </ul>
+                </div>
+                <div class="col-md-5">
+                    <div class="folder-structure">
+                        <i class="fas fa-folder-open text-warning"></i> GeoSMART<br>
+                        ├── index.html (Landing)<br>
+                        ├── dashboard.html<br>
+                        ├── balok.html<br>
+                        └── 📂 assets/<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;├── 📂 images/ (logo, bg)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;└── 📂 models/ (.glb)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="step-card">
+            <span class="badge-step">Fase 2: Mathematics Engine</span>
+            <h2><i class="fas fa-shapes text-primary"></i> Tutorial GeoGebra</h2>
+            <p>Langkah membuat semua unsur balok interaktif:</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <ol>
+                        <li><b>Badan Balok:</b> Buat slider <code>p, l, t</code>. Masukkan input <code>A=(0,0,0)</code> dan <code>Box(A, p, l, t)</code>.</li>
+                        <li><b>Diagonal:</b> Gunakan <i>Segment</i> antar titik (misal A ke G untuk Diagonal Ruang).</li>
+                        <li><b>Jaring-jaring:</b> Klik balok, pilih tool <i>Net</i>.</li>
+                        <li><b>Checkbox:</b> Tambahkan tool <i>Checkbox</i> untuk memunculkan/menyembunyikan unsur.</li>
+                    </ol>
+                </div>
+                <div class="col-md-6">
+                    <p class="small text-secondary mb-1">Cara Integrasi ke HTML:</p>
+                    <pre>
+&lt;!-- Gunakan Wrapper agar Responsif --&gt;
+&lt;div class="ratio ratio-16x9"&gt;
+  &lt;iframe src="URL_GEOGEBRA_MU"&gt;&lt;/iframe&gt;
+&lt;/div&gt;</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="step-card">
+            <span class="badge-step">Fase 3: Smart Development</span>
+            <h2><i class="fas fa-brain text-primary"></i> Strategi Prompt AI</h2>
+            <p>Jika stuck saat coding fitur (seperti kuis atau modal), gunakan prompt ini:</p>
+            <pre>
+"Halo Gemini, buatkan kode HTML/CSS/JS lengkap untuk halaman KUIS di proyek GeoSMART. 
+Kriterianya: Bootstrap 5, Dark Mode, Aksen Biru Muda (#38bdf8), 
+5 soal geometri balok, dan tombol kembali ke dashboard.html. 
+Jangan gunakan simbol bintang (*) agar mudah saya copy."</pre>
+            <div class="tips-box">
+                <i class="fas fa-lightbulb text-warning"></i> <b>Tips:</b> Selalu cek path gambar. AI sering menulis <code>src="image.jpg"</code>, pastikan ganti ke <code>src="assets/images/nama_file.png"</code>.
+            </div>
+        </section>
+
+        <section class="step-card border-primary">
+            <span class="badge-step">Fase 4: Deployment</span>
+            <h2><i class="fab fa-git-alt text-primary"></i> Alur Git Bash </h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><b>Rutinitas Update:</b></p>
+                    <pre>
+<span class="git-cmd">git add .</span>
+<span class="git-cmd">git commit -m "Update Fitur X"</span>
+<span class="git-cmd">git pull origin main</span>
+<span class="git-cmd">git push origin main</span></pre>
+                </div>
+                <div class="col-md-6">
+                    <p><b>Jika Ada Error (Troubleshooting):</b></p>
+                    <ul>
+                        <li><b>Identitas:</b> <code>git config --global user.email "mail@mu.com"</code></li>
+                        <li><b>Beda Versi:</b> <code>git pull origin main --rebase</code></li>
+                        <li><b>Cek File:</b> <code>git status</code> (Pastikan hijau sebelum push)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-success mt-4" style="background:#f0fdf4; color:#166534; border-color:#86efac;">
+                <i class="fas fa-globe"></i> <b>Live Link:</b> Repository > Settings > Pages > Branch: Main > Save. Website-mu aktif dalam 1 menit!
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-4 border-top border-secondary">
+        <p class="text-secondary small">
+            GeoSMART Project &copy; 2026 | Pendidikan Matematika UNM<br>
+            <span class="text-primary">Devi - 230101502029</span>
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

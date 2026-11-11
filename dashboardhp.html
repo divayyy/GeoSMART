@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | GeoSMART</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --navy: #0b2a5b;
+            --navy-gelap: #071a3d;
+            --biru: #1d4ed8;
+            --biru-terang: #3b82f6;
+            --langit: #38bdf8;
+            --langit-muda: #7dd3fc;
+            --indigo: #6366f1;
+        }
+
+        * { font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif; }
+
+        body {
+            margin: 0;
+            background:
+                linear-gradient(rgba(7, 26, 61, 0.55), rgba(11, 42, 91, 0.65)),
+                url('assets/images/bgkubika4.png') center/cover no-repeat fixed;
+            background-color: var(--navy-gelap);
+            color: white;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            padding: 12px clamp(14px, 4vw, 24px);
+            background: rgba(11, 42, 91, 0.55);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(147, 197, 253, 0.25);
+            box-shadow: 0 4px 20px rgba(7, 26, 61, 0.35);
+        }
+
+        .brand-area { display: flex; align-items: center; gap: 10px; }
+        .logo-img { width: 38px; height: auto; }
+        .brand-text { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.5px; color: #fff; }
+
+        /* PROFIL */
+        .user-profile {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: background 0.25s, border-color 0.25s;
+        }
+        .user-profile:hover { background: rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.55); }
+        .dropdown-toggle::after { display: none; }
+
+        .dropdown-menu {
+            background: var(--navy);
+            border-radius: 12px;
+            border: 1px solid rgba(147, 197, 253, 0.25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+            padding: 0;
+            min-width: 190px;
+            margin-top: 10px !important;
+            overflow: hidden;
+        }
+        .dropdown-item { padding: 12px 20px; font-size: 14px; color: #dbeafe; }
+        .dropdown-item:hover { background: rgba(255, 255, 255, 0.1); color: white; }
+        .dropdown-item.greeting {
+            border-bottom: 1px solid rgba(147, 197, 253, 0.2);
+            cursor: default;
+            font-weight: 600;
+            white-space: normal;
+            word-break: break-word;
+        }
+        .dropdown-item.greeting:hover { background: transparent; color: #dbeafe; }
+        .dropdown-item.logout { color: #fca5a5; font-weight: 600; }
+        .dropdown-item.logout:hover { background: rgba(248, 113, 113, 0.12); color: #fca5a5; }
+
+        /* HERO */
+        .hero-section {
+            flex: 1;
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: clamp(18px, 5vw, 30px) 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .center-logo {
+            width: clamp(90px, 28vw, 140px);
+            height: auto;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 15px rgba(125, 211, 252, 0.45));
+        }
+
+        .hello-tag { font-size: clamp(1.1rem, 4.5vw, 1.4rem); font-weight: 700; margin-bottom: 4px; word-break: break-word; }
+        .hello-tag span { color: var(--langit-muda); }
+
+        h1 {
+            font-size: clamp(1.5rem, 7vw, 2.4rem);
+            font-weight: 900;
+            margin-bottom: clamp(20px, 5vw, 30px);
+            letter-spacing: -0.5px;
+        }
+
+        /* MENU 2 KOLOM */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: stretch;
+            gap: 14px;
+            width: 100%;
+            margin-bottom: 28px;
+        }
+
+        .card-link { text-decoration: none; color: inherit; display: block; }
+
+        .edu-card {
+            background: rgba(11, 42, 91, 0.55);
+            border: 1px solid rgba(147, 197, 253, 0.3);
+            border-radius: 18px;
+            padding: 22px 10px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+        }
+        .edu-card:hover, .card-link:active .edu-card {
+            background: rgba(29, 78, 216, 0.35);
+            border-color: var(--langit);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35), 0 0 12px rgba(56, 189, 248, 0.3);
+        }
+        .card-link:focus-visible .edu-card { border-color: var(--langit-muda); box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.5); }
+
+        .icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin: 0 auto 12px;
+            color: white;
+        }
+        .icon-balok { background: linear-gradient(135deg, var(--langit), var(--biru-terang)); box-shadow: 0 4px 12px rgba(56, 189, 248, 0.45); }
+        .icon-kubus { background: linear-gradient(135deg, var(--indigo), var(--biru)); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.45); }
+
+        .edu-card h3 { font-size: clamp(1.1rem, 4.5vw, 1.25rem); font-weight: 800; margin-bottom: 6px; color: white; }
+
+        .edu-card p {
+            font-size: clamp(0.72rem, 2.8vw, 0.8rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            min-height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.35;
+        }
+
+        /* TOMBOL TUTORIAL */
+        .tutor-grid { display: flex; justify-content: center; width: 100%; margin-bottom: 10px; }
+        .tutor-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid var(--langit);
+            color: #e0f2fe;
+            padding: 11px 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        .tutor-btn:hover {
+            background: #e0f2fe;
+            color: var(--navy);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.55);
+            text-decoration: none;
+        }
+        .tutor-btn:focus-visible { outline: 3px solid var(--langit-muda); outline-offset: 3px; }
+
+        /* FOOTER */
+        .custom-footer {
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.75rem;
+            letter-spacing: 0.4px;
+            line-height: 1.6;
+            padding: 14px 12px;
+            background: rgba(7, 26, 61, 0.85);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(147, 197, 253, 0.2);
+            margin-top: auto;
+        }
+
+        /* HP sangat kecil */
+        @media (max-width: 340px) {
+            .card-container { grid-template-columns: 1fr; }
+        }
+
+        /* Layar pendek / landscape */
+        @media (max-height: 520px) {
+            .hero-section { justify-content: flex-start; }
+            .center-logo { width: 64px; }
+        }
+
+        /* Laptop (jika halaman ini dibuka di layar lebar) */
+        @media (min-width: 1024px) {
+            .hero-section { max-width: 600px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
+            <div class="brand-area">
+                <img src="assets/images/geosmart.png" alt="Logo GeoSMART" class="logo-img">
+                <span class="brand-text">GeoSMART</span>
+            </div>
+
+            <div class="dropdown">
+                <button class="user-profile dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu profil">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><span class="dropdown-item greeting" id="popName">Halo, Student</span></li>
+                    <li><a class="dropdown-item logout" href="#" id="logoutBtn">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero-section">
+        <img src="assets/images/geosmart.png" alt="Logo Utama GeoSMART" class="center-logo">
+
+        <div class="hello-tag">Halo, <span id="studentName">Student</span>!</div>
+        <h1>WELCOME TO GeoSMART</h1>
+
+        <div class="card-container">
+            <a href="balookhp.html" class="card-link">
+                <div class="edu-card">
+                    <div class="icon-box icon-balok"><i class="fa-solid fa-cube"></i></div>
+                    <h3>Balok</h3>
+                    <p>Rusuk • Volume • Jaring</p>
+                </div>
+            </a>
+
+            <a href="kubusshp.html" class="card-link">
+                <div class="edu-card">
+                    <div class="icon-box icon-kubus"><i class="fa-solid fa-cubes"></i></div>
+                    <h3>Kubus</h3>
+                    <p>Rusuk • Luas • Volume</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="tutor-grid">
+            <a href="tutor-pakaihp.html" class="tutor-btn">
+                <i class="fas fa-circle-info"></i> Tutorial Penggunaan Media
+            </a>
+        </div>
+    </main>
+
+    <footer class="custom-footer">
+        Developed by <strong>DEVI</strong> <strong>230101502029</strong> | <strong>Pendidikan Matematika UNM</strong>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeUser = localStorage.getItem('userName');
+            if (activeUser && activeUser.trim() !== "") {
+                document.getElementById('studentName').innerText = activeUser;
+                document.getElementById('popName').innerText = 'Halo, ' + activeUser;
+            } else {
+                window.location.replace('index.html');
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.clear();
+            window.location.replace('index.html');
+        });
+    </script>
+</body>
+</html>

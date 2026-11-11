@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoSMART | Kuis Evaluasi Balok</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Urbanist','Segoe UI',sans-serif;}
+body{
+    height:100vh; overflow:hidden; color:#1e2937;
+    background:linear-gradient(rgba(255,255,255,.93),rgba(240,249,255,.93)),url('assets/images/bgkubika4.png');
+    background-size:cover; background-position:center; background-repeat:no-repeat; background-color:#f0f9ff;
+}
+.container{width:95%;max-width:1200px;height:95vh;margin:auto;padding:15px 0;display:flex;gap:15px;}
+
+.sidebar{width:250px;background:#fff;border-radius:18px;border:1px solid #e2e8f0;box-shadow:0 6px 20px rgba(15,23,42,.06);padding:15px;overflow:auto;}
+.sidebar-header{background:#7dd3fc;color:#0c4a6e;text-align:center;padding:12px;border-radius:12px;font-weight:700;margin-bottom:15px;}
+.stats{display:flex;justify-content:space-between;margin-bottom:15px;}
+.stat{text-align:center;}
+.stat-number{font-size:22px;font-weight:700;color:#0369a1;}
+.stat-label{font-size:12px;color:#64748b;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.num{height:50px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;font-weight:600;transition:.3s;}
+.num:hover{background:#f0f9ff;border-color:#38bdf8;}
+.num.active{background:#7dd3fc;color:#0c4a6e;border-color:#38bdf8;}
+.num.done{background:#14b8a6;color:#fff;border-color:#14b8a6;}
+
+.main{flex:1;background:#fff;border-radius:18px;border:1px solid #e2e8f0;box-shadow:0 6px 20px rgba(15,23,42,.06);padding:20px;display:flex;flex-direction:column;overflow:auto;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;gap:10px;flex-wrap:wrap;}
+.timer{background:#ef4444;color:#fff;padding:8px 15px;border-radius:25px;font-size:14px;font-weight:700;}
+.badge{background:#f8fafc;border:1px solid #e2e8f0;padding:8px 15px;border-radius:25px;font-size:14px;}
+.dashboard-btn{text-decoration:none;background:#7dd3fc;color:#0c4a6e;padding:8px 15px;border-radius:25px;font-size:14px;font-weight:600;transition:.3s;}
+.dashboard-btn:hover{background:#38bdf8;transform:translateY(-2px);}
+
+.progress{height:8px;background:#f1f5f9;border-radius:50px;overflow:hidden;margin-bottom:16px;}
+.progress-bar{width:10%;height:100%;background:#7dd3fc;transition:.4s;}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:#e0f2fe;color:#075985;}
+.tag.tujuan{background:#dbeafe;color:#1e40af;}
+
+.question{font-size:20px;font-weight:600;margin-bottom:16px;line-height:1.55;}
+.btn{width:100%;padding:12px 15px;margin-bottom:8px;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#1e2937;text-align:left;font-size:15px;cursor:pointer;transition:.3s;}
+.btn:hover{background:#f0f9ff;border-color:#38bdf8;}
+.btn.selected{background:#7dd3fc;border-color:#38bdf8;color:#0c4a6e;font-weight:700;}
+.btn:focus-visible,.back:focus-visible,.next:focus-visible{outline:3px solid #0369a1;outline-offset:2px;}
+
+.footer{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;}
+.back{padding:10px 20px;border:1px solid #e2e8f0;border-radius:25px;background:#fff;color:#64748b;cursor:pointer;font:inherit;}
+.back:hover{border-color:#38bdf8;color:#0369a1;}
+.next{padding:10px 20px;border:none;border-radius:25px;background:#7dd3fc;color:#0c4a6e;cursor:pointer;font:inherit;font-weight:600;}
+.next:hover{background:#38bdf8;}
+
+/* Hasil */
+.skor-besar{font-size:44px;font-weight:800;color:#0369a1;}
+.rekap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0;}
+.rekap div{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;}
+.rekap b{display:block;font-size:20px;color:#0369a1;}
+.review{border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:10px;background:#f8fafc;}
+.review.benar{border-left:5px solid #14b8a6;}
+.review.salah{border-left:5px solid #ef4444;}
+.review p{line-height:1.55;margin-top:6px;}
+
+@media(max-width:900px){
+    body{overflow:auto;height:auto;}
+    .container{flex-direction:column;height:auto;}
+    .sidebar{width:100%;}
+    .main{overflow:visible;}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="sidebar-header">📋 Daftar Soal</div>
+        <div class="stats">
+            <div class="stat"><div class="stat-number" id="selesai">0</div><div class="stat-label">Terjawab</div></div>
+            <div class="stat"><div class="stat-number" id="pengerjaan">1</div><div class="stat-label">Pengerjaan</div></div>
+            <div class="stat"><div class="stat-number">10</div><div class="stat-label">Total</div></div>
+        </div>
+        <div class="grid" id="grid"></div>
+    </div>
+
+    <div class="main" id="main">
+        <div class="topbar">
+            <div style="display:flex;gap:10px;align-items:center;">
+                <a href="baloklp.html" class="dashboard-btn">Kembali</a>
+                <div class="timer" id="timer">⏰ 20:00</div>
+            </div>
+            <div class="badge" id="badge">Soal 1/10</div>
+        </div>
+
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="tags" id="tags"></div>
+        <div class="question" id="q">Memuat...</div>
+        <div id="opsi"></div>
+
+        <div class="footer">
+            <button class="back" onclick="prev()">← Sebelumnya</button>
+            <button class="next" id="btnNext" onclick="next()">Lanjut →</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Indikator numerasi (Han dkk., 2017)
+const IND = {
+    A: 'Menggunakan angka dan simbol',
+    B: 'Menganalisis informasi',
+    C: 'Menarik kesimpulan / interpretasi'
+};
+
+// Bank soal tetap. Tujuan T1-T6 mengikuti modal Tujuan Pembelajaran.
+// Opsi pertama pada tiap soal adalah jawaban benar; urutan diacak saat kuis dimulai.
+const BANK = [
+ { ind:'A', tujuan:'T1 Ciri-ciri balok',
+   q:'Ayah membuat rangka lemari berbentuk balok dari besi siku dengan ukuran 80 cm × 50 cm × 120 cm. Panjang besi siku minimal yang dibutuhkan untuk seluruh rusuk rangka adalah ...',
+   o:['10 m','2,5 m','5 m','20 m'],
+   p:'Balok punya 12 rusuk: 4 rusuk panjang, 4 rusuk lebar, 4 rusuk tinggi. Jumlah = 4(80 + 50 + 120) = 1.000 cm = 10 m.' },
+
+ { ind:'B', tujuan:'T2 Garis dan bidang istimewa',
+   q:'Sebuah peti berbentuk balok berukuran dalam 8 dm × 9 dm × 12 dm. Tongkat lurus terpanjang yang masih dapat dimasukkan seluruhnya ke dalam peti adalah ...',
+   o:['17 dm','15 dm','21 dm','29 dm'],
+   p:'Tongkat terpanjang berimpit dengan diagonal ruang: √(8² + 9² + 12²) = √(64 + 81 + 144) = √289 = 17 dm. Panjang 15 dm adalah diagonal sisi alas yang berukuran 9 × 12.' },
+
+ { ind:'B', tujuan:'T3 Jaring-jaring; T4 Luas permukaan',
+   q:'Sebuah kotak dibuat dari 6 potong karton persegi panjang: 2 potong berukuran 10 cm × 6 cm, 2 potong 10 cm × 4 cm, dan 2 potong 6 cm × 4 cm. Luas karton minimal untuk kotak tersebut adalah ...',
+   o:['248 cm²','124 cm²','240 cm²','280 cm²'],
+   p:'Ketiga pasang sisi cocok, sehingga membentuk balok 10 × 6 × 4. Luas = 2(60) + 2(40) + 2(24) = 120 + 80 + 48 = 248 cm². Nilai 240 cm³ adalah volume, bukan luas.' },
+
+ { ind:'C', tujuan:'T4 Luas permukaan; T6 Masalah kontekstual',
+   q:'Sebuah kotak balok berukuran 30 cm × 20 cm × 10 cm akan ditutup seluruh permukaannya dengan stiker. Satu lembar stiker seluas 500 cm². Banyak lembar stiker minimal yang dibutuhkan adalah ...',
+   o:['5 lembar','4 lembar','6 lembar','12 lembar'],
+   p:'Luas permukaan = 2(600 + 300 + 200) = 2.200 cm². 2.200 ÷ 500 = 4,4, sehingga harus dibulatkan ke atas menjadi 5 lembar. Angka 12 berasal dari volume (6.000 ÷ 500).' },
+
+ { ind:'A', tujuan:'T5 Volume balok',
+   q:'Sebuah kolam ikan berbentuk balok memiliki panjang 2 m, lebar 1,5 m, dan kedalaman 80 cm. Jika diisi penuh, volume air di kolam tersebut adalah ... liter.',
+   o:['2.400','240','24.000','2,4'],
+   p:'Samakan satuan: 200 cm × 150 cm × 80 cm = 2.400.000 cm³. Karena 1 liter = 1.000 cm³, volumenya 2.400 liter. (Cara lain: 2 × 1,5 × 0,8 = 2,4 m³ = 2.400 dm³ = 2.400 liter.)' },
+
+ { ind:'C', tujuan:'T5 Volume balok; T6 Masalah kontekstual',
+   q:'Sebuah bak berbentuk balok berukuran 100 cm × 60 cm × 100 cm. Bak sudah terisi seperempat bagian, lalu diisi lagi dengan keran berdebit 15 liter/menit mulai pukul 07.10. Bak akan penuh pada pukul ...',
+   o:['07.40','07.20','07.50','07.55'],
+   p:'Volume bak = 600.000 cm³ = 600 liter. Sisa yang harus diisi = 3/4 × 600 = 450 liter. Waktu = 450 ÷ 15 = 30 menit, jadi penuh pukul 07.40. Pukul 07.50 muncul jika bak dianggap kosong (600 ÷ 15 = 40 menit).' },
+
+ { ind:'A', tujuan:'T4 Luas permukaan; T6 Masalah kontekstual',
+   q:'Sebuah peti kayu tanpa tutup berbentuk balok berukuran 60 cm × 40 cm × 30 cm. Luas papan kayu minimal yang dibutuhkan untuk membuat peti tersebut adalah ...',
+   o:['8.400 cm²','10.800 cm²','6.000 cm²','12.000 cm²'],
+   p:'Tanpa tutup berarti 5 sisi: alas (60 × 40 = 2.400) + 2 sisi (60 × 30 = 3.600) + 2 sisi (40 × 30 = 2.400) = 8.400 cm². Nilai 10.800 cm² adalah luas permukaan balok tertutup.' },
+
+ { ind:'B', tujuan:'T5 Volume balok; T6 Masalah kontekstual',
+   q:'Sebuah kontainer berbentuk balok berukuran dalam 6 m × 2 m × 2 m akan diisi dus berukuran 60 cm × 40 cm × 40 cm tanpa ada ruang tersisa dan tanpa dus yang dipotong. Banyak dus yang dapat dimuat adalah ...',
+   o:['250 dus','125 dus','500 dus','50 dus'],
+   p:'Cek tiap rusuk: 600 ÷ 60 = 10; 200 ÷ 40 = 5; 200 ÷ 40 = 5. Banyak dus = 10 × 5 × 5 = 250. Cek volume: 24.000.000 ÷ 96.000 = 250.' },
+
+ { ind:'C', tujuan:'T5 Volume balok',
+   q:'Kotak A berukuran 20 cm × 10 cm × 10 cm dan kotak B berukuran 15 cm × 15 cm × 10 cm. Pernyataan yang benar tentang kapasitas kedua kotak adalah ...',
+   o:['Kotak B lebih besar 250 cm³ dari kotak A','Kotak A lebih besar 250 cm³ dari kotak B','Kedua kotak memiliki kapasitas yang sama','Kotak B lebih besar 50 cm³ dari kotak A'],
+   p:'Volume A = 20 × 10 × 10 = 2.000 cm³. Volume B = 15 × 15 × 10 = 2.250 cm³. Selisih = 250 cm³ dan B lebih besar. Panjang rusuk yang lebih besar belum tentu berarti volume yang lebih besar.' },
+
+ { ind:'C', tujuan:'T5 Volume balok; T6 Masalah kontekstual',
+   q:'Sebuah kotak balok bervolume 3.600 cm³ dengan alas berukuran 15 cm × 12 cm akan diletakkan berdiri pada rak yang tingginya 25 cm. Kesimpulan yang tepat adalah ...',
+   o:['Muat, karena tinggi kotak 20 cm','Tidak muat, karena tinggi kotak 30 cm','Muat, karena tinggi kotak 15 cm','Tidak muat, karena tinggi kotak 26 cm'],
+   p:'Luas alas = 15 × 12 = 180 cm². Tinggi = volume ÷ luas alas = 3.600 ÷ 180 = 20 cm. Karena 20 cm < 25 cm, kotak muat dengan sisa ruang 5 cm.' }
+];
+
+let soal = [];          // soal terpilih dengan urutan opsi sudah diacak
+let idx = 0;
+let jawaban = {};
+let waktu = 1200;
+let timerId = null;
+let selesaiSudah = false;
+
+function acak(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function init(){
+    soal = BANK.map(b => {
+        const opsi = acak(b.o);
+        return { ind:b.ind, tujuan:b.tujuan, q:b.q, p:b.p, opsi:opsi, benar:opsi.indexOf(b.o[0]) };
+    });
+    renderGrid();
+    render();
+    timerId = setInterval(tick, 1000);
+}
+
+function renderGrid(){
+    document.getElementById('grid').innerHTML = soal.map((_, i) => {
+        let cls = 'num';
+        if (i === idx) cls += ' active';
+        else if (jawaban[i] !== undefined) cls += ' done';
+        return `<div class="${cls}" onclick="go(${i})">${i + 1}</div>`;
+    }).join('');
+    document.getElementById('selesai').textContent = Object.keys(jawaban).length;
+    document.getElementById('pengerjaan').textContent = idx + 1;
+}
+
+function render(){
+    const d = soal[idx];
+    document.getElementById('tags').innerHTML =
+        `<span class="tag">${IND[d.ind]}</span><span class="tag tujuan">${d.tujuan}</span>`;
+    document.getElementById('q').textContent = `${idx + 1}. ${d.q}`;
+    const huruf = ['A','B','C','D'];
+    document.getElementById('opsi').innerHTML = d.opsi.map((o, i) => `
+        <button class="btn ${jawaban[idx] === i ? 'selected' : ''}" onclick="pilih(${i})">${huruf[i]}. ${o}</button>
+    `).join('');
+    document.getElementById('btnNext').textContent = idx === soal.length - 1 ? 'Selesai ✓' : 'Lanjut →';
+    document.getElementById('progressBar').style.width = ((idx + 1) / soal.length * 100) + '%';
+    document.getElementById('badge').textContent = `Soal ${idx + 1}/${soal.length}`;
+    renderGrid();
+}
+
+function pilih(i){ jawaban[idx] = i; render(); }
+function go(i){ idx = i; render(); }
+function prev(){ if (idx > 0) { idx--; render(); } }
+function next(){
+    if (idx < soal.length - 1) { idx++; render(); return; }
+    const kosong = soal.length - Object.keys(jawaban).length;
+    if (kosong > 0 && !confirm(`Masih ada ${kosong} soal belum dijawab. Selesaikan kuis sekarang?`)) return;
+    finish();
+}
+
+function tick(){
+    waktu--;
+    if (waktu < 0) { finish(); return; }
+    const m = Math.floor(waktu / 60), s = waktu % 60;
+    const t = document.getElementById('timer');
+    if (t) t.textContent = `⏰ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function finish(){
+    if (selesaiSudah) return;
+    selesaiSudah = true;
+    clearInterval(timerId);
+
+    const rekap = { A:[0,0], B:[0,0], C:[0,0] };   // [benar, total]
+    let skor = 0;
+    soal.forEach((d, i) => {
+        rekap[d.ind][1]++;
+        if (jawaban[i] === d.benar) { skor++; rekap[d.ind][0]++; }
+    });
+    const nilai = skor * 10;
+    const huruf = ['A','B','C','D'];
+
+    const kartuInd = Object.keys(rekap).map(k =>
+        `<div><b>${rekap[k][0]} / ${rekap[k][1]}</b>${IND[k]}</div>`).join('');
+
+    const review = soal.map((d, i) => {
+        const ok = jawaban[i] === d.benar;
+        const jwbSiswa = jawaban[i] === undefined ? 'Tidak dijawab' : `${huruf[jawaban[i]]}. ${d.opsi[jawaban[i]]}`;
+        return `<div class="review ${ok ? 'benar' : 'salah'}">
+            <div class="tags"><span class="tag">${IND[d.ind]}</span><span class="tag tujuan">${d.tujuan}</span></div>
+            <b>${i + 1}. ${ok ? 'Benar' : 'Belum tepat'}</b>
+            <p>${d.q}</p>
+            <p><b>Jawabanmu:</b> ${jwbSiswa}<br><b>Jawaban benar:</b> ${huruf[d.benar]}. ${d.opsi[d.benar]}</p>
+            <p><b>Pembahasan:</b> ${d.p}</p>
+        </div>`;
+    }).join('');
+
+    document.getElementById('main').innerHTML = `
+        <div class="topbar">
+            <a href="baloklp.html" class="dashboard-btn">Kembali</a>
+            <div class="badge">Kuis selesai</div>
+        </div>
+        <h2 style="color:#0369a1;">Hasil Kuis Evaluasi Balok</h2>
+        <div class="skor-besar">${nilai}</div>
+        <p>Kamu menjawab benar ${skor} dari ${soal.length} soal.</p>
+        <div class="rekap">${kartuInd}</div>
+        <p style="margin-bottom:12px;color:#64748b;">Pelajari pembahasan di bawah, terutama soal yang belum tepat. Rekap per indikator menunjukkan kemampuan numerasi mana yang perlu kamu latih lagi.</p>
+        ${review}
+        <div class="footer"><span></span><button class="next" onclick="location.reload()">Ulangi Kuis</button></div>`;
+    document.getElementById('main').scrollTop = 0;
+}
+
+init();
+</script>
+</body>
+</html>

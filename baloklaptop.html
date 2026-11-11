@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏠 BALOK - GeoSMART</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<style>
+*{box-sizing:border-box;font-family:'Urbanist','Segoe UI',Tahoma,sans-serif}
+body{margin:0;background:linear-gradient(rgba(255,255,255,.93),rgba(240,249,255,.93)),url('assets/images/bgkubika4.png') center/cover fixed;background-color:#f0f9ff;color:#1e2937;overflow-x:hidden;line-height:1.7}
+header{background:rgba(255,255,255,.88);backdrop-filter:blur(8px);box-shadow:0 4px 15px rgba(15,23,42,.06);border-bottom:1px solid #fde68a;padding:14px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000}
+header h1{margin:0;font-size:20px;font-weight:800;color:#b91c1c}
+.back-btn{color:#b45309;text-decoration:none;font-weight:600;padding:8px 16px;border-radius:10px;background:#fefce8;border:1px solid #fde047}
+.wrap{max-width:1150px;margin:auto;padding:28px 15px 50px}
+.section{background:#fff;border-radius:20px;padding:25px;margin-bottom:26px;border:1px solid #e2e8f0;box-shadow:0 12px 25px rgba(15,23,42,.06)}
+h2{font-size:1.6rem;font-weight:800;color:#b91c1c;margin:0 0 14px}
+h3{color:#b45309;margin:22px 0 8px;font-size:1.2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:#fefce8;border:1px solid #fde68a;border-radius:16px;padding:16px}
+.card h4{margin:0 0 6px;color:#b45309}
+.formula{display:inline-block;background:#fff;border:1px solid #fcd34d;border-radius:10px;padding:6px 12px;font-family:'JetBrains Mono',monospace;font-weight:700}
+.contoh{background:#fff7ed;border-left:4px solid #f59e0b;padding:10px 14px;border-radius:8px;margin-top:10px;font-size:.95rem}
+.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;border-radius:14px;padding:14px 18px}
+.info ol{margin:6px 0 0;padding-left:20px}
+model-viewer{width:100%;height:420px;background:radial-gradient(circle,#fff,#f1f5f9);border-radius:12px}
+.tab-menu{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tab-menu button{background:#f8fafc;color:#475569;border:1px solid #e2e8f0;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600}
+.tab-menu button.active{background:#f59e0b;color:#fff;border-color:#f59e0b}
+.tab-content{display:none}.tab-content.active{display:block;animation:fi .4s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.iframe-wrapper{position:relative;width:100%;padding-bottom:65%;height:0;overflow:hidden;border-radius:12px;border:1px solid #e2e8f0;margin-bottom:14px}
+.iframe-wrapper iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+textarea{width:100%;min-height:80px;padding:10px 12px;border:1px solid #93c5fd;border-radius:10px;font-size:15px;resize:vertical;margin:6px 0 10px}
+label{font-weight:600;color:#475569}
+.btn{background:linear-gradient(45deg,#f59e0b,#ea580c);color:#fff;border:0;padding:9px 16px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
+.btn.alt{background:#fff;color:#b45309;border:2px solid #fcd34d}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opt{display:inline-block;margin:4px 6px 4px 0;min-width:110px;padding:8px 14px;border-radius:10px;border:2px solid #93c5fd;background:#fff;color:#2563eb;font-weight:600;cursor:pointer}
+.opt.ok{background:#10b981;border-color:#10b981;color:#fff}.opt.no{background:#ef4444;border-color:#ef4444;color:#fff}
+.res{font-weight:700;min-height:24px}.res.ok{color:#059669}.res.no{color:#dc2626}
+.soal{border:2px solid #bfdbfe;border-radius:16px;padding:20px;margin-bottom:18px;background:#fff}
+.soal h4{margin:0 0 6px;color:#b45309;font-size:1.1rem}
+.tag{display:inline-block;background:#eff6ff;color:#1d4ed8;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.tag.hots{background:#7c3aed;color:#fff}
+.pemb{background:rgba(16,185,129,.08);border:2px solid #10b981;border-radius:12px;padding:12px 16px;margin-top:12px}
+.pemb[hidden]{display:none}
+.msg{color:#dc2626;font-size:.9rem;font-weight:600;min-height:20px}
+dialog{border:3px solid #f59e0b;border-radius:20px;padding:0;width:min(560px,calc(100% - 28px));max-height:calc(100dvh - 30px);overflow:auto}
+dialog::backdrop{background:rgba(15,23,42,.55)}
+.d-head{background:#fefce8;padding:16px 22px;border-bottom:1px solid #fde68a}
+.d-head h3{margin:0}.d-body{padding:16px 22px 20px}
+.d-foot{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+/* tabel nama sisi */
+.tb{width:100%;max-width:420px;border-collapse:collapse;margin:10px 0;font-size:.95rem}
+.tb th,.tb td{border:1px solid #fde68a;padding:6px 12px;text-align:left}
+.tb th{background:#fefce8;color:#b45309}
+
+/* tab Titik Sudut */
+.svgbox{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;text-align:center;margin-bottom:14px}
+.svgbox svg{max-width:420px;width:100%;height:auto}
+.vtx{cursor:pointer;outline:none}
+.vtx circle{fill:#fff;stroke:#2563eb;stroke-width:2.5;transition:fill .2s}
+.vtx.on circle{fill:#f59e0b;stroke:#b45309}
+.vtx:focus-visible circle{stroke:#b91c1c;stroke-width:4}
+.vtx text{font-weight:800;font-size:16px;fill:#1e2937;pointer-events:none}
+
+
+@media(max-width:768px){model-viewer{height:300px}h2{font-size:1.35rem}.iframe-wrapper{padding-bottom:75%}header h1{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="baloklp.html" class="back-btn">⬅ Kembali</a>
+  <h1>🧊 Balok - GeoSMART</h1>
+</header>
+
+<div class="wrap">
+
+<div class="section">
+  <h2>Visualisasi 3D</h2>
+  <model-viewer src="assets/images/bangunruang/balok1.glb" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-robot"></i> Cara Belajar bersama AI</h2>
+  <div class="info">
+    AI di GeoSMART adalah <b>pendamping</b>, bukan mesin penjawab. Ikuti urutan ini:
+    <ol>
+      <li><b>Baca</b> materi atau soal lebih dulu.</li>
+      <li><b>Tulis</b> bagian yang belum kamu pahami (istilah, kalimat, atau simbol), atau tulis penyelesaianmu sendiri.</li>
+      <li><b>Tanya Gemini</b>, lalu jawab pertanyaan pemantik dari AI. Kamu akan diberi petunjuk, bukan jawaban akhir.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-chart-simple"></i> Tiga Kemampuan Numerasi pada Balok</h2>
+  <p>Di GeoSMART kamu berlatih menggunakan <b>volume</b> dan <b>luas permukaan</b> balok untuk menyelesaikan masalah sehari-hari. Ada tiga kemampuan numerasi yang dilatih:</p>
+  <div class="grid">
+    <div class="card"><h4>🔢 Menggunakan angka dan simbol</h4>Memilih rumus (V = p×l×t atau L = 2(pl + pt + lt)), memasukkan angka, dan menghitung dengan satuan yang benar.</div>
+    <div class="card"><h4>🔍 Menganalisis informasi</h4>Memilah informasi pada teks atau gambar: mana yang diketahui, mana yang ditanyakan, mana yang perlu disamakan satuannya atau tidak dipakai.</div>
+    <div class="card"><h4>💡 Menarik kesimpulan</h4>Menafsirkan hasil sesuai konteks: satuan, pembulatan, perbandingan, atau keputusan yang diambil.</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🏠 Balok</h2>
+
+  <h3><i class="fa-solid fa-circle-info"></i> Pengertian</h3>
+  <p>Balok adalah benda yang dibatasi oleh <b>enam persegi panjang</b>, misalnya lemari. Persegi panjang bagian depan sama ukuran dengan bagian belakang, bagian kiri dengan kanan, dan bagian atas dengan bawah (alas).</p>
+  <p>Balok diberi nama sesuai titik sudutnya, misalnya <b>ABCD.EFGH</b> dengan ABCD sebagai alas dan EFGH sebagai bagian atas. Enam persegi panjang pada balok ABCD.EFGH adalah:</p>
+  <table class="tb">
+    <tr><th>Bagian</th><th>Persegi panjang</th></tr>
+    <tr><td>Depan</td><td>ABFE</td></tr>
+    <tr><td>Belakang</td><td>DCGH</td></tr>
+    <tr><td>Kiri</td><td>DAEH</td></tr>
+    <tr><td>Kanan</td><td>CBFG</td></tr>
+    <tr><td>Atas</td><td>EFGH</td></tr>
+    <tr><td>Bawah (alas)</td><td>ABCD</td></tr>
+  </table>
+  <p style="font-size:.9rem;color:#64748b;margin-top:0">Huruf pada nama sisi mengikuti keliling sisi tersebut dan boleh dimulai dari titik sudut mana saja.</p>
+  <button class="btn" onclick="bukaAI('materi','pengertian')">✨ Tanya Gemini</button>
+
+  <h3><i class="fa-solid fa-cube"></i> Nama Bagian-bagian Balok</h3>
+  <div class="grid">
+    <div class="card"><h4>Sisi (bidang)</h4>Persegi panjang yang membatasi balok. Ada <b>6 sisi</b>.</div>
+    <div class="card"><h4>Rusuk</h4>Garis pembentuk sisi. Ada <b>12 rusuk</b> dalam 3 jenis, masing-masing 4 buah yang sejajar dan sama panjang:
+      <br>• rusuk panjang: AB, DC, EF, HG
+      <br>• rusuk lebar: AD, BC, EH, FG
+      <br>• rusuk tinggi (tegak): AE, BF, CG, DH</div>
+    <div class="card"><h4>Titik sudut</h4>Titik temu antarrusuk (tiga rusuk bertemu di setiap titik sudut). Ada <b>8 titik sudut</b>: A, B, C, D, E, F, G, H.</div>
+  </div>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','unsur')">✨ Tanya Gemini</button></p>
+
+  <h3><i class="fa-solid fa-slash"></i> Garis dan Bidang Istimewa</h3>
+  <div class="grid">
+    <div class="card"><h4>Diagonal sisi</h4>Garis (bukan rusuk) yang menghubungkan dua titik sudut dalam satu sisi, contoh BG. Setiap sisi memiliki 2, sehingga seluruhnya ada <b>12</b>.</div>
+    <div class="card"><h4>Diagonal ruang</h4>Garis (bukan rusuk) yang menghubungkan dua titik sudut yang berhadapan, yaitu pada sisi yang berbeda dan tidak berada pada satu sisi yang sama, contoh EC. Ada <b>4</b>.</div>
+    <div class="card"><h4>Bidang diagonal</h4>Bidang berbentuk persegi panjang yang melalui dua rusuk yang berhadapan, contoh DBFH. Pada bidang ini terdapat dua diagonal sisi (DB dan FH) dan dua diagonal ruang (DF dan BH). Ada <b>6</b>.</div>
+  </div>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','istimewa')">✨ Tanya Gemini</button></p>
+
+  <h3><i class="fa-solid fa-shapes"></i> Jaring-jaring Balok</h3>
+  <p>Jaring-jaring adalah rangkaian persegi panjang yang diperoleh ketika balok dibuka, dan dapat dilipat kembali menjadi balok. Jaring-jaring balok terdiri dari <b>enam persegi panjang</b> (tiga pasang yang sama ukuran). Jika yang dibuat adalah kotak tanpa tutup, jaring-jaringnya terdiri dari lima persegi panjang.</p>
+  <p>Perlu diingat: <b>tidak semua</b> rangkaian enam persegi panjang dapat dilipat menjadi balok. Sisi yang bertumpuk atau saling menutupi menandakan rangkaian itu bukan jaring-jaring balok. Untuk memeriksanya, kamu bisa memberi nama titik sudut pada rangkaian tersebut:</p>
+  <div class="info">
+    <b>Cara memeriksa jaring-jaring balok</b>
+    <ol>
+      <li>Pilih satu persegi panjang sebagai alas, lalu beri nama ABCD.</li>
+      <li>Beri nama persegi panjang yang menempel pada tiap sisinya, misalnya ADHE di kiri dan CBFG di kanan. Titik yang akan bertemu saat dilipat diberi huruf yang sama.</li>
+      <li>Lanjutkan sampai semua persegi panjang bernama. Jika ada persegi panjang yang hanya dapat diberi nama yang sama dengan persegi panjang lain, rangkaian itu <b>bukan</b> jaring-jaring balok.</li>
+    </ol>
+  </div>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','jaring')">✨ Tanya Gemini</button></p>
+</div>
+
+<div class="section">
+  <h2>Eksplorasi Unsur &amp; Jaring-jaring</h2>
+  <div class="tab-menu" id="tabMenu"></div>
+  <div id="tabBody"></div>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-square-root-variable"></i> Luas Permukaan dan Volume</h2>
+  <h3>Luas Permukaan</h3>
+  <p>Luas permukaan adalah jumlah luas seluruh sisi. Balok memiliki 3 jenis persegi panjang yang masing-masing berjumlah dua. Jika balok dibuka menjadi jaring-jaring, luas permukaannya sama dengan jumlah luas jaring-jaring tersebut.</p>
+  <div class="grid">
+    <div class="card"><h4>Balok</h4><span class="formula">L = 2(p×l + p×t + l×t)</span>
+      <div class="contoh">Balok p = 5 cm, l = 4 cm, t = 3 cm:<br>alas dan atas = 2×5×4 = 40 cm²<br>depan dan belakang = 2×5×3 = 30 cm²<br>kiri dan kanan = 2×4×3 = 24 cm²<br>L = 40 + 30 + 24 = <b>94 cm²</b></div></div>
+  </div>
+  <p class="contoh" style="margin-top:12px"><b>Eksplorasi:</b> buka tab <b>Jaring-jaring</b> pada bagian Eksplorasi di atas, ubah p, l, t, lalu buka dan tutup jaring-jaringnya. Perhatikan enam persegi panjang yang luasnya dijumlahkan.</p>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','luas')">✨ Tanya Gemini</button></p>
+
+  <h3>Volume</h3>
+  <p>Volume menyatakan besar ruang yang ditempati suatu benda. Kubus dengan rusuk 1 cm memiliki volume 1 cm³ (kubus satuan). Volume balok adalah banyaknya kubus satuan yang dapat mengisi balok tersebut. Jangan lupa memberi satuan volume (pangkat tiga).</p>
+  <div class="grid">
+    <div class="card"><h4>Balok</h4><span class="formula">V = p × l × t</span>
+      <div class="contoh">Kotak 8 cm × 4 cm × 2 cm: 4 lajur berisi 8 kubus satuan, sebanyak 2 lapis.<br>V = 8 × 4 × 2 = <b>64 cm³</b></div></div>
+  </div>
+  <p class="contoh" style="margin-top:12px"><b>Ingat konversi:</b> 1 liter = 1.000 cm³ = 1 dm³, dan 1 m³ = 1.000 dm³ = 1.000 liter.</p>
+
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','volume')">✨ Tanya Gemini</button></p>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-clipboard-question"></i> Latihan Mandiri Numerasi Geometri</h2>
+  <div class="info" style="margin-bottom:16px">Setiap soal dikerjakan dalam <b>tiga langkah numerasi</b>: angka dan simbol, analisis informasi, lalu kesimpulan. Isi semua dengan caramu sendiri, tanyakan ke Gemini untuk dicek lewat petunjuk, lalu buka pembahasan.</div>
+  <div id="daftarSoal"></div>
+</div>
+
+<div class="section">
+  <h2><i class="fa-solid fa-box-open"></i> Balok di Sekitar Kita</h2>
+  <p>Lemari, kotak susu, batu bata, dan buku adalah contoh benda berbentuk balok. Luas permukaan berguna untuk memperkirakan bahan (cat atau kertas pembungkus), sedangkan volume menunjukkan kapasitas isi.</p>
+  <div class="grid">
+    <div class="card"><h4>🥛 Kotak susu</h4>p=7, l=7, t=24 cm<br>V = 1.176 cm³ ≈ 1,18 liter</div>
+    <div class="card"><h4>🧱 Batu bata</h4>p=23, l=11, t=6 cm<br>V = 1.518 cm³</div>
+    <div class="card"><h4>📱 Ponsel</h4>p=15, l=7, t=0,8 cm<br>V = 84 cm³</div>
+    <div class="card"><h4>📚 Buku</h4>p=21, l=15, t=2 cm<br>V = 630 cm³</div>
+  </div>
+  <div class="info" style="margin-top:14px"><b>Yuk berpikir!</b> Jika kamu punya kotak sepatu berbentuk balok, bagaimana cara menghitung banyak benda kecil berbentuk kubus satuan yang muat di dalamnya?</div>
+  <p style="margin-top:12px"><button class="btn" onclick="bukaAI('materi','dunia')">✨ Tanya Gemini</button></p>
+</div>
+
+</div>
+
+<dialog id="aiDlg">
+  <div class="d-head"><h3 id="aiJudul">Tanya Gemini</h3></div>
+  <div class="d-body">
+    <p id="aiKonteks" style="margin-top:0"></p>
+    <label for="aiInput" id="aiLabel"></label>
+    <textarea id="aiInput" oninput="cekInput()"></textarea>
+    <div class="msg" id="aiInfo"></div>
+    <div class="d-foot">
+      <button class="btn alt" onclick="document.getElementById('aiDlg').close()">Batal</button>
+      <button class="btn" id="aiKirim" onclick="kirimAI()" disabled>Salin prompt &amp; buka Gemini</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ===== TAB TITIK SUDUT (gambar interaktif) ===== */
+const VT=[['A',50,180,28,196],['B',210,180,216,202],['C',290,140,316,146],['D',130,140,116,160],['E',50,80,26,76],['F',210,80,226,100],['G',290,40,314,30],['H',130,40,124,20]];
+const TITIK_HTML=`<div class="svgbox">
+<svg viewBox="0 0 340 220" role="img" aria-label="Balok ABCD.EFGH dengan delapan titik sudut yang dapat ditandai">
+<polygon points="50,180 210,180 210,80 50,80" fill="#eff6ff"/>
+<polygon points="50,80 210,80 290,40 130,40" fill="#dbeafe"/>
+<polygon points="210,180 290,140 290,40 210,80" fill="#bfdbfe"/>
+<g stroke="#1e3a8a" stroke-width="2" fill="none" stroke-linejoin="round">
+<polyline points="50,180 210,180 210,80 50,80 50,180"/>
+<polyline points="50,80 130,40 290,40 210,80"/>
+<polyline points="210,180 290,140 290,40"/>
+</g>
+<g stroke="#1e3a8a" stroke-width="1.6" stroke-dasharray="5 4" fill="none">
+<polyline points="50,180 130,140 290,140"/>
+<line x1="130" y1="140" x2="130" y2="40"/>
+</g>
+${VT.map(v=>`<g class="vtx" tabindex="0" role="button" aria-label="Titik sudut ${v[0]}" onclick="togTitik(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togTitik(this)}"><circle cx="${v[1]}" cy="${v[2]}" r="11"/><text x="${v[3]}" y="${v[4]}" text-anchor="middle" dominant-baseline="central">${v[0]}</text></g>`).join('')}
+</svg>
+<div class="res" id="titikInfo">Titik sudut yang sudah ditandai: 0 dari 8</div>
+<button class="btn alt" onclick="resetTitik()">Ulangi</button>
+</div>`;
+function updTitik(){
+  const n=document.querySelectorAll('#titik .vtx.on').length;
+  const r=document.getElementById('titikInfo');
+  r.className='res'+(n===8?' ok':'');
+  r.textContent=n===8?'✅ Semua 8 titik sudut sudah ditandai. Di setiap titik sudut, tiga rusuk bertemu.':'Titik sudut yang sudah ditandai: '+n+' dari 8';
+}
+function togTitik(g){g.classList.toggle('on');updTitik()}
+function resetTitik(){document.querySelectorAll('#titik .vtx.on').forEach(g=>g.classList.remove('on'));updTitik()}
+
+/* ===== EKSPLORASI ===== */
+const TABS=[
+ {id:'sisi',nama:'Sisi',geo:'k4mued6m',q1:'Setelah mengamati gambar, apa yang dimaksud dengan sisi balok menurutmu?',mc:[{q:'Berapa jumlah sisi yang membatasi sebuah balok?',o:['4 sisi','6 sisi','8 sisi'],a:1}]},
+ {id:'rusuk',nama:'Rusuk',geo:'mp4hwk8r',q1:'Apa perbedaan rusuk dan sisi menurut pengamatanmu?',mc:[{q:'Berapa jumlah seluruh rusuk balok?',o:['8 rusuk','10 rusuk','12 rusuk'],a:2}]},
+ {id:'titik',nama:'Titik Sudut',html:TITIK_HTML,info:'<b>Instruksi:</b> ketuk setiap titik sudut pada gambar balok ABCD.EFGH untuk menandainya, lalu hitung banyaknya.',q1:'Apa yang dimaksud dengan titik sudut menurutmu? Sebutkan nama-nama titik sudut pada balok ABCD.EFGH!',mc:[{q:'Berapa jumlah seluruh titik sudut balok?',o:['6','8','12'],a:1},{q:'Berapa rusuk yang bertemu pada setiap titik sudut balok?',o:['2 rusuk','3 rusuk','4 rusuk'],a:1}]},
+ {id:'dsisi',nama:'Diagonal Sisi',geo:'w4kqvtty',q1:'Jelaskan di mana letak diagonal sisi pada sebuah sisi balok!',mc:[{q:'Setiap sisi memiliki 2 diagonal sisi. Berapa jumlah seluruhnya pada balok?',o:['6','12','24'],a:1}]},
+ {id:'druang',nama:'Diagonal Ruang',geo:'wxpnps8g',q1:'Apa yang dimaksud dengan diagonal ruang?',mc:[{q:'Berapa jumlah diagonal ruang pada balok?',o:['2','4','8'],a:1}]},
+ {id:'bdiag',nama:'Bidang Diagonal',geo:'qwtrmqh8',q1:'Menurutmu, mengapa bidang ini disebut bidang diagonal?',mc:[{q:'Berapa jumlah bidang diagonal pada balok?',o:['4','6','12'],a:1}]},
+ {id:'jaring',nama:'Jaring-jaring',geo:'wcpbvkhs',q1:'Jelaskan dengan kata-katamu: bagaimana enam persegi panjang pada jaring-jaring terlipat menjadi balok?',
+  info:'<b>Instruksi:</b> geser slider p, l, t untuk mengubah panjang, lebar, dan tinggi balok; geser slider “j” untuk melihat jaring-jaring terbuka dan tertutup.',
+  mc:[{q:'Jika sisi EFGH (atas) dijadikan alas, sisi mana yang menjadi tutup (atas)?',o:['ABCD','ABFE','BCFG'],a:0},
+      {q:'Jika ABCD adalah alas dan ABFE adalah sisi depan, sisi mana yang menjadi belakang?',o:['CDHG','ADEH','BCFG'],a:0}]}
+];
+const IFR='/width/1000/height/650/allowUpscale=true/rc=false/ai=false/sdz=false/smb=false/stb=false/stbh=false/ld=false/sri=false';
+document.getElementById('tabMenu').innerHTML=TABS.map((t,i)=>`<button class="${i?'':'active'}" onclick="openTab(this,'${t.id}')">${t.nama}</button>`).join('');
+document.getElementById('tabBody').innerHTML=TABS.map((t,i)=>`
+ <div id="${t.id}" class="tab-content ${i?'':'active'}">
+  ${t.html?t.html:`<div class="iframe-wrapper"><iframe src="https://www.geogebra.org/material/iframe/id/${t.geo}${IFR}"></iframe></div>`}
+  ${t.info?`<div class="info" style="margin-bottom:12px">${t.info}</div>`:''}
+  <h4 style="color:#b45309;margin:8px 0 0">🧠 Aktivitas 1: Analisis</h4>
+  <p style="margin:4px 0">${t.q1}</p>
+  <textarea placeholder="Ketik jawabanmu di sini..."></textarea>
+  ${t.mc.map((m,j)=>`<h4 style="color:#b45309;margin:8px 0 0">✍️ Aktivitas ${j+2}: Pilihan Ganda</h4><p style="margin:4px 0">${m.q}</p><div>${m.o.map((o,k)=>`<button class="opt" onclick="pilih(this,${m.a===k})">${o}</button>`).join('')}</div><div class="res"></div>`).join('')}
+ </div>`).join('');
+function openTab(btn,id){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('#tabMenu button').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+function pilih(btn,benar){
+  const box=btn.parentElement;
+  box.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  btn.classList.add(benar?'ok':'no');
+  const r=box.nextElementSibling;
+  r.className='res '+(benar?'ok':'no');
+  r.textContent=benar?'✅ Benar!':'❌ Belum tepat. Amati kembali visualisasi di atas, lalu coba jelaskan alasannya.';
+}
+
+/* ===== LATIHAN ===== */
+const SOAL=[
+ {j:'Akuarium',f:'Volume',t:'Sebuah akuarium berbentuk balok memiliki panjang 80 cm, lebar 40 cm, dan tinggi 50 cm. Jika diisi air hingga penuh, berapa liter volume air di dalamnya? (1 liter = 1.000 cm³)',
+  a:'V = p × l × t = 80 × 40 × 50 = 160.000 cm³; 160.000 ÷ 1.000 = 160 liter.',n:'Informasi yang dipakai: p, l, t, dan 1 liter = 1.000 cm³. Yang ditanyakan dalam liter, sehingga cm³ harus dikonversi.',k:'Akuarium dapat menampung 160 liter air saat penuh.'},
+ {j:'Kolam Renang',f:'Volume',t:'Kolam renang berbentuk balok berukuran panjang 10 m, lebar 5 m, dan tinggi 1,2 m. Berapa liter air paling banyak yang dapat ditampung kolam tersebut?',
+  a:'V = 10 × 5 × 1,2 = 60 m³ = 60.000 dm³ = 60.000 liter.',n:'Ukuran sudah dalam satuan yang sama (m). Kapasitas paling banyak sama dengan volume kolam, dan 1 m³ = 1.000 liter.',k:'Kolam menampung paling banyak 60.000 liter air.'},
+ {j:'Ruang Kelas',f:'Volume',t:'Ruang kelas berbentuk balok dengan panjang 7 m, lebar 6 m, dan tinggi 3,5 m. Berdasarkan percobaan, seseorang dapat tinggal nyaman dalam ruangan jika memiliki 4 m³ udara. Berapa banyak maksimal orang yang dapat menempati kelas tersebut?',
+  a:'V = 7 × 6 × 3,5 = 147 m³; banyak orang = 147 ÷ 4 = 36,75.',n:'Syarat tiap orang 4 m³ udara, sehingga banyak orang = volume ruang ÷ 4. Tinggi ruang ikut dipakai karena udara mengisi seluruh ruang.',k:'Banyak orang harus bilangan bulat dan dibulatkan ke bawah: maksimal 36 orang (37 orang berarti kurang dari 4 m³ per orang).'},
+ {j:'Keramik Kolam',f:'Luas permukaan',t:'Bagian dalam kolam renang (alas dan empat dinding) berukuran 10 m × 5 m × 1,2 m akan ditutup keramik 20 cm × 20 cm. Satu dus berisi 12 keramik. Berapa dus yang perlu dibeli?',
+  a:'Luas = 10×5 + 2×10×1,2 + 2×5×1,2 = 50 + 24 + 12 = 86 m² = 860.000 cm². Keramik = 860.000 ÷ 400 = 2.150. Dus = 2.150 ÷ 12 ≈ 179,17.',n:'Yang ditutup hanya alas dan empat dinding (tanpa tutup), jadi bukan seluruh enam sisi. Satuan kolam (m) dan keramik (cm) harus disamakan, dan keramik dijual per dus.',k:'Dibeli 180 dus (dibulatkan ke atas agar seluruh permukaan tertutup).'},
+ {j:'Cat Lemari',f:'Luas permukaan',t:'Lemari berbentuk balok berukuran p = 120 cm, l = 60 cm, t = 200 cm. Pak Joko akan mengecat seluruh permukaan lemari. Berapa m² luas yang akan dicat? (1 m² = 10.000 cm²)',
+  a:'L = 2(120×60 + 120×200 + 60×200) = 2(7.200 + 24.000 + 12.000) = 86.400 cm² = 8,64 m².',n:'Seluruh permukaan dicat, sehingga yang dihitung enam sisi. Ukuran dalam cm sedangkan jawaban diminta m².',k:'Luas permukaan lemari yang dicat adalah 8,64 m².'},
+ {j:'Dua Kotak Kado',f:'Volume dan luas permukaan',hots:1,t:'Toko kado menjual dua kotak dengan bahan kertas kado yang sama. Kotak A: 20 cm × 15 cm × 10 cm. Kotak B: 25 cm × 12 cm × 10 cm. Jika ingin menghemat kertas kado, kotak mana yang dipilih? Buktikan dengan perhitungan!',
+  a:'Kotak A: V = 3.000 cm³, L = 2(300 + 200 + 150) = 1.300 cm². Kotak B: V = 3.000 cm³, L = 2(300 + 250 + 120) = 1.340 cm².',n:'Volume kedua kotak sama, sehingga pembandingnya luas permukaan, karena kertas kado menutupi permukaan, bukan isi.',k:'Pilih kotak A karena memerlukan kertas kado 40 cm² lebih sedikit.'}
+];
+const LANG=[['🔢 Angka dan simbol','Tulis yang diketahui, rumus yang kamu pakai, dan perhitunganmu...'],['🔍 Analisis informasi','Informasi apa yang kamu pakai dan mengapa? Adakah satuan yang perlu disamakan?'],['💡 Kesimpulan','Tulis kesimpulan sesuai konteks soal, lengkap dengan satuan...']];
+document.getElementById('daftarSoal').innerHTML=SOAL.map((s,i)=>`
+ <div class="soal">
+  <h4>${i+1}. ${s.j}<span class="tag${s.hots?' hots':''}">${s.hots?'HOTS · ':''}${s.f}</span></h4>
+  <p style="margin:4px 0 8px">${s.t}</p>
+  ${LANG.map((l,j)=>`<label for="a${i}_${j}">${j+1}. ${l[0]}</label><textarea id="a${i}_${j}" style="min-height:60px" placeholder="${l[1]}"></textarea>`).join('')}
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn" onclick="bukaAI('latihan',${i})">✨ Tanya Gemini</button>
+    <button class="btn alt" onclick="lihatPemb(${i})">Lihat pembahasan</button>
+  </div>
+  <div class="msg" id="m${i}"></div>
+  <div class="pemb" id="p${i}" hidden><b>Pembahasan:</b>
+   <p style="margin:6px 0"><b>🔢 Angka dan simbol:</b> ${s.a}</p>
+   <p style="margin:6px 0"><b>🔍 Analisis informasi:</b> ${s.n}</p>
+   <p style="margin:6px 0"><b>💡 Kesimpulan:</b> ${s.k}</p>
+   <small>Bandingkan dengan jawabanmu. Jika berbeda, tanyakan ke Gemini bagian mana yang perlu kamu tinjau kembali.</small></div>
+ </div>`).join('');
+function bagian(i,j){return document.getElementById('a'+i+'_'+j).value.trim()}
+function lengkap(i){return [0,1,2].every(j=>bagian(i,j).length>=5)}
+function usaha(i){return '1) Angka dan simbol: '+bagian(i,0)+' | 2) Analisis informasi: '+bagian(i,1)+' | 3) Kesimpulan: '+bagian(i,2)}
+function lihatPemb(i){
+  const m=document.getElementById('m'+i);
+  if(!lengkap(i)){m.textContent='Isi dulu ketiga langkah (angka dan simbol, analisis informasi, kesimpulan) dengan caramu sendiri.';return}
+  m.textContent='';document.getElementById('p'+i).hidden=false;
+}
+
+/* ===== PROMPT AI (SCAFFOLDING) ===== */
+const TOPIK={
+ pengertian:{n:'Pengertian balok',f:'Balok dibatasi enam persegi panjang; sisi depan sama ukuran dengan belakang, kiri dengan kanan, atas dengan bawah (alas); balok diberi nama menurut titik sudutnya, misalnya ABCD.EFGH dengan ABCD sebagai alas dan EFGH sebagai bagian atas.'},
+ unsur:{n:'Sisi, rusuk, dan titik sudut balok',f:'Balok punya 6 sisi (persegi panjang), 12 rusuk (4 rusuk panjang AB, DC, EF, HG; 4 rusuk lebar AD, BC, EH, FG; 4 rusuk tinggi atau rusuk tegak AE, BF, CG, DH), dan 8 titik sudut (titik temu antarrusuk; tiga rusuk bertemu di setiap titik sudut).'},
+ istimewa:{n:'Diagonal sisi, diagonal ruang, dan bidang diagonal',f:'Diagonal sisi: garis bukan rusuk yang menghubungkan dua titik sudut dalam satu sisi, contoh BG (12 buah). Diagonal ruang: garis bukan rusuk yang menghubungkan dua titik sudut yang berhadapan, pada sisi yang berbeda, contoh EC (4 buah). Bidang diagonal: persegi panjang yang melalui dua rusuk yang berhadapan, contoh DBFH, yang memuat dua diagonal sisi dan dua diagonal ruang (6 buah).'},
+ jaring:{n:'Jaring-jaring balok',f:'Jaring-jaring adalah rangkaian persegi panjang hasil membuka balok yang dapat dilipat kembali menjadi balok (enam persegi panjang, tiga pasang sama ukuran; kotak tanpa tutup lima persegi panjang). Tidak semua rangkaian enam persegi panjang adalah jaring-jaring balok. Cara memeriksa: beri nama persegi panjang dengan huruf titik sudut, mulai dari alas ABCD; jika ada persegi panjang yang hanya bisa diberi nama yang sama dengan persegi panjang lain, rangkaian itu bukan jaring-jaring balok.'},
+ luas:{n:'Luas permukaan balok',f:'Luas permukaan balok = jumlah luas jaring-jaringnya = 2(p×l + p×t + l×t). Contoh balok 5×4×3 cm: L = 40 + 30 + 24 = 94 cm².'},
+ volume:{n:'Volume balok',f:'Volume balok = panjang × lebar × tinggi (banyak kubus satuan pengisi balok: satu lapis berisi p×l kubus satuan, sebanyak t lapis). 1 liter = 1.000 cm³. Contoh balok 8×4×2 cm: V = 64 cm³.'},
+ dunia:{n:'Penerapan balok dalam kehidupan sehari-hari',f:'Luas permukaan dipakai untuk memperkirakan bahan (cat, kertas), volume untuk kapasitas isi, dengan rumus balok dan konversi satuan.'}
+};
+let ctx=null;
+function bukaAI(mode,k){
+  if(mode==='latihan'&&!lengkap(k)){
+    document.getElementById('m'+k).textContent='Isi dulu ketiga langkah dengan caramu sendiri, baru tanyakan ke Gemini.';return;
+  }
+  ctx={mode,k};
+  document.getElementById('aiInput').value='';
+  document.getElementById('aiKirim').disabled=true;
+  document.getElementById('aiInfo').textContent='';
+  if(mode==='materi'){
+    document.getElementById('aiJudul').textContent='Tanya Gemini: '+TOPIK[k].n;
+    document.getElementById('aiKonteks').textContent='Baca dulu bagian materi ini. Lalu sebutkan bagian yang belum kamu pahami agar AI bisa membantu tepat sasaran.';
+    document.getElementById('aiLabel').textContent='Bagian mana yang belum kamu pahami? (istilah, kalimat, atau simbol)';
+  }else{
+    document.getElementById('aiJudul').textContent='Tanya Gemini: soal '+SOAL[k].j;
+    document.getElementById('aiKonteks').textContent='Penyelesaianmu sudah disertakan di prompt. AI akan memberi petunjuk, bukan jawaban akhir.';
+    document.getElementById('aiLabel').textContent='Bagian mana yang membuatmu ragu atau ingin kamu cek?';
+  }
+  document.getElementById('aiDlg').showModal();
+}
+function cekInput(){document.getElementById('aiKirim').disabled=document.getElementById('aiInput').value.trim().length<8}
+function susunPrompt(tanya){
+  const umum='Gunakan bahasa Indonesia yang ramah dan sederhana untuk siswa kelas IX SMP. Jangan meminta atau menuliskan data pribadi. Jika aku menulis “tidak mengerti”, jelaskan ulang dengan cara atau contoh yang berbeda.';
+  if(ctx.mode==='materi'){
+    const t=TOPIK[ctx.k];
+    return `Kamu adalah AI guru GeoSMART untuk siswa kelas IX SMP. Topik: ${t.n}.
+Fakta acuan dari buku (jangan menyimpang): ${t.f}
+
+Aturan:
+1. Jangan langsung menjelaskan seluruh materi. Mulai dengan satu pertanyaan pemantik untuk memeriksa pemahamanku.
+2. Jelaskan hanya bagian yang aku sebut belum paham, dengan contoh benda sehari-hari.
+3. Setelah menjelaskan, akhiri dengan satu pertanyaan untuk kujawab sendiri, dan jangan memberikan jawabannya.
+4. ${umum}
+
+Bagian yang belum kupahami setelah membaca materi: ${tanya}`;
+  }
+  const s=SOAL[ctx.k];
+  return `Kamu adalah AI guru GeoSMART untuk siswa kelas IX SMP. Tugasmu hanya memberi petunjuk (clue) bertahap pada soal numerasi tentang ${s.f.toLowerCase()} balok.
+
+Soal: ${s.t}
+
+Pekerjaan yang sudah kukerjakan sendiri:
+1) Angka dan simbol: ${bagian(ctx.k,0)}
+2) Analisis informasi: ${bagian(ctx.k,1)}
+3) Kesimpulan: ${bagian(ctx.k,2)}
+
+Yang ingin kucek atau kutanyakan: ${tanya}
+
+Aturan:
+1. Jangan memberikan jawaban akhir secara langsung. Jika aku memintanya, termasuk beserta langkah penyelesaian, tetap arahkan dengan petunjuk.
+2. Periksa ketiga bagian pekerjaanku satu per satu. Sebutkan bagian yang sudah tepat, dan arahkan bagian yang perlu kutinjau tanpa menyebutkan hasil akhirnya.
+3. Angka dan simbol: tanyakan rumus apa yang kupakai dan mengapa, lalu minta aku menjelaskannya.
+4. Analisis informasi: tanyakan informasi mana yang perlu dipakai, mana yang tidak, dan apakah ada satuan yang harus disamakan.
+5. Kesimpulan: tanyakan apakah hasilku masuk akal dalam konteks soal (satuan, pembulatan, atau perbandingan).
+6. Beri satu petunjuk per balasan, lalu tunggu jawabanku.
+7. ${umum}`;
+}
+function kirimAI(){
+  const p=susunPrompt(document.getElementById('aiInput').value.trim());
+  navigator.clipboard.writeText(p).catch(()=>{});
+  window.open('https://gemini.google.com/app?q='+encodeURIComponent(p),'_blank');
+  const i=document.getElementById('aiInfo');
+  i.style.color='#059669';
+  i.textContent='Prompt tersalin. Jika kolom Gemini masih kosong, tempel dengan Ctrl+V (atau tekan lama lalu Tempel).';
+}
+</script>
+</body>
+</html>

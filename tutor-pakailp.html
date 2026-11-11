@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoSMART | Panduan Pengguna Media</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #7dd3fc;      /* biru muda */
+            --primary-dark: #38bdf8;
+            --on-primary: #0c4a6e;   /* teks gelap di atas biru muda */
+            --accent: #0369a1;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #1e2937;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 2px solid var(--primary);
+            padding: 10px 0;
+        }
+
+        .hero-mini {
+            padding: 100px 0 20px;
+            background: linear-gradient(180deg, rgba(125, 211, 252, 0.25), transparent);
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+        }
+
+        .step-tag {
+            background: var(--primary);
+            color: var(--on-primary);
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        h2 { font-size: 1.6rem; font-weight: 700; color: var(--accent); margin-bottom: 15px; }
+        h3 { font-size: 1.2rem; color: var(--accent); margin-top: 6px; }
+        h4 { font-size: 1.15rem; color: var(--on-primary); }
+
+        .feature-box {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border-left: 4px solid var(--primary-dark);
+        }
+        .feature-box p { margin-bottom: 0; }
+
+        .menu-icon { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
+
+        .btn-nav {
+            font-weight: bold;
+            background: var(--primary);
+            color: var(--on-primary);
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-nav:hover { background: var(--primary-dark); color: var(--on-primary); }
+        .btn-nav:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+        ul li, ol li { margin-bottom: 8px; }
+
+        .catatan {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 12px;
+        }
+
+        .text-secondary { color: #64748b !important; }
+        .border-secondary { border-color: #e2e8f0 !important; }
+        .border-info { border-color: #7dd3fc !important; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar fixed-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="fw-bold fs-4" style="color: var(--accent);">GeoSMART</span>
+            <a href="dashboard.html" class="btn-nav"><i class="fas fa-th-large"></i> Kembali ke Dashboard</a>
+        </div>
+    </nav>
+
+    <header class="hero-mini text-center">
+        <div class="container">
+            <h1 class="fw-bold display-5" style="color: var(--accent);">Panduan Penggunaan Media</h1>
+            <p class="lead text-secondary">Pelajari cara masuk, menjelajahi materi kubus dan balok, hingga memakai bantuan AI dengan benar.</p>
+        </div>
+    </header>
+
+    <main class="container pb-5">
+
+        <section class="section-card">
+            <span class="step-tag">Langkah 1</span>
+            <h2><i class="fas fa-right-to-bracket"></i> Masuk (Login)</h2>
+            <ul>
+                <li>Buka GeoSMART, lalu isi <b>nama</b> kamu di halaman login.</li>
+                <li>Pilih <b>perangkat</b> yang kamu pakai: Handphone atau Laptop.</li>
+                <li>Klik tombol masuk. Kamu akan diarahkan ke dashboard utama.</li>
+            </ul>
+            <div class="catatan">
+                <i class="fas fa-circle-info"></i> Gunakan nama panggilan atau kode dari gurumu. Jangan menuliskan nomor induk, alamat, atau data pribadi lainnya.
+            </div>
+        </section>
+
+        <section class="section-card">
+            <span class="step-tag">Langkah 2</span>
+            <h2><i class="fas fa-home"></i> Menjelajahi Dashboard</h2>
+            <p>Di dashboard utama tersedia menu berikut:</p>
+            <div class="row g-3 text-center mt-2">
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded h-100">
+                        <i class="fas fa-cubes menu-icon"></i>
+                        <h4>Materi Kubus dan Balok</h4>
+                        <p class="small text-secondary">Berisi tujuan pembelajaran, materi, latihan mandiri, dan kuis.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded h-100">
+                        <i class="fas fa-circle-question menu-icon"></i>
+                        <h4>Petunjuk Penggunaan</h4>
+                        <p class="small text-secondary">Halaman ini: fungsi tombol dan cara memakai GeoSMART.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded h-100">
+                        <i class="fas fa-users menu-icon"></i>
+                        <h4>Informasi Penyusun</h4>
+                        <p class="small text-secondary">Identitas pengembang media. Tombol <b>Keluar</b> mengakhiri penggunaan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <span class="step-tag">Langkah 3</span>
+            <h2><i class="fas fa-book-open"></i> Isi Menu Materi Kubus dan Balok</h2>
+            <p>Di dalam menu materi, pelajari secara berurutan:</p>
+            <ol>
+                <li><b>Tujuan Pembelajaran</b>: capaian yang ingin kamu raih setelah belajar.</li>
+                <li><b>Materi</b>: unsur dan sifat (sisi, rusuk, titik sudut, diagonal), jaring-jaring, luas permukaan, dan volume, lengkap dengan contoh.</li>
+                <li><b>Latihan Mandiri</b>: soal numerasi kontekstual yang dapat dibantu AI.</li>
+                <li><b>Kuis</b>: soal evaluasi untuk mengecek pemahamanmu.</li>
+            </ol>
+        </section>
+
+        <section class="section-card">
+            <span class="step-tag">Langkah 4</span>
+            <h2><i class="fas fa-mouse-pointer"></i> Cara Menggunakan Fitur GeoGebra</h2>
+            <p>Pada bagian materi, manfaatkan fitur eksplorasi 3D berikut:</p>
+
+            <div class="feature-box">
+                <h3><i class="fas fa-check-square"></i> Identifikasi Unsur</h3>
+                <p>Pilih unsur seperti sisi, rusuk, titik sudut, atau diagonal ruang. Unsur yang dipilih akan ditampilkan pada gambar 3D sehingga mudah dibedakan.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3><i class="fas fa-up-down-left-right"></i> Putar dan Amati</h3>
+                <p>Geser objek 3D dengan jari atau mouse untuk melihat kubus dan balok dari berbagai arah.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3><i class="fas fa-box-open"></i> Jaring-Jaring</h3>
+                <p>Gunakan tombol animasi untuk membuka bangun menjadi jaring-jaring dan menutupnya kembali. Amati hubungan luas tiap sisi dengan luas permukaan.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3><i class="fas fa-sliders"></i> Ubah Ukuran (Slider)</h3>
+                <p>Geser slider untuk mengubah panjang, lebar, dan tinggi. Perhatikan bagaimana luas permukaan dan volume ikut berubah.</p>
+            </div>
+        </section>
+
+        <section class="section-card border-info">
+            <span class="step-tag">Langkah 5</span>
+            <h2><i class="fas fa-robot"></i> Latihan Mandiri dengan Bantuan AI Gemini</h2>
+            <p>Tombol <b>Tanya AI Gemini</b> membantu kamu berpikir, bukan memberi jawaban akhir. Ikuti alur ini pada setiap soal:</p>
+            <ol>
+                <li><b>Kerjakan sendiri dulu.</b> Tulis jawaban manualmu pada kolom yang tersedia, walaupun belum yakin.</li>
+                <li><b>Tulis bagian yang belum kamu pahami</b>: istilah, simbol, atau kalimat pada soal.</li>
+                <li>Klik <b>Tanya AI Gemini</b>. Prompt yang berisi soal, jawabanmu, dan kebingunganmu akan disalin atau ditampilkan. Buka Gemini, lalu tempel (paste) prompt tersebut.</li>
+                <li>Baca petunjuk dari AI, jawab pertanyaan pemantiknya, dan lanjutkan percakapan jika masih bingung.</li>
+                <li>Tulis <b>refleksi</b>: rumus atau prinsip apa yang kamu pakai, dan apa kesimpulanmu sesuai konteks soal.</li>
+            </ol>
+            <div class="catatan">
+                <i class="fas fa-triangle-exclamation"></i> AI hanya memberi petunjuk bertahap. Jika kamu meminta jawaban akhir, AI akan menolak dan tetap memberi petunjuk. Jawaban AI bisa saja keliru, jadi periksa kembali dengan materi di GeoSMART atau tanyakan kepada gurumu. Jangan menuliskan data pribadi saat berbicara dengan AI.
+            </div>
+        </section>
+
+        <section class="section-card">
+            <span class="step-tag">Langkah 6</span>
+            <h2><i class="fas fa-trophy"></i> Kuis Evaluasi</h2>
+            <ul>
+                <li>Kuis berisi 10 soal pilihan ganda dengan batas waktu. Perhatikan timer di bagian atas.</li>
+                <li>Kamu dapat berpindah soal lewat nomor pada daftar soal. Nomor hijau berarti soal sudah dijawab.</li>
+                <li>Kuis dikerjakan tanpa bantuan AI. Andalkan pemahamanmu.</li>
+                <li>Setelah selesai, kamu akan melihat skor, rekap kemampuan numerasi, dan pembahasan setiap soal. Pelajari soal yang belum tepat.</li>
+            </ul>
+        </section>
+
+        <section class="section-card">
+            <span class="step-tag">Perlu Diketahui</span>
+            <h2><i class="fas fa-wifi"></i> Syarat Penggunaan</h2>
+            <ul>
+                <li>Gunakan HP atau laptop dengan peramban web dan <b>koneksi internet</b> agar GeoGebra dan Gemini dapat dibuka.</li>
+                <li>Bantuan AI membutuhkan akses ke layanan Gemini di perangkatmu.</li>
+                <li>Jika tombol Gemini tidak membuka halaman, periksa koneksi internet lalu coba lagi.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-4 border-top border-secondary">
+        <p class="text-secondary mb-1">GeoSMART © 2026 | Pendidikan Matematika UNM</p>
+        <p class="fw-bold" style="color: var(--accent);">Jurusan Matematika UNM</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

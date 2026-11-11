@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BALOK | GeoSMART</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <style>
+        * { font-family: 'Urbanist', 'Segoe UI', sans-serif; }
+
+        body {
+            margin: 0;
+            background:
+                linear-gradient(rgba(255, 255, 255, .93), rgba(240, 249, 255, .93)),
+                url('assets/images/bgkubika4.png') center/cover no-repeat fixed;
+            background-color: #f0f9ff;
+            color: #1e2937;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, .85);
+            border-bottom: 1px solid #fde68a;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+            backdrop-filter: blur(8px);
+        }
+
+        .brand-area { display: flex; align-items: center; gap: 10px; }
+        .logo-img { width: 38px; height: auto; }
+        .brand-text { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.5px; color: #b91c1c; }
+
+        .content-section {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* KARTU MODEL 3D (GLB) */
+        .model-card {
+            width: 100%;
+            max-width: 440px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 14px;
+            margin-bottom: 14px;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+        }
+
+        .model-card .judul {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #f59e0b;
+            margin: 0 0 2px;
+        }
+
+        .model-card h1 { font-size: 1.4rem; font-weight: 800; color: #b91c1c; margin: 0 0 8px; }
+
+        .model-card model-viewer {
+            width: 100%;
+            height: clamp(200px, 55vw, 260px);
+            background: radial-gradient(circle, #fff, #f1f5f9);
+            border-radius: 14px;
+            --poster-color: transparent;
+        }
+
+        .rumus {
+            background: #fefce8;
+            border-left: 5px solid #f59e0b;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .rumus .label {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #854d0e;
+            margin-bottom: 2px;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 440px;
+            margin-bottom: 25px;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .action-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+        }
+
+        .action-card:hover {
+            background: #fefce8;
+            border-color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(245, 158, 11, 0.15);
+        }
+
+        .menu-link:focus-visible .action-card { outline: 3px solid #f59e0b; outline-offset: 2px; }
+
+        .icon-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .blue-icon { background: #3b82f6; color: white; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
+        .teal-icon { background: #14b8a6; color: white; box-shadow: 0 4px 10px rgba(20, 184, 166, 0.3); font-weight: bold; }
+        .orange-icon { background: #f59e0b; color: white; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); }
+        .red-icon { background: #b91c1c; color: white; box-shadow: 0 4px 10px rgba(185, 28, 28, 0.3); }
+
+        .text-info-card h3 { font-size: 1.1rem; font-weight: 700; margin: 0 0 2px 0; color: #1e2937; }
+        .text-info-card p { font-size: 0.78rem; color: #64748b; margin: 0; line-height: 1.3; }
+
+        .back-nav-box { width: 100%; max-width: 440px; padding: 0 5px; }
+
+        .btn-back-dash {
+            background: transparent;
+            border: 1px dashed #e2e8f0;
+            color: #64748b;
+            padding: 12px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-back-dash:hover {
+            border-style: solid;
+            border-color: #f59e0b;
+            color: #b91c1c;
+            background: #fefce8;
+            text-decoration: none;
+        }
+
+        /* MODAL TUJUAN PEMBELAJARAN */
+        .modal-tujuan {
+            border: 0;
+            padding: 0;
+            width: calc(100% - 32px);
+            max-width: 440px;
+            max-height: 86vh;
+            border-radius: 20px;
+            background: #ffffff;
+            color: #1e2937;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.3);
+            overflow: hidden;
+        }
+
+        .modal-tujuan[open] { display: flex; flex-direction: column; animation: modalMasuk .25s ease; }
+        .modal-tujuan::backdrop { background: rgba(15, 23, 42, 0.55); backdrop-filter: blur(3px); }
+
+        @keyframes modalMasuk {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .modal-tujuan[open] { animation: none; }
+            .action-card { transition: none; }
+        }
+
+        .modal-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px 20px 14px;
+            background: #fefce8;
+            border-bottom: 1px solid #fde68a;
+        }
+
+        .modal-head h2 { font-size: 1.25rem; font-weight: 800; margin: 0 0 2px; color: #b91c1c; }
+        .modal-head p { margin: 0; font-size: 0.78rem; color: #64748b; }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            color: #64748b;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s ease;
+        }
+
+        .modal-close:hover { border-color: #f59e0b; color: #b91c1c; }
+        .modal-close:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+
+        .modal-body { padding: 16px 20px 20px; overflow-y: auto; }
+
+        .cp-box {
+            background: #fefce8;
+            border: 1px solid #fde68a;
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin: 0 0 16px;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #475569;
+        }
+
+        .cp-box strong { display: block; font-size: 0.9rem; font-weight: 800; color: #b91c1c; margin-bottom: 4px; }
+        .cp-box ul { margin: 4px 0 6px; padding-left: 18px; }
+        .cp-box small { display: block; color: #94a3b8; font-size: 0.72rem; }
+
+        .modal-body .intro { font-size: 0.88rem; font-weight: 600; margin: 0 0 14px; }
+
+        .tujuan-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+
+        .tujuan-list li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 0.8rem;
+            line-height: 1.45;
+            color: #475569;
+        }
+
+        .tujuan-list strong { display: block; font-size: 0.92rem; font-weight: 700; color: #1e2937; margin-bottom: 2px; }
+
+        .tujuan-list .ikon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .tujuan-list li:nth-child(6n+1) .ikon { background: #3b82f6; }
+        .tujuan-list li:nth-child(6n+2) .ikon { background: #14b8a6; }
+        .tujuan-list li:nth-child(6n+3) .ikon { background: #f59e0b; }
+        .tujuan-list li:nth-child(6n+4) .ikon { background: #b91c1c; }
+        .tujuan-list li:nth-child(6n+5) .ikon { background: #6366f1; }
+        .tujuan-list li:nth-child(6n+6) .ikon { background: #0ea5e9; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container-fluid p-0">
+            <div class="brand-area">
+                <img src="assets/images/geosmart.png" alt="Logo GeoSMART" class="logo-img">
+                <span class="brand-text">GeoSMART</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-section">
+
+        <!-- Tampilan model 3D (GLB) -->
+        <div class="model-card">
+            <p class="judul">Geometri</p>
+            <h1>Bangun Ruang Balok</h1>
+            <model-viewer
+                src="assets/images/bangunruang/balok1.glb"
+                alt="Model 3D Balok"
+                auto-rotate
+                camera-controls
+                touch-action="pan-y">
+            </model-viewer>
+            <div class="rumus">
+                <span class="label">Persamaan Volume (V)</span>
+                <math display="block">
+                    <mi>V</mi>
+                    <mo>=</mo>
+                    <mi>p</mi>
+                    <mo>×</mo>
+                    <mi>l</mi>
+                    <mo>×</mo>
+                    <mi>t</mi>
+                </math>
+            </div>
+        </div>
+
+        <div class="btn-container">
+
+            <button type="button" class="menu-link" id="btnBukaTujuan" aria-haspopup="dialog">
+                <div class="card action-card">
+                    <div class="icon-circle red-icon">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div class="text-info-card">
+                        <h3>Tujuan Pembelajaran</h3>
+                        <p>Lihat apa saja yang akan kamu kuasai setelah belajar balok.</p>
+                    </div>
+                </div>
+            </button>
+
+            <a href="balokhp.html" class="menu-link">
+                <div class="card action-card">
+                    <div class="icon-circle blue-icon">
+                        <i class="fa-solid fa-shapes"></i>
+                    </div>
+                    <div class="text-info-card">
+                        <h3>Materi Balok &amp; Eksplorasi Bangun Ruang Balok</h3>
+                        <p>Pelajari sisi, rusuk, titik sudut, dan jaring-jaring balok interaktif.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="latihanbalokhp.html" class="menu-link">
+                <div class="card action-card">
+                    <div class="icon-circle teal-icon">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div class="text-info-card">
+                        <h3>Latihan Mandiri + Berbantuan AI</h3>
+                        <p>Asah kemampuan pemecahan masalah dibimbing petunjuk pintar AI.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="kuisbalokhp.html" class="menu-link">
+                <div class="card action-card">
+                    <div class="icon-circle orange-icon">
+                        <i class="fa-solid fa-stopwatch"></i>
+                    </div>
+                    <div class="text-info-card">
+                        <h3>Kuis Evaluasi</h3>
+                        <p>Uji pemahaman akhirmu secara mandiri. Nilai langsung keluar!</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="back-nav-box">
+            <a href="dashboardhp.html" class="btn-back-dash">
+                <i class="fa-solid fa-house"></i> Kembali ke Dashboard Utama
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Modal Tujuan Pembelajaran -->
+    <dialog class="modal-tujuan" id="modalTujuan" aria-labelledby="judulTujuan">
+        <div class="modal-head">
+            <div>
+                <h2 id="judulTujuan">Tujuan Pembelajaran</h2>
+                <p>Bangun Ruang Balok &middot; Fase D, Kelas IX</p>
+            </div>
+            <button type="button" class="modal-close" id="btnTutupTujuan" aria-label="Tutup">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="cp-box">
+                <strong>Capaian Pembelajaran (Fase D)</strong>
+                <ul>
+                    <li>Geometri: membuat jaring-jaring bangun ruang dan membuat bangun ruang dari jaring-jaringnya.</li>
+                    <li>Pengukuran: menjelaskan cara menentukan luas permukaan dan volume bangun ruang serta menyelesaikan masalah yang terkait.</li>
+                </ul>
+                <small>Tujuan di bawah mengacu pada buku Matematika untuk SMP/MTs Kelas IX (Budhi dkk., 2025), Bab 3 Bangun Ruang.</small>
+            </div>
+            <p class="intro">Setelah belajar dengan GeoSMART, kamu diharapkan mampu:</p>
+            <ul class="tujuan-list">
+                <li>
+                    <span class="ikon"><i class="fa-solid fa-cube"></i></span>
+                    <div>
+                        <strong>Menjelaskan ciri-ciri balok</strong>
+                        Menyebutkan dan menunjuk sisi (6), rusuk (12), dan titik sudut (8) pada balok, serta menjelaskan bahwa sisi-sisi yang berhadapan memiliki bentuk dan ukuran yang sama.
+                    </div>
+                </li>
+                <li>
+                    <span class="ikon"><i class="fa-solid fa-draw-polygon"></i></span>
+                    <div>
+                        <strong>Menjelaskan garis dan bidang istimewa</strong>
+                        Mengenali diagonal sisi, diagonal ruang, dan bidang diagonal pada balok.
+                    </div>
+                </li>
+                <li>
+                    <span class="ikon"><i class="fa-solid fa-shapes"></i></span>
+                    <div>
+                        <strong>Menjelaskan bentuk jaring-jaring balok dan membuat balok dari jaring-jaringnya</strong>
+                        Menentukan apakah suatu rangkaian persegi panjang dapat dilipat menjadi balok, lalu menamai titik sudutnya.
+                    </div>
+                </li>
+                <li>
+                    <span class="ikon"><i class="fa-solid fa-vector-square"></i></span>
+                    <div>
+                        <strong>Menentukan rumus luas permukaan balok</strong>
+                        Menurunkan L = 2(p&times;l + p&times;t + l&times;t) dari jumlah luas jaring-jaring balok.
+                    </div>
+                </li>
+                <li>
+                    <span class="ikon"><i class="fa-solid fa-calculator"></i></span>
+                    <div>
+                        <strong>Menentukan rumus volume balok</strong>
+                        Menunjukkan bahwa V = panjang &times; lebar &times; tinggi melalui susunan kubus satuan.
+                    </div>
+                </li>
+                <li>
+                    <span class="ikon"><i class="fa-solid fa-lightbulb"></i></span>
+                    <div>
+                        <strong>Menyelesaikan masalah kontekstual luas permukaan dan volume balok</strong>
+                        Menggunakan angka dan simbol, menganalisis informasi, dan menarik kesimpulan pada masalah luas permukaan dan volume balok dalam kehidupan sehari-hari, termasuk konversi satuan.
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            var modal = document.getElementById('modalTujuan');
+            document.getElementById('btnBukaTujuan').addEventListener('click', function () { modal.showModal(); });
+            document.getElementById('btnTutupTujuan').addEventListener('click', function () { modal.close(); });
+            // Tutup saat area gelap di luar kartu diketuk
+            modal.addEventListener('click', function (e) {
+                var r = modal.getBoundingClientRect();
+                if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) modal.close();
+            });
+        })();
+    </script>
+</body>
+</html>
